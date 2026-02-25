@@ -71,6 +71,9 @@ except ImportError:
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
+# OLLAMA_AUTH can be a Bearer token or Basic auth string (e.g. "Basic dXNlcjpwYXNz")
+OLLAMA_AUTH = os.getenv("OLLAMA_AUTH")
 
 
 # --- Local Storage Configuration ---
@@ -302,3 +305,7 @@ def is_claude_model(model_name):
 def is_openai_model(model_name):
     """Check if model uses OpenAI router"""
     return model_name.lower().startswith("openai/")
+
+def is_ollama_model(model_name):
+    """Check if model is an Ollama model (everything not explicitly API)"""
+    return not (is_gemini_model(model_name) or is_claude_model(model_name) or is_openai_model(model_name) or "llama-3.1-8b-instant" in model_name or "qwen3-32b" in model_name or "llama-70b" in model_name)

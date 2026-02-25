@@ -181,10 +181,66 @@ def get_llm_response(prompt, model_name, max_tokens=None, temperature=None, top_
         except Exception as e:
             raise Exception(f"Anthropic API error: {str(e)}")
     
+    elif is_ollama_model(model_name):
+        import requests
+        import json
+        
+        headers = {'Content-Type': 'application/json'}
+        if OLLAMA_AUTH:
+            # If it doesn't start with Basic or Bearer, assume Bearer token
+            if not (OLLAMA_AUTH.startswith("Basic ") or OLLAMA_AUTH.startswith("Bearer ")):
+                headers['Authorization'] = f"Bearer {OLLAMA_AUTH}"
+            else:
+                headers['Authorization'] = OLLAMA_AUTH
+                
+        payload = {
+            "model": model_name,
+            "prompt": prompt,
+            "stream": False,
+            "options": {
+                "temperature": temperature,
+                "top_p": top_p,
+            }
+        }
+        
+        # In Ollama, max_tokens is often controlled via num_predict in options
+        if max_tokens:
+             payload["options"]["num_predict"] = max_tokens
+             
+        try:
+            response = requests.post(OLLAMA_URL, headers=headers, json=payload, timeout=300)
+            response.raise_for_status()
+            result_json = response.json()
+            response_text = result_json.get("response", "")
+            
+            class MockChoice:
+                def __init__(self, content):
+                    self.message = type('obj', (object,), {'content': content})
+            
+            class MockUsage:
+                def __init__(self, prompt_tokens, completion_tokens):
+                    self.prompt_tokens = prompt_tokens
+                    self.completion_tokens = completion_tokens
+                    self.total_tokens = prompt_tokens + completion_tokens
+            
+            class MockResponse:
+                def __init__(self, content, usage):
+                    self.choices = [MockChoice(content)]
+                    self.usage = usage
+            
+            # Ollama provides prompt_eval_count and eval_count
+            p_tokens = result_json.get("prompt_eval_count", int(len(prompt)/4))
+            c_tokens = result_json.get("eval_count", int(len(response_text)/4))
+            
+            return MockResponse(response_text, MockUsage(p_tokens, c_tokens))
+            
+        except Exception as e:
+            raise Exception(f"Ollama API error: {str(e)}")
+
     else:
         # Use Groq for non-Gemini, non-Claude models (includes Llama and OpenAI models via Groq)
         if not active_groq_client:
-            raise Exception("Groq client not configured. Please set GROQ_API_KEY environment variable.")
+            raise Exception(f"Groq client not configured. Please set GROQ_API_KEY environment variable. Model requested: {model_name}")
 
         return active_groq_client.chat.completions.create(
             model=model_name,

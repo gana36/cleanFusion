@@ -43,23 +43,8 @@ class AuthMiddleware(BaseHTTPMiddleware):
         if request.url.path.startswith("/static") or request.url.path.startswith("/fuze/static"):
             return await call_next(request)
 
-        # For main page requests, return 401 to force browser to re-prompt
-        # This works because we change the realm on each request
-        if request.url.path == "/fuze/" and not request.headers.get("Authorization"):
-            from fastapi.responses import Response
-            return Response(
-                status_code=401,
-                headers={"WWW-Authenticate": f'Basic realm="Login-{uuid.uuid4().hex[:8]}"'}
-            )
-
+        # Removed the logic that forced a 401 to make the user re-login every time
         response = await call_next(request)
-
-        # Clear auth header in response to force re-login next time
-        if request.url.path == "/fuze/":
-            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-            response.headers["Pragma"] = "no-cache"
-            response.headers["Expires"] = "0"
-
         return response
 
 def verify_credentials(credentials: HTTPBasicCredentials = Depends(security)):
@@ -79,7 +64,7 @@ def verify_credentials(credentials: HTTPBasicCredentials = Depends(security)):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
-            headers={"WWW-Authenticate": f'Basic realm="Login-{uuid.uuid4().hex[:8]}"'},
+            headers={"WWW-Authenticate": 'Basic realm="FusionApp"'},
         )
 
     print(f"[AUTH] ✅ Authentication SUCCESS for user: {credentials.username}")
