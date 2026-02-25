@@ -1,11 +1,27 @@
 {% extends "base.html" %}
 {% block extra_css %}
 {% if mode == 'auto-fusion' %}
-<style>
+<style id="autoFusionStyle">
     .controls, 
     .pipeline-config:not(#automatedControls .pipeline-config),
-    #schemaTypeInfo {
+    #schemaTypeInfo,
+    #pdfExtractionToggleContainer,
+    #pdfExtractionSection {
         display: none !important;
+    }
+    .content {
+        padding-top: 10px !important;
+        padding-bottom: 0px !important;
+        min-height: auto !important;
+    }
+    .container {
+        min-height: auto !important;
+    }
+    .parsed-content-container {
+        margin-bottom: 0px !important;
+    }
+    .parsed-content {
+        margin-bottom: 0px !important;
     }
 </style>
 {% endif %}

@@ -818,16 +818,19 @@ function updateControls() {
     //     mergeMethod: mergeMethod,
     //     canProcess: canProcess
     // });
-    // Show/hide Groq-only parameters based on selected LLMs
+    // Show/hide advanced parameters based on selected LLMs
     var matchingLLM = document.getElementById('matchingLLM').value;
     var mergeLLM = document.getElementById('mergeLLM').value;
-    var groqOnlyElements = document.querySelectorAll('.groq-only');
-    var hasGroqModel = (matchingLLM && (matchingLLM.startsWith('llama') || matchingLLM.startsWith('openai/') ||
-        matchingLLM.startsWith('qwen/') || matchingLLM.startsWith('deepseek'))) ||
-        (mergeLLM && (mergeLLM.startsWith('llama') || mergeLLM.startsWith('openai/') ||
-            mergeLLM.startsWith('qwen/') || mergeLLM.startsWith('deepseek')));
-    groqOnlyElements.forEach(element => {
-        if (hasGroqModel) {
+    var advancedElements = document.querySelectorAll('.groq-only');
+
+    // Show for models that typically support these parameters (OpenAI-compatible APIs)
+    var isAdvancedModel = (matchingLLM && (matchingLLM.includes('llama') || matchingLLM.includes('gpt') ||
+        matchingLLM.includes('qwen') || matchingLLM.includes('deepseek'))) ||
+        (mergeLLM && (mergeLLM.includes('llama') || mergeLLM.includes('gpt') ||
+            mergeLLM.includes('qwen') || mergeLLM.includes('deepseek')));
+
+    advancedElements.forEach(element => {
+        if (isAdvancedModel) {
             element.style.display = 'grid';
             element.classList.add('visible');
         } else {
@@ -7210,26 +7213,39 @@ function fetchModels() {
                 modelSelects.forEach(select => {
                     if (!select) return;
 
-                    // Clear existing options
-                    select.innerHTML = '';
+                    // Get existing values and texts for deduplication (case-insensitive)
+                    const existingVals = Array.from(select.options).map(o => o.value.toLowerCase().trim());
+                    const existingTexts = Array.from(select.options).map(o => o.text.toLowerCase().trim());
 
-                    // Add models
+                    // Add models from file that aren't already there
                     models.forEach(model => {
-                        const option = document.createElement('option');
-                        option.value = model;
-                        option.textContent = model;
-                        select.appendChild(option);
+                        const mLower = model.toLowerCase().trim();
+                        // Only add if neither the value nor the text matches existing options
+                        if (!existingVals.includes(mLower) && !existingTexts.includes(mLower)) {
+                            const option = document.createElement('option');
+                            option.value = model;
+                            option.textContent = model;
+                            select.appendChild(option);
+                        }
                     });
 
-                    // Add custom option for PDF select
-                    if (select.id === 'pdfModelSelect') {
+                    // Add custom option for PDF select if not there
+                    if (select.id === 'pdfModelSelect' && !existingVals.includes('custom')) {
                         const customOption = document.createElement('option');
                         customOption.value = 'custom';
                         customOption.textContent = 'Custom Model...';
                         select.appendChild(customOption);
                     }
 
-                    console.log(`[fetchModels] Populated #${select.id} with ${models.length} models`);
+                    // Remove "Loading models..." placeholder if present
+                    for (let i = 0; i < select.options.length; i++) {
+                        if (select.options[i] && select.options[i].text.toLowerCase().includes("loading")) {
+                            select.remove(i);
+                            break;
+                        }
+                    }
+
+                    console.log(`[fetchModels] Deduped and updated #${select.id}`);
                 });
             } else {
                 console.error('[fetchModels] No models found in file');

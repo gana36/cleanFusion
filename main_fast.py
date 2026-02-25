@@ -589,7 +589,7 @@ async def create_partitions(request: Request, username: str = Depends(verify_cre
         return JSONResponse({
             'success': True,
             'partition_stats': partition_stats,
-            'partition_file': abs_path,
+            'partition_file': partition_output_file,
             'partitions': {
                 'source_partitions': partitioned_data.get('source_partitions', []),
                 'target_partitions': partitioned_data.get('target_partitions', [])
@@ -1914,8 +1914,8 @@ Return only the JSON in the Merged_Data format specified in the instructions abo
                     'successful_partitions': successful_partitions,
                     'failed_partitions': failed_partitions
                 },
-                'raw_response': f"Processed {len(partition_merge_results)} partition pairs. Results written to {abs_path}",
-                'partition_results_file': abs_path
+                'raw_response': f"Processed {len(partition_merge_results)} partition pairs. Results written to {partition_merge_output_file}",
+                'partition_results_file': partition_merge_output_file
             }
 
         else:
