@@ -296,16 +296,28 @@ MODEL_MAP = {
 # --- Model Detection Helper Functions ---
 def is_gemini_model(model_name):
     """Check if model is a Gemini model"""
-    return model_name.lower().startswith("gemini")
+    if not model_name: return False
+    return "gemini" in model_name.lower()
 
 def is_claude_model(model_name):
     """Check if model is a Claude model"""
-    return model_name.lower().startswith("claude")
+    if not model_name: return False
+    return "claude" in model_name.lower()
 
 def is_openai_model(model_name):
-    """Check if model uses OpenAI router"""
+    """Check if model uses OpenAI router (typically via Groq in this project)"""
+    if not model_name: return False
     return model_name.lower().startswith("openai/")
 
 def is_ollama_model(model_name):
-    """Check if model is an Ollama model (everything not explicitly API)"""
-    return not (is_gemini_model(model_name) or is_claude_model(model_name) or is_openai_model(model_name) or "llama-3.1-8b-instant" in model_name or "qwen3-32b" in model_name or "llama-70b" in model_name)
+    """Check if model should be treated as an Ollama model"""
+    if not model_name: return True
+    # If explicitly gemini or claude, it's an API model
+    if is_gemini_model(model_name) or is_claude_model(model_name):
+        return False
+    # If it's a known Groq model and we have a key, treat as non-ollama
+    groq_models = ["llama-3.1", "qwen/qwen3", "deepseek-r1-distill", "openai/gpt-oss"]
+    if GROQ_API_KEY and any(m in model_name.lower() for m in groq_models):
+        return False
+    # Everything else (or if missing Groq key) is Ollama
+    return True

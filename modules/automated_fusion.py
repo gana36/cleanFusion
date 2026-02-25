@@ -74,10 +74,9 @@ def extract_combined_features(
 # =========================
 
 # POINT TO THE BACKUP FUSION MODELS
-# __file__ is /home/akash/schema_extraction_UI/fusion_latest/FusionFrontend/modules/automated_fusion.py
-# We need to reach /home/akash/schema_extraction_UI/fusion_latest/backup_fusion/model_multi
+# project_root is /home/akash/cleanFusion
 MODELS_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
     "backup_fusion", 
     "model_multi"
 )
@@ -108,7 +107,7 @@ def _load_training_df() -> pd.DataFrame:
     global _df_cache
     if _df_cache is None:
         if not os.path.exists(TRAIN_CSV):
-            raise RuntimeError(f"Training CSV not found at {TRAIN_CSV}.")
+            raise RuntimeError(f"Training CSV not found (checked backup_fusion/model_multi/train.csv).")
         df = pd.read_csv(TRAIN_CSV)
         if "total_latency_s" not in df.columns:
             if "match_generation_time" in df.columns and "merge_generation_time" in df.columns:
@@ -122,7 +121,7 @@ def _load_meta(backend: str, target_key: str) -> Dict[str, Any]:
         return _meta_cache[cache_key]
     meta_path = os.path.join(MODELS_DIR, f"{backend}_{target_key}.meta.json")
     if not os.path.exists(meta_path):
-        raise RuntimeError(f"Meta file not found: {meta_path}.")
+        raise RuntimeError(f"Meta file not found: {backend}_{target_key}.meta.json")
     import json
     with open(meta_path, "r") as f:
         meta = json.load(f)
@@ -144,10 +143,10 @@ def _patch_model(model):
             
         if isinstance(obj, SimpleImputer):
             if not hasattr(obj, '_fill_dtype'):
-                # In newer sklearn, _fill_dtype is expected. 
-                # We can set it to a default or try to infer.
-                # Just setting it to float or similar usually works.
-                obj._fill_dtype = np.float64
+                if obj.strategy in ['mean', 'median']:
+                    obj._fill_dtype = np.float64
+                else:
+                    obj._fill_dtype = object
         
         if isinstance(obj, Pipeline):
             for _, step in obj.steps:
@@ -175,7 +174,7 @@ def _load_model(backend: str, target_key: str):
         raise RuntimeError(f"Backend '{backend}' is not supported.")
     model_path = os.path.join(MODELS_DIR, f"{backend}_{target_key}.joblib")
     if not os.path.exists(model_path):
-        raise RuntimeError(f"Model file not found: {model_path}.")
+        raise RuntimeError(f"Model file not found for {backend}_{target_key}.")
     
     model = joblib.load(model_path)
     # Patch the model for version compatibility
@@ -213,6 +212,16 @@ def _build_eval_frame(
             row.setdefault(col, np.nan)
         rows.append(row)
     X_eval = pd.DataFrame(rows, columns=feature_cols)
+    
+    # Sanitize types for sklearn 1.8 compatibility
+    num_cols = ["input_prompt_tokens", "output_tokens"]
+    for col in feature_cols:
+        if col in num_cols:
+            X_eval[col] = pd.to_numeric(X_eval[col], errors='coerce').fillna(0.0).astype(float)
+        else:
+            # For categorical, replace np.nan with a string to avoid object-ref failure
+            X_eval[col] = X_eval[col].fillna("N/A").astype(str)
+            
     return paths, X_eval
 
 def predict_best_paths(
@@ -230,13 +239,19 @@ def predict_best_paths(
          meta = _load_meta(backend, "accuracy") # Fallback
     feature_cols: List[str] = meta.get("feature_columns") or []
     paths, X_eval = _build_eval_frame(df, feature_cols, schema_type, input_tokens)
+    
     preds: Dict[str, np.ndarray] = {}
     for key in ("cost", "accuracy", "latency"):
         try:
             model = _load_model(backend, key)
         except RuntimeError:
             continue
-        raw_preds = model.predict(X_eval)
+        
+        try:
+            raw_preds = model.predict(X_eval)
+        except Exception as e:
+            raise e
+        
         if key == "cost":
             preds[key] = np.maximum(raw_preds, 0.0)
         elif key == "accuracy":
@@ -250,6 +265,18 @@ def predict_best_paths(
         result["pred_accuracy"] = preds["accuracy"]
     if "latency" in preds:
         result["pred_latency"] = preds["latency"]
+
+    def _sanitize(val: Any, col_name: str = "") -> Any:
+        if isinstance(val, (float, np.float64, np.float32)):
+            if np.isnan(val) or np.isinf(val):
+                # If it's a column that should be a string, return empty string or "N/A"
+                if col_name in PATH_COLS:
+                    return ""
+                return 0.0
+            return float(val)
+        if val is None:
+            return ""
+        return val
 
     def _best_row(objective: str) -> Optional[Dict[str, Any]]:
         if objective == "cost" and "pred_cost" in result:
@@ -268,7 +295,9 @@ def predict_best_paths(
             keep_cols = ["LLM used for matching", "Match Operator", "Match Method", "pred_cost", "pred_accuracy", "pred_latency"]
         else: # merge
             keep_cols = ["LLM used for matching", "Match Operator", "Match Method", "Merge Operator", "Merge Method", "LLM used for merging", "pred_cost", "pred_accuracy", "pred_latency"]
-        filtered = {k: row.get(k) for k in keep_cols if k in row}
+        
+        filtered = {k: _sanitize(row.get(k), k) for k in keep_cols if k in row}
+        
         # Hard code Gemini 2.5 Flash for latency predictions as requested by existing code
         if objective == "latency":
             filtered["LLM used for matching"] = "Gemini 2.5 Flash"

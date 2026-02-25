@@ -238,22 +238,80 @@ def get_llm_response(prompt, model_name, max_tokens=None, temperature=None, top_
             raise Exception(f"Ollama API error: {str(e)}")
 
     else:
-        # Use Groq for non-Gemini, non-Claude models (includes Llama and OpenAI models via Groq)
-        if not active_groq_client:
-            raise Exception(f"Groq client not configured. Please set GROQ_API_KEY environment variable. Model requested: {model_name}")
+        # User requested a model not explicitly handled by Gemini/Claude blocks
+        # This includes Groq models (Llama, Qwen) and OpenAI-compatible models.
+        
+        # If Groq is configured, use it as primary
+        if active_groq_client:
+            return active_groq_client.chat.completions.create(
+                model=model_name,
+                messages=[
+                    {"role": "system", "content": "You are a precise JSON generator. Return only valid JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=temperature,
+                max_tokens=max_tokens,
+                top_p=top_p,
+                frequency_penalty=frequency_penalty,
+                presence_penalty=presence_penalty
+            )
+        else:
+            # GROQ NOT CONFIGURED - This is the "No Groq API key" case.
+            # We now fallback to Ollama instead of throwing an error immediately.
+            try:
+                # We reuse the logic from the Ollama block above
+                # Note: We call it directly here
+                import requests
+                import json
+                
+                print(f"[INFO] Groq not configured. Falling back to Ollama for model: {model_name}")
+                
+                headers = {'Content-Type': 'application/json'}
+                if OLLAMA_AUTH:
+                    if not (OLLAMA_AUTH.startswith("Basic ") or OLLAMA_AUTH.startswith("Bearer ")):
+                        headers['Authorization'] = f"Bearer {OLLAMA_AUTH}"
+                    else:
+                        headers['Authorization'] = OLLAMA_AUTH
+                        
+                payload = {
+                    "model": model_name,
+                    "prompt": prompt,
+                    "stream": False,
+                    "options": {
+                        "temperature": temperature,
+                        "top_p": top_p,
+                    }
+                }
+                if max_tokens:
+                     payload["options"]["num_predict"] = max_tokens
+                     
+                response = requests.post(OLLAMA_URL, headers=headers, json=payload, timeout=300)
+                response.raise_for_status()
+                result_json = response.json()
+                response_text = result_json.get("response", "")
+                
+                class MockChoice:
+                    def __init__(self, content):
+                        self.message = type('obj', (object,), {'content': content})
+                class MockUsage:
+                    def __init__(self, p_t, c_t):
+                        self.prompt_tokens = p_t
+                        self.completion_tokens = c_t
+                        self.total_tokens = p_t + c_t
+                class MockResponse:
+                    def __init__(self, content, usage):
+                        self.choices = [MockChoice(content)]
+                        self.usage = usage
+                
+                p_tokens = result_json.get("prompt_eval_count", int(len(prompt)/4))
+                c_tokens = result_json.get("eval_count", int(len(response_text)/4))
+                
+                return MockResponse(response_text, MockUsage(p_tokens, c_tokens))
+                
+            except Exception as e:
+                # If even Ollama fallback fails, THEN we explain why
+                raise Exception(f"Model '{model_name}' could not be executed. Groq API key is missing and local Ollama fallback failed: {str(e)}")
 
-        return active_groq_client.chat.completions.create(
-            model=model_name,
-            messages=[
-                {"role": "system", "content": "You are a precise JSON generator. Return only valid JSON."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=temperature,
-            max_tokens=max_tokens,
-            top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty
-        )
 
 def detect_schema_complexity(schema_data):
     """Auto-detect whether a schema is complex (hierarchical) or relational"""
