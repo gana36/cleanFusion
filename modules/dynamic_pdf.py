@@ -41,7 +41,7 @@ SCRIPT_DIR = Path(__file__).parent
 DATA_PROMPT_FILE = SCRIPT_DIR / "dynamic_data_prompt.txt"
 
 CHUNK_SIZE = 3  # Variables per extraction chunk (User specified)
-OLLAMA_URL = "http://localhost:11434/api/generate"
+from modules.config import OLLAMA_URL, OLLAMA_AUTH
 
 # =============================================================================
 # LLM WRAPPER (API-BASED)

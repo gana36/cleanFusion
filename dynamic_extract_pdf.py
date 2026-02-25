@@ -95,7 +95,9 @@ SCRIPT_DIR = Path(__file__).parent
 SCHEMA_PROMPT_FILE = SCRIPT_DIR / "dynamic_schema_prompt.txt"
 DATA_PROMPT_FILE = SCRIPT_DIR / "dynamic_data_prompt.txt"
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
+import os
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
+OLLAMA_AUTH = os.getenv("OLLAMA_AUTH")
 DEFAULT_MODEL = "Qwen2.5:14B"
 CHUNK_SIZE = 5  # Variables per extraction chunk
 
@@ -103,16 +105,33 @@ CHUNK_SIZE = 5  # Variables per extraction chunk
 # OLLAMA API
 # =============================================================================
 
-def call_ollama(prompt: str, model: str, base_url: str = OLLAMA_URL, timeout: int = 300) -> str:
-    """Call Ollama via Python library."""
+def call_ollama(prompt: str, model: str, base_url: str = None, timeout: int = 300) -> str:
+    """Call Ollama via requests to support auth headers."""
+    import requests
+    
+    url = base_url or OLLAMA_URL
+    headers = {'Content-Type': 'application/json'}
+    
+    if OLLAMA_AUTH:
+        if not (OLLAMA_AUTH.startswith("Basic ") or OLLAMA_AUTH.startswith("Bearer ")):
+            headers['Authorization'] = f"Bearer {OLLAMA_AUTH}"
+        else:
+            headers['Authorization'] = OLLAMA_AUTH
+            
+    payload = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "options": {
+            "temperature": 0.1,
+            "num_ctx": 16000
+        }
+    }
+    
     try:
-        response = ollama.chat(model=model, messages=[
-            {
-                'role': 'user',
-                'content': prompt,
-            },
-        ])
-        return response['message']['content']
+        response = requests.post(url, headers=headers, json=payload, timeout=timeout)
+        response.raise_for_status()
+        return response.json().get('response', '')
     except Exception as e:
         print(f"    Error calling Ollama: {e}")
         return ""
