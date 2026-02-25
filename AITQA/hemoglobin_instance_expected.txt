@@ -1,0 +1,263 @@
+{
+  "Table1.HMD": [
+    {
+      "attribute1": "Bleeding.(n=35)",
+      "children": []
+    },
+    {
+      "attribute2": "Non-bleeding.(n=377)",
+      "children": []
+    },
+    {
+      "attribute3": "P value",
+      "children": []
+    }
+  ],
+  "Table1.VMD": [
+    {
+      "attribute1": "Age, mean±SD,y",
+      "children": []
+    },
+    {
+      "attribute2": "Hypertension",
+      "children": []
+    }
+  ],
+  "Table2.HMD": [
+    {
+      "attribute1": "With vaccines.(n=48)",
+      "children": []
+    },
+    {
+      "attribute2": "Without reactions.(n=217)",
+      "children": []
+    },
+    {
+      "attribute3": "P value",
+      "children": []
+    }
+  ],
+  "Table2.VMD": [
+    {
+      "attribute1": "Age, mean±SD,years",
+      "children": []
+    },
+    {
+      "attribute2": "BMI, mean±SD,years",
+      "children": []
+    },
+    {
+      "attribute3": "Hypertension (H)",
+      "children": []
+    }
+  ],
+  "HMD_Merged_Schema": [
+    "P value",
+    "Bleeding.(n=35)",
+    "Non-bleeding.(n=377)",
+    "With vaccines.(n=48)",
+    "Without reactions.(n=217)"
+  ],
+  "VMD_Merged_Schema": [
+    "Age, mean±SD,y",
+    "Hypertension",
+    "BMI, mean±SD,years"
+  ],
+  "Merged_Data": [
+    {
+      "P value": {
+        "VMD_data": [
+          {
+            "Age, mean±SD,y": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "Hypertension": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "BMI, mean±SD,years": {
+              "source1": "",
+              "source2": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Bleeding.(n=35)": {
+        "VMD_data": [
+          {
+            "Age, mean±SD,y": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "Hypertension": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "BMI, mean±SD,years": {
+              "source1": "",
+              "source2": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Non-bleeding.(n=377)": {
+        "VMD_data": [
+          {
+            "Age, mean±SD,y": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "Hypertension": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "BMI, mean±SD,years": {
+              "source1": "",
+              "source2": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "With vaccines.(n=48)": {
+        "VMD_data": [
+          {
+            "Age, mean±SD,y": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "Hypertension": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "BMI, mean±SD,years": {
+              "source1": "",
+              "source2": ""
+            }
+          }
+        ]
+      }
+    },
+    {
+      "Without reactions.(n=217)": {
+        "VMD_data": [
+          {
+            "Age, mean±SD,y": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "Hypertension": {
+              "source1": "",
+              "source2": ""
+            }
+          },
+          {
+            "BMI, mean±SD,years": {
+              "source1": "",
+              "source2": ""
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "HMD_Map_Schema1": [
+    {
+      "source1": "Merged_Schema.P value",
+      "source2": "Table1.P value"
+    },
+    {
+      "source1": "Merged_Schema.Bleeding.(n=35)",
+      "source2": "Schema1.Bleeding.(n=35)"
+    },
+    {
+      "source1": "Merged_Schema.Non-bleeding.(n=377)",
+      "source2": "Schema1.Non-bleeding.(n=377)"
+    },
+    {
+      "source1": "Merged_Schema.With vaccines.(n=48)",
+      "source2": "Schema1.With vaccines.(n=48)"
+    },
+    {
+      "source1": "Merged_Schema.Without reactions.(n=217)",
+      "source2": "Schema1.Without reactions.(n=217)"
+    }
+  ],
+  "VMD_Map_Schema1": [
+    {
+      "source1": "Merged_Schema.Age, mean±SD,y",
+      "source2": "Table1.Age, mean±SD,y"
+    },
+    {
+      "source1": "Merged_Schema.Hypertension",
+      "source2": "Table1.Hypertension"
+    },
+    {
+      "source1": "Merged_Schema.BMI, mean±SD,years",
+      "source2": "Schema1.BMI, mean±SD,years"
+    }
+  ],
+  "HMD_Map_Schema2": [
+    {
+      "source1": "Merged_Schema.P value",
+      "source2": "Table2.P value"
+    },
+    {
+      "source1": "Merged_Schema.Bleeding.(n=35)",
+      "source2": "Schema2.Bleeding.(n=35)"
+    },
+    {
+      "source1": "Merged_Schema.Non-bleeding.(n=377)",
+      "source2": "Schema2.Non-bleeding.(n=377)"
+    },
+    {
+      "source1": "Merged_Schema.With vaccines.(n=48)",
+      "source2": "Schema2.With vaccines.(n=48)"
+    },
+    {
+      "source1": "Merged_Schema.Without reactions.(n=217)",
+      "source2": "Schema2.Without reactions.(n=217)"
+    }
+  ],
+  "VMD_Map_Schema2": [
+    {
+      "source1": "Merged_Schema.Age, mean±SD,y",
+      "source2": "Table2.Age, mean±SD,years"
+    },
+    {
+      "source1": "Merged_Schema.Hypertension",
+      "source2": "Table2.Hypertension (H)"
+    },
+    {
+      "source1": "Merged_Schema.BMI, mean±SD,years",
+      "source2": "Schema2.BMI, mean±SD,years"
+    }
+  ],
+  "Merged_Schema": [],
+  "Map_Schema1": [],
+  "Map_Schema2": []
+}

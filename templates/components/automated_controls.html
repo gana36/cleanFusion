@@ -1,0 +1,726 @@
+
+<style>
+    .automated-controls-container {
+        max-width: 900px;
+        margin: 0 auto 30px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .top-row {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
+    .select-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .select-group label {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .styled-select {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        min-width: 150px;
+    }
+
+    .predict-btn {
+        background: #4A148C;
+        color: white;
+        border: none;
+        padding: 10px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        margin-top: 15px;
+    }
+
+    .predict-btn:hover {
+        background: #6A1B9A;
+        transform: translateY(-1px);
+    }
+
+    .adaptive-modeling-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+    }
+
+    .number-badge {
+        background: #FFE0B2;
+        color: #E65100;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border: 1px solid #FFB74D;
+        font-size: 12px;
+    }
+
+    .adaptive-text {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        max-width: 250px;
+        line-height: 1.2;
+    }
+
+    .pipeline-plans-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .section-number-badge {
+        background: #FFE0B2;
+        color: #E65100;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        border: 1px solid #FFB74D;
+        font-size: 11px;
+    }
+
+    .pipeline-cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .pipeline-card {
+        border: 1px solid #edf2f7;
+        border-radius: 12px;
+        padding: 20px;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        background: #F9FAFB;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+
+    .pipeline-card:hover {
+        border-color: #cbd5e0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .pipeline-card.selected {
+        border: 2px solid #E91E63;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(233, 30, 99, 0.1);
+    }
+
+    .radio-input {
+        margin-top: 5px;
+        cursor: pointer;
+    }
+
+    .card-content {
+        flex: 1;
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 15px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .metric-value {
+        color: #4A5568;
+        font-weight: 500;
+    }
+
+    .pipeline-flow {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 5px;
+    }
+
+    .step-box {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 10px;
+        min-width: 140px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .step-header {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #2D3748;
+    }
+
+    .step-icon {
+        width: 18px;
+        height: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        font-size: 10px;
+    }
+
+    .step-detail {
+        font-size: 10px;
+        color: #718096;
+        line-height: 1.2;
+    }
+
+    .arrow {
+        color: #cbd5e0;
+        font-size: 16px;
+    }
+
+    .execute-btn-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 15px;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: center;
+        z-index: 1000;
+    }
+
+    .execute-btn {
+        background: #00897B;
+        color: white;
+        border: none;
+        width: 100%;
+        max-width: 900px;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .execute-btn:hover {
+        background: #00796B;
+    }
+
+    .download-icon, .share-icon {
+        font-size: 20px;
+    }
+</style>
+
+<div class="automated-controls-container" id="automatedControls" style="display: none;">
+    <div class="top-row">
+        <div class="select-group">
+            <label>Select Model</label>
+            <select id="autoModelSelect" class="styled-select">
+                <option value="rf">RF (Random Forest)</option>
+                <option value="xgb">XGBoost</option>
+                <option value="bert">BERT</option>
+                <option value="gru">GRU</option>
+                <option value="lstm">LSTM</option>
+                <option value="mlp">MLP</option>
+                <option value="perceptron">Perceptron</option>
+                <option value="svm">SVM</option>
+            </select>
+        </div>
+        <div class="select-group">
+            <label>Operation</label>
+            <select id="autoOperationSelect" class="styled-select">
+                <option value="merge">Merge</option>
+                <option value="match">Match</option>
+            </select>
+        </div>
+        <button class="predict-btn" onclick="predictPipelines()">Predict</button>
+        
+        <div class="adaptive-modeling-info">
+            <div class="number-badge">№ 2</div>
+            <div class="adaptive-text">Automatically predicted by the Adaptive Modeling!</div>
+        </div>
+    </div>
+
+    <div id="pipelinePlansSection" style="display: none;">
+        <div class="pipeline-plans-title">
+            <h3>Pipeline Plans</h3>
+            <div class="section-number-badge">№ 3</div>
+        </div>
+
+        <div class="pipeline-cards-container" id="pipelineCards">
+            <!-- Card 1: Cost -->
+            <div class="pipeline-card selected" onclick="selectPipeline(this, 0)">
+                <input type="radio" name="pipelineOption" class="radio-input" checked>
+                <div class="card-content">
+                    <div class="card-header">
+                        <span style="color: #E91E63;">🟣</span>
+                        <span style="color: #48bb78;">$</span>
+                        <span>Cost (USD)</span>
+                        <span class="metric-value">— $0.00084</span>
+                    </div>
+                    <div class="pipeline-flow">
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #F3E5F5;">🔮</div>
+                                <span>INPUT</span>
+                            </div>
+                            <div class="step-detail">Source & Target Tables</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #E8F5E9;">🧩</div>
+                                <span>MATCH STEP</span>
+                            </div>
+                            <div class="step-detail">Operator: Operator</div>
+                            <div class="step-detail">Method: JSON</div>
+                            <div class="step-detail">LLM: Gemini 2.0 Flash Exp</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #E3F2FD;">🔗</div>
+                                <span>MERGE STEP</span>
+                            </div>
+                            <div class="step-detail">Operator: Operator</div>
+                            <div class="step-detail">Method: JSON</div>
+                            <div class="step-detail">LLM: GPT Oss 20B</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #FFF3E0;">📦</div>
+                                <span>OUTPUT</span>
+                            </div>
+                            <div class="step-detail">Merged JSON output</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Accuracy -->
+            <div class="pipeline-card" onclick="selectPipeline(this, 1)">
+                <input type="radio" name="pipelineOption" class="radio-input">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span style="color: #E91E63;">🎯</span>
+                        <span>Accuracy (%)</span>
+                        <span class="metric-value">— 83.24%</span>
+                    </div>
+                    <div class="pipeline-flow">
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #F3E5F5;">🔮</div>
+                                <span>INPUT</span>
+                            </div>
+                            <div class="step-detail">Source & Target Tables</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #E8F5E9;">🧩</div>
+                                <span>MATCH STEP</span>
+                            </div>
+                            <div class="step-detail">Operator: Operator</div>
+                            <div class="step-detail">Method: JSON</div>
+                            <div class="step-detail">LLM: GPT Oss 20B</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #E3F2FD;">🔗</div>
+                                <span>MERGE STEP</span>
+                            </div>
+                            <div class="step-detail">Operator: Operator</div>
+                            <div class="step-detail">Method: JSON</div>
+                            <div class="step-detail">LLM: GPT Oss 20B</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #FFF3E0;">📦</div>
+                                <span>OUTPUT</span>
+                            </div>
+                            <div class="step-detail">Merged JSON output</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Latency -->
+            <div class="pipeline-card" onclick="selectPipeline(this, 2)">
+                <input type="radio" name="pipelineOption" class="radio-input">
+                <div class="card-content">
+                    <div class="card-header">
+                        <span style="color: #E91E63;">⏱️</span>
+                        <span>Latency (seconds)</span>
+                        <span class="metric-value">— 3.03s</span>
+                    </div>
+                    <div class="pipeline-flow">
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #F3E5F5;">🔮</div>
+                                <span>INPUT</span>
+                            </div>
+                            <div class="step-detail">Source & Target Tables</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #E8F5E9;">🧩</div>
+                                <span>MATCH STEP</span>
+                            </div>
+                            <div class="step-detail">Operator: Operator</div>
+                            <div class="step-detail">Method: JSON</div>
+                            <div class="step-detail">LLM: Gemini 2.0 Flash Exp</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #E3F2FD;">🔗</div>
+                                <span>MERGE STEP</span>
+                            </div>
+                            <div class="step-detail">Operator: Instance Merge</div>
+                            <div class="step-detail">Method: JSON</div>
+                            <div class="step-detail">LLM: Gemini 2.0 Flash Exp</div>
+                        </div>
+                        <div class="arrow">→</div>
+                        <div class="step-box">
+                            <div class="step-header">
+                                <div class="step-icon" style="background: #FFF3E0;">📦</div>
+                                <span>OUTPUT</span>
+                            </div>
+                            <div class="step-detail">Merged JSON output</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="execute-btn-container" id="executeBtnContainer" style="display: none;">
+    <button class="execute-btn" onclick="executeAutomatedPipeline()">
+        Execute Pipeline Plan
+        <span class="download-icon">📥</span>
+        <span class="share-icon">♻️</span>
+    </button>
+</div>
+
+<script>
+    async function predictPipelines() {
+        if (!sourceData || !targetData) {
+            alert("Please upload both source and target schemas first.");
+            return;
+        }
+
+        const backend = document.getElementById('autoModelSelect').value;
+        const mode = document.getElementById('autoOperationSelect').value;
+        
+        showLoading(true);
+        try {
+            const response = await fetch('/fuze/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    source_schema: sourceData,
+                    target_schema: targetData,
+                    backend: backend,
+                    mode: mode
+                })
+            });
+            
+            const result = await response.json();
+            if (result.success) {
+                updatePipelineCards(result.prediction);
+                document.getElementById('pipelinePlansSection').style.display = 'block';
+                document.getElementById('pipelinePlansSection').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('executeBtnContainer').style.display = 'flex';
+            } else {
+                alert("Prediction failed: " + result.error);
+            }
+        } catch (error) {
+            alert("Error: " + error.message);
+        } finally {
+            showLoading(false);
+        }
+    }
+
+    function updatePipelineCards(prediction) {
+        const cards = [
+            { id: 'cost', data: prediction.best_cost, title: 'Cost (USD)', icon: '🟣', subIcon: '$' },
+            { id: 'accuracy', data: prediction.best_accuracy, title: 'Accuracy (%)', icon: '🎯', subIcon: '' },
+            { id: 'latency', data: prediction.best_latency, title: 'Latency (seconds)', icon: '⏱️', subIcon: '' }
+        ];
+
+        const container = document.getElementById('pipelineCards');
+        container.innerHTML = '';
+
+        cards.forEach((card, index) => {
+            if (!card.data) return;
+
+            const div = document.createElement('div');
+            div.className = `pipeline-card ${index === 0 ? 'selected' : ''}`;
+            div.onclick = function() { selectPipeline(this, index); };
+            
+            // Format metric value
+            let metricVal = "";
+            if (card.id === 'cost') metricVal = `$${card.data.pred_cost.toFixed(5)}`;
+            else if (card.id === 'accuracy') metricVal = `${(card.data.pred_accuracy * 100).toFixed(2)}%`;
+            else if (card.id === 'latency') metricVal = `${card.data.pred_latency.toFixed(2)}s`;
+
+            // Prepare flow HTML
+            let flowHtml = `
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-icon" style="background: #F3E5F5;">🔮</div>
+                        <span>INPUT</span>
+                    </div>
+                    <div class="step-detail">Source & Target Tables</div>
+                </div>
+                <div class="arrow">→</div>
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-icon" style="background: #E8F5E9;">🧩</div>
+                        <span>MATCH STEP</span>
+                    </div>
+                    <div class="step-detail">Operator: ${card.data['Match Operator'] || 'Operator'}</div>
+                    <div class="step-detail">Method: ${card.data['Match Method'] || 'JSON'}</div>
+                    <div class="step-detail">LLM: ${card.data['LLM used for matching'] || 'N/A'}</div>
+                </div>
+            `;
+
+            if (prediction.mode === 'merge') {
+                flowHtml += `
+                    <div class="arrow">→</div>
+                    <div class="step-box">
+                        <div class="step-header">
+                            <div class="step-icon" style="background: #E3F2FD;">🔗</div>
+                            <span>MERGE STEP</span>
+                        </div>
+                        <div class="step-detail">Operator: ${card.data['Merge Operator'] || 'Operator'}</div>
+                        <div class="step-detail">Method: ${card.data['Merge Method'] || 'JSON'}</div>
+                        <div class="step-detail">LLM: ${card.data['LLM used for merging'] || 'N/A'}</div>
+                    </div>
+                `;
+            }
+
+            flowHtml += `
+                <div class="arrow">→</div>
+                <div class="step-box">
+                    <div class="step-header">
+                        <div class="step-icon" style="background: #FFF3E0;">📦</div>
+                        <span>OUTPUT</span>
+                    </div>
+                    <div class="step-detail">Merged JSON output</div>
+                </div>
+            `;
+
+            div.innerHTML = `
+                <input type="radio" name="pipelineOption" class="radio-input" ${index === 0 ? 'checked' : ''}>
+                <div class="card-content">
+                    <div class="card-header">
+                        <span style="color: #E91E63;">${card.icon}</span>
+                        ${card.subIcon ? `<span style="color: #48bb78;">${card.subIcon}</span>` : ''}
+                        <span>${card.title}</span>
+                        <span class="metric-value">— ${metricVal}</span>
+                    </div>
+                    <div class="pipeline-flow">
+                        ${flowHtml}
+                    </div>
+                </div>
+            `;
+            
+            // Store the data on the element for execution
+            div.dataset.config = JSON.stringify(card.data);
+            
+            container.appendChild(div);
+        });
+    }
+
+    function selectPipeline(card, index) {
+        // Remove selected class from all cards
+        const cards = document.querySelectorAll('.pipeline-card');
+        cards.forEach(c => c.classList.remove('selected'));
+        
+        // Add selected class to current card
+        card.classList.add('selected');
+        
+        // Check the radio input
+        card.querySelector('input[type="radio"]').checked = true;
+    }
+
+    function executeAutomatedPipeline() {
+        const selectedBase = document.querySelector('.pipeline-card.selected');
+        if (!selectedBase) {
+            alert("No pipeline selected.");
+            return;
+        }
+
+        const config = JSON.parse(selectedBase.dataset.config);
+        console.log("Executing mapped pipeline config:", config);
+        
+        const matchOp = document.getElementById('matchOperation');
+        const matchType = document.getElementById('schemaMatchingType');
+        const matchLLM = document.getElementById('matchingLLM');
+        const mergeContainer = document.getElementById('mergeStepContainer');
+        const mergeOp = document.getElementById('mergeOperation');
+        const mergeMethod = document.getElementById('mergeMethod');
+        const mergeLLM = document.getElementById('mergeLLM');
+        const processBtn = document.getElementById('processBtn');
+
+        if (!matchOp || !matchType || !processBtn) {
+            alert("Error: Core controls not found.");
+            return;
+        }
+
+        // Map config to controls
+        // Note: Field names in config might vary based on train.csv columns
+        const mapping = {
+            'Match Operator': matchOp,
+            'Match Method': matchType,
+            'LLM used for matching': matchLLM,
+            'Merge Operator': mergeOp,
+            'Merge Method': mergeMethod,
+            'LLM used for merging': mergeLLM
+        };
+
+        // Standardize values (e.g. from "operator" in config to "operator" in select)
+        const valMap = {
+            "operator": "operator",
+            "align": "align",
+            "map": "map",
+            "merge": "merge",
+            "instance_merge": "instance_merge"
+        };
+
+        // Handle Match
+        if (config['Match Operator']) matchOp.value = valMap[config['Match Operator'].toLowerCase()] || matchOp.options[0].value;
+        if (typeof updateMatchingMethodOptions === 'function') updateMatchingMethodOptions();
+        
+        // Match Method might be "JSON" in config but "json_default" in select
+        if (config['Match Method']) {
+             if (config['Match Method'].toLowerCase() === 'json') matchType.value = "json_default";
+             else matchType.value = config['Match Method'].toLowerCase();
+        }
+        
+        if (config['LLM used for matching']) {
+            // Find option by text if value doesn't match
+            setSelectByText(matchLLM, config['LLM used for matching']);
+        }
+
+        // Handle Merge if applicable
+        const isMergeMode = document.getElementById('autoOperationSelect').value === 'merge';
+        if (isMergeMode) {
+            if (mergeContainer.style.display === 'none') {
+                 const addBtn = document.querySelector('button[onclick*="toggleMergeStep"]');
+                 if (addBtn) addBtn.click();
+            }
+            
+            if (config['Merge Operator']) mergeOp.value = valMap[config['Merge Operator'].toLowerCase()] || mergeOp.options[0].value;
+            if (typeof updateMergeMethodOptions === 'function') updateMergeMethodOptions();
+            
+            if (config['Merge Method']) {
+                if (config['Merge Method'].toLowerCase() === 'json') mergeMethod.value = "json_default";
+                else mergeMethod.value = config['Merge Method'].toLowerCase();
+            }
+            
+            if (config['LLM used for merging']) {
+                setSelectByText(mergeLLM, config['LLM used for merging']);
+            }
+        }
+
+        // Helper to find option by text
+        function setSelectByText(select, text) {
+            const lowerText = text.toLowerCase();
+            // Try prefix matching too (e.g. "Gemini 2.5 Flash" -> "gemini-1.5-flash" if it matches)
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].text.toLowerCase().includes(lowerText) || 
+                    lowerText.includes(select.options[i].text.toLowerCase())) {
+                    select.selectedIndex = i;
+                    return;
+                }
+            }
+        }
+
+        // Trigger the original process button
+        processBtn.click();
+    }
+
+    // Logic to show/hide based on table population and mode
+    function updateVisibility() {
+        const isAutoMode = window.appMode === 'auto-fusion';
+        const sourceDataExists = document.getElementById('sourcePreview')?.innerHTML.trim() !== "";
+        const targetDataExists = document.getElementById('targetPreview')?.innerHTML.trim() !== "";
+        
+        const automatedControls = document.getElementById('automatedControls');
+        const standardControls = document.querySelector('.controls');
+        const pipelineConfigs = document.querySelectorAll('.pipeline-config');
+        const schemaTypeInfo = document.getElementById('schemaTypeInfo');
+
+        if (isAutoMode) {
+            // Hide standard controls in auto mode
+            if (standardControls) standardControls.style.display = 'none';
+            pipelineConfigs.forEach(el => {
+                // Don't hide our own container if we use that class
+                if (!el.closest('#automatedControls')) {
+                    el.style.display = 'none';
+                }
+            });
+            // Hide schema type info if it's the standard one
+            if (schemaTypeInfo) schemaTypeInfo.style.display = 'none';
+
+            // Show automated controls only after both tables are populated
+            if (sourceDataExists && targetDataExists) {
+                automatedControls.style.display = 'block';
+            } else {
+                automatedControls.style.display = 'none';
+            }
+        } else {
+            // Manual mode or PDF mode - handled by main.js and standard controls
+            automatedControls.style.display = 'none';
+            document.getElementById('executeBtnContainer').style.display = 'none';
+        }
+    }
+
+    // Check frequently for changes in table population
+    const checkInterval = setInterval(updateVisibility, 500);
+    // Also run immediately
+    updateVisibility();
+</script>

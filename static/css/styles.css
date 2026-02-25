@@ -1,0 +1,1027 @@
+.simple-map {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    align-items: start;
+    margin-top: 8px;
+}
+.mapping-tables-container {
+    display: flex;
+    gap: 40px;
+    /* Reduced gap between tables */
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    /* Prevent wrapping - enable horizontal scroll */
+    position: relative;
+    min-height: 300px;
+    /* Enable both horizontal and vertical scrolling */
+    overflow-x: auto;
+    overflow-y: auto;
+}
+/* Layout for compact merged table - VERTICAL STACKING */
+#merged-source-tab .mapping-tables-container,
+#merged-target-tab .mapping-tables-container {
+    display: block;
+    position: relative;
+    overflow: visible;
+    min-height: 600px;
+    height: auto;
+    margin: 20px;
+    margin-top: 0px;
+    /* Fix: Remove vertical offset by setting top margin to 0 */
+    width: calc(100% - 40px);
+}
+/* Fix padding for merged tabs to reduce vertical offset */
+#merged-source-tab .table-mapping-view,
+#merged-target-tab .table-mapping-view {
+    padding: 10px 25px;
+    /* Reduce top/bottom padding from 25px to 10px */
+}
+.simple-map .col {
+    background: #ffffff;
+}
+.simple-col-title {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+.simple-chip {
+    display: inline-block;
+    padding: 8px 10px;
+    border-radius: 16px;
+    border: 1px solid #cce3d0;
+    background: #eaf7ec;
+    color: #1b5e20;
+    font-weight: 600;
+    font-size: 14px;
+    margin: 6px 0;
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.container {
+    max-width: 1400px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: visible;
+    min-height: 100vh;
+}
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+.header h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+.header p {
+    margin: 10px 0 0 0;
+    opacity: 0.9;
+}
+.content {
+    padding: 30px;
+    overflow: visible;
+    min-height: 100vh;
+}
+.upload-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+.upload-box {
+    flex: 1;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s;
+}
+.upload-box:hover {
+    border-color: #667eea;
+}
+.upload-box.active {
+    border-color: #667eea;
+    background: #f0f7ff;
+}
+.upload-box h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+.file-input {
+    display: none;
+}
+.upload-btn {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+.upload-btn:hover {
+    background: #5a6fd8;
+}
+.text-input-section {
+    margin-bottom: 20px;
+}
+.text-input-toggle {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.text-input-area {
+    display: none;
+    width: 100%;
+    height: 150px;
+    font-family: 'Courier New', monospace;
+    padding: 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    resize: vertical;
+}
+.parsed-content {
+    margin: 20px 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 15px;
+    display: none;
+}
+.parsed-content h4 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 1.1em;
+}
+.parsed-content-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+.table-container {
+    margin-bottom: 15px;
+}
+.table-container h3 {
+    color: #333;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background: #e3f2fd;
+    border-radius: 5px;
+    font-size: 0.9em;
+    text-align: center;
+}
+.hmd-vmd-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    border: 2px solid #333;
+}
+.hmd-vmd-table th,
+.hmd-vmd-table td {
+    padding: 4px 6px;
+    /* Increased padding for better readability */
+    text-align: center;
+    border: 1px solid #333;
+    word-wrap: break-word;
+    max-width: 100px;
+    /* Slightly increased max width */
+    font-size: 14px;
+    /* Increased font size for better readability */
+    font-weight: bold;
+    /* Make all table content bold */
+}
+.hmd-header.level-0 {
+    background: #2E7D32;
+    color: white;
+    font-weight: bold;
+}
+.hmd-header.level-1 {
+    background: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+.hmd-header.level-2 {
+    background: #81C784;
+    color: white;
+    font-weight: bold;
+}
+.vmd-cell {
+    background: #ffebee;
+    color: #c62828;
+    font-weight: 600;
+    text-align: left;
+    padding-left: 8px;
+}
+.data-cell {
+    background: #f8f9fa;
+}
+.matched-row {
+    background: #ffe8e8 !important;
+}
+.table-mapping-view {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    border: 2px solid #e0e0e0;
+    margin-bottom: 20px;
+    overflow: visible;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* Ensure full width usage */
+}
+/* Ensure tables can stretch to use available space */
+.source-table-container div,
+.target-table-container div {
+    width: 100%;
+    max-width: none;
+    overflow-x: auto;
+}
+.source-table-container table,
+.target-table-container table {
+    width: 100%;
+    min-width: 300px;
+    /* Minimum width to prevent tables from being too narrow */
+    table-layout: auto;
+    /* Allow tables to expand naturally */
+}
+/* Make tables stretch to fill available space */
+.source-table-container,
+.target-table-container {
+    flex: 0 0 auto;
+    /* Don't grow or shrink - use natural table width */
+    min-width: 300px;
+    /* Prevent tables from being too narrow */
+    position: relative;
+    z-index: 5;
+}
+/* Source/Target table - BOTTOM position */
+#merged-source-tab .target-table-container,
+#merged-target-tab .target-table-container {
+    overflow: visible;
+    position: relative;
+    z-index: 5;
+    margin-top: 0;
+    text-align: center;
+    display: block;
+}
+/* Merge table - TOP position */
+#merged-source-tab .source-table-container,
+#merged-target-tab .source-table-container {
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+    margin-bottom: 30px;
+    text-align: center;
+    display: block;
+}
+/* Make merged table compact like Source/Target table */
+#merged-source-tab .source-table-container table,
+#merged-target-tab .source-table-container table {
+    width: max-content;
+    /* Table expands to show all columns */
+    min-width: 100%;
+    /* At least full container width */
+    border-collapse: collapse;
+    /* Remove spacing between cells */
+}
+/* Force merged schema displays to use EXACTLY the same styling as main merged schema */
+#mergedSchemaDisplay,
+#mergedSchemaDisplay2 {
+    margin-top: 5px;
+}
+/* Override ALL table styling in merged tabs to match main merged schema */
+#mergedSchemaDisplay table,
+#mergedSchemaDisplay2 table,
+#merged-source-tab table,
+#merged-target-tab table {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid #333 !important;
+    min-width: fit-content !important;
+    width: fit-content !important;
+    border-collapse: collapse !important;
+    margin: 0 auto !important;
+    font-size: 14px !important;
+    table-layout: auto !important;
+}
+/* Force all cells in merged tabs to be compact like main merged schema */
+#mergedSchemaDisplay table td,
+#mergedSchemaDisplay table th,
+#mergedSchemaDisplay2 table td,
+#mergedSchemaDisplay2 table th {
+    padding: 4px 8px !important;
+    height: auto !important;
+    line-height: 1.2 !important;
+    font-size: 14px !important;
+    white-space: nowrap !important;
+    width: auto !important;
+    border: 1px solid #ddd !important;
+    margin: 0 !important;
+    text-align: left !important;
+    vertical-align: middle !important;
+}
+/* Fix Source/Target table text cutoff - allow full width */
+#sourceSchemaDisplay table td,
+#sourceSchemaDisplay table th,
+#targetSchemaDisplay table td,
+#targetSchemaDisplay table th {
+    white-space: nowrap !important;
+    max-width: none !important;
+    /* Remove width constraint */
+    width: auto !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+}
+/* Ensure Source/Target tables expand to fit content */
+#sourceSchemaDisplay table,
+#targetSchemaDisplay table {
+    width: fit-content !important;
+    min-width: fit-content !important;
+}
+.connection-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.08));
+    /* Subtle shadow */
+    overflow: visible;
+}
+/* Adjust overlay for vertical offset in merged tabs */
+#merged-source-tab .connection-overlay,
+#merged-target-tab .connection-overlay {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: calc(100% + 100px);
+    height: calc(100% + 350px);
+    /* Extended height to cover the vertical offset */
+    pointer-events: none;
+    z-index: 10;
+    overflow: visible;
+}
+.connection-overlay path {
+    transition: all 0.2s ease;
+}
+.connection-overlay path:hover {
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.15));
+    stroke-width: 3;
+}
+.connection-overlay circle {
+    transition: all 0.2s ease;
+}
+.connection-overlay circle:hover {
+    r: 5;
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+}
+.mapping-summary {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    margin-top: 20px;
+}
+.mapping-summary h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 1.2em;
+}
+.controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+.controls select {
+    padding: 12px 15px;
+    font-size: 14px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    background: white;
+    min-width: 150px;
+}
+.process-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+.process-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+.process-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+/* Parameter Controls */
+.parameter-controls {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+}
+.parameter-row {
+    display: grid;
+    grid-template-columns: 120px 1fr 60px;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.parameter-row label {
+    font-weight: 500;
+    color: #333;
+    font-size: 14px;
+}
+.parameter-row input[type="range"] {
+    width: 100%;
+    height: 4px;
+    background: #ddd;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+.parameter-row input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #667eea;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.parameter-row span {
+    font-weight: bold;
+    color: #667eea;
+    text-align: center;
+    min-width: 50px;
+}
+.parameter-row small {
+    grid-column: 2 / 4;
+    color: #666;
+    font-size: 11px;
+    margin-top: -8px;
+}
+.parameter-row select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    font-size: 14px;
+}
+.groq-only {
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+.groq-only.visible {
+    opacity: 1;
+}
+.results-container {
+    display: none;
+    margin-top: 30px;
+    overflow: visible;
+}
+.mapping-container {
+    overflow: visible;
+    position: relative;
+}
+/* Ensure the main content area can accommodate extended mappings */
+.content {
+    padding: 30px;
+    overflow: visible;
+    /* Prevent clipping of extended content */
+    min-height: 100vh;
+    /* Ensure enough height for content */
+}
+.results-tabs {
+    display: flex;
+    border-bottom: 2px solid #e1e5e9;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    font-weight: 500;
+    color: #666;
+    min-width: 140px;
+    text-align: center;
+    box-sizing: border-box;
+}
+.tab.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+.loading {
+    display: none;
+    text-align: center;
+    margin: 30px 0;
+}
+.loading.active {
+    display: block;
+}
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+.error,
+.success {
+    padding: 15px;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: none;
+}
+.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+@media (max-width: 768px) {
+    .upload-section {
+        flex-direction: column;
+    }
+    .parsed-content-container {
+        grid-template-columns: 1fr;
+    }
+    .controls {
+        justify-content: center;
+    }
+    .mapping-tables-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .source-table-container,
+    .target-table-container {
+        max-width: 100%;
+    }
+    #merged-source-tab .mapping-tables-container,
+    #merged-target-tab .mapping-tables-container {
+        margin: 10px;
+        width: calc(100% - 20px);
+        min-height: 500px;
+    }
+    #merged-source-tab .target-table-container,
+    #merged-target-tab .target-table-container {
+        position: relative;
+        /* Change to relative on mobile */
+        top: auto;
+        right: auto;
+        width: 100%;
+        /* Full width on mobile */
+        max-width: none;
+        margin-top: 30px;
+        /* Space after merged table */
+        box-shadow: none;
+        /* Simpler on mobile */
+    }
+}
+.simple-columns-wrap {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+.simple-list {
+    width: 100%;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px;
+}
+.simple-item {
+    display: block;
+    width: 100%;
+    padding: 10px 12px;
+    margin: 6px 0;
+    border: 1px solid #cce3d0;
+    border-radius: 12px;
+    background: #eaf7ec;
+    color: #1b5e20;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.3;
+}
+/* Data Toggle Checkbox Styles */
+.preview-controls {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+.data-toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #495057;
+    font-weight: 500;
+    user-select: none;
+}
+.data-toggle-checkbox {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+    appearance: none;
+    border: 2px solid #667eea;
+    border-radius: 4px;
+    background: white;
+    transition: all 0.2s ease;
+}
+.data-toggle-checkbox:checked {
+    background: #667eea;
+    border-color: #667eea;
+}
+.data-toggle-checkbox:checked::after {
+    content: '✔';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+.data-toggle-checkbox:hover {
+    border-color: #5a6fd8;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+.data-toggle-checkbox:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+.control-help {
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 8px;
+    font-style: italic;
+}
+.pipeline-selection {
+    background: #f8f9fa;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 20px 0;
+    text-align: center;
+}
+.pipeline-selection h4 {
+    margin: 0 0 12px 0;
+    color: #333;
+    font-size: 1.1em;
+}
+.pipeline-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+.pipeline-option {
+    background: white;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pipeline-option:hover {
+    border-color: #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    transform: translateY(-2px);
+}
+.pipeline-option.selected {
+    border-color: #667eea;
+    background: #f0f7ff;
+}
+.pipeline-option h5 {
+    margin: 0 0 4px 0;
+    color: #333;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+.pipeline-option p {
+    margin: 0;
+    color: #666;
+    font-size: 0.85em;
+    line-height: 1.3;
+    text-align: center;
+}
+.pipeline-option .pipeline-steps {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 8px;
+    font-size: 0.9em;
+    color: #495057;
+    border-left: 3px solid #667eea;
+}
+/* Merged Schema Section Styling */
+.merged-schema-section {
+    margin: 10px auto;
+    padding: 5px;
+    width: fit-content;
+    display: table;
+    background: #f8faff;
+    border: 2px solid #e3f2fd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+    position: relative;
+}
+.merged-schema-display {
+    margin-top: 5px;
+    position: relative;
+}
+.merged-schema-display table {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    border: 3px solid #667eea !important;
+    min-width: fit-content !important;
+    width: auto !important;
+    position: relative;
+}
+/* Simple cell layout without internal separators (continuous lines handle separation) */
+.merged-cell-separator {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.merged-cell-separator .cell-data {
+    flex: 1;
+    text-align: center;
+    padding: 0 8px;
+}
+/* Old dashed line CSS removed - now using overlay approach */
+/* Old positioning CSS removed - now using overlay approach */
+.no-data-message {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+    background-color: #f9f9f9;
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    font-style: italic;
+    margin: 10px 0;
+}
+
+/* Metrics spin animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* View Toggle Buttons */
+.view-toggle-buttons {
+    display: flex;
+    gap: 0;
+    background: #f0f0f0;
+    border-radius: 6px;
+    padding: 3px;
+}
+
+.view-toggle-btn {
+    padding: 8px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.view-toggle-btn:hover {
+    color: #333;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.view-toggle-btn.active {
+    background: white;
+    color: #667eea;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Container */
+.profile-container {
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.profile-summary {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.profile-summary h5 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.profile-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-item:last-child {
+    border-bottom: none;
+}
+
+.profile-label {
+    font-weight: 500;
+    color: #666;
+}
+
+.profile-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.profile-tables {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.profile-tables h5 {
+    margin: 0 0 15px 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.profile-table th {
+    background: #f5f5f5;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    border-bottom: 2px solid #ddd;
+}
+
+.profile-table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+}
+
+.profile-table tr:hover {
+    background: #fafafa;
+}
+
+.profile-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Preview Section - Resizable */
+#sourcePreview, #targetPreview {
+    position: relative;
+    overflow: auto;
+    min-height: 300px;
+    height: 400px;
+    max-height: 800px;
+    resize: vertical;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+}
+
+/* Profile Section - Resizable */
+#sourceProfile, #targetProfile {
+    position: relative;
+    overflow: auto;
+    min-height: 300px;
+    height: 400px;
+    max-height: 800px;
+    resize: vertical;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 10px;
+    background: white;
+}
+
+/* Custom Scrollbar Styling */
+#sourcePreview::-webkit-scrollbar,
+#targetPreview::-webkit-scrollbar,
+#sourceProfile::-webkit-scrollbar,
+#targetProfile::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+#sourcePreview::-webkit-scrollbar-track,
+#targetPreview::-webkit-scrollbar-track,
+#sourceProfile::-webkit-scrollbar-track,
+#targetProfile::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#sourcePreview::-webkit-scrollbar-thumb,
+#targetPreview::-webkit-scrollbar-thumb,
+#sourceProfile::-webkit-scrollbar-thumb,
+#targetProfile::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#sourcePreview::-webkit-scrollbar-thumb:hover,
+#targetPreview::-webkit-scrollbar-thumb:hover,
+#sourceProfile::-webkit-scrollbar-thumb:hover,
+#targetProfile::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Resize handle indicator */
+#sourcePreview::after,
+#targetPreview::after,
+#sourceProfile::after,
+#targetProfile::after {
+    content: '⋮⋮';
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    color: #999;
+    font-size: 16px;
+    pointer-events: none;
+    letter-spacing: 2px;
+}
+
+/* PDF Extraction Table Styling */
+.extraction-table-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    margin: 20px 0;
+}

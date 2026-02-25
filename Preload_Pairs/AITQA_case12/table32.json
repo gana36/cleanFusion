@@ -1,0 +1,392 @@
+{
+  "Table2.HMD": [
+    {
+            "attribute1": ""
+        },
+    {
+      "attribute2": "Year ended December 31,",
+      "children": [
+        {
+          "child_level1.attribute1": "2018"
+        },
+        {
+          "child_level1.attribute2": "2017"
+        },
+        {
+          "child_level1.attribute3": "2016"
+        },
+        {
+          "child_level1.attribute4": "2015"
+        },
+        {
+          "child_level1.attribute5": "2014"
+        }
+      ]
+    }
+  ],
+  "Table2.VMD": [
+    {
+      "attribute1": "Financial Data (in millions, except per share amounts):",
+      "children": [
+        {
+          "child_level1.attribute1": "Operating revenues"
+        },
+        {
+          "child_level1.attribute2": "Operating expenses"
+        },
+        {
+          "child_level1.attribute3": "Operating income"
+        },
+        {
+          "child_level1.attribute4": "Other expenses (income) net"
+        },
+        {
+          "child_level1.attribute5": "Income before taxes"
+        },
+        {
+          "child_level1.attribute6": "Provision for income taxes"
+        },
+        {
+          "child_level1.attribute7": "Net income"
+        },
+        {
+          "child_level1.attribute8": "Net income per share, basic"
+        },
+        {
+          "child_level1.attribute9": "Net income per share, diluted"
+        },
+        {
+          "child_level1.attribute10": "Cash dividends per common share"
+        },
+        {
+          "child_level1.attribute11": "Total assets at period-end"
+        },
+        {
+          "child_level1.attribute12": "Long-term obligations at period-end"
+        },
+        {
+          "child_level1.attribute13": "Stockholders\u2019 equity at period-end"
+        }
+      ]
+    },
+    {
+      "attribute1": "Operating Data:",
+      "children": [
+        {
+          "child_level1.attribute1": "Revenue passengers carried"
+        },
+        {
+          "child_level1.attribute2": "Enplaned passengers"
+        },
+        {
+          "child_level1.attribute3": "Revenue passenger miles (RPMs) (000s) (a)"
+        },
+        {
+          "child_level1.attribute4": "Available seat miles (ASMs) (000s) (b)"
+        },
+        {
+          "child_level1.attribute5": "Load factor (c)"
+        },
+        {
+          "child_level1.attribute6": "Average length of passenger haul (miles)"
+        },
+        {
+          "child_level1.attribute7": "Average aircraft stage length (miles)"
+        },
+        {
+          "child_level1.attribute8": "Trips flown"
+        },
+        {
+          "child_level1.attribute9": "Seats flown (d)"
+        },
+        {
+          "child_level1.attribute10": "Seats per trip (e)"
+        },
+        {
+          "child_level1.attribute11": "Average passenger fare"
+        },
+        {
+          "child_level1.attribute12": "Passenger revenue yield per RPM (cents) (f)"
+        },
+        {
+          "child_level1.attribute13": "Operating revenue per ASM (cents) (g)(j)"
+        },
+        {
+          "child_level1.attribute14": "Passenger revenue per ASM (cents) (h)"
+        },
+        {
+          "child_level1.attribute15": "Operating expenses per ASM (cents) (i)"
+        },
+        {
+          "child_level1.attribute16": "Operating expenses per ASM, excluding fuel (cents)"
+        },
+        {
+          "child_level1.attribute17": "Operating expenses per ASM, excluding fuel and profitsharing (cents)"
+        },
+        {
+          "child_level1.attribute18": "Fuel costs per gallon, including fuel tax"
+        },
+        {
+          "child_level1.attribute19": "Fuel costs per gallon, including fuel tax, economic"
+        },
+        {
+          "child_level1.attribute20": "Fuel consumed, in gallons (millions)"
+        },
+        {
+          "child_level1.attribute21": "Active fulltime equivalent Employees"
+        },
+        {
+          "child_level1.attribute22": "Aircraft at end of period"
+        }
+      ]
+    }
+  ],
+  "Table2.Data": [
+    [
+      "$21,965",
+      "$21,146",
+      "$20,289",
+      "$19,820",
+      "$18,605"
+    ],
+    [
+      "18,759",
+      "17,739",
+      "16,767",
+      "15,821",
+      "16,437"
+    ],
+    [
+      "3,206",
+      "3,407",
+      "3,522",
+      "3,999",
+      "2,168"
+    ],
+    [
+      "42",
+      "142",
+      "72",
+      "520",
+      "352"
+    ],
+    [
+      "3,164",
+      "3,265",
+      "3,450",
+      "3,479",
+      "1,816"
+    ],
+    [
+      "699",
+      "(92)",
+      "1,267",
+      "1,298",
+      "680"
+    ],
+    [
+      "$2,465",
+      "$3,357",
+      "$2,183",
+      "$2,181",
+      "$1,136"
+    ],
+    [
+      "$4.30",
+      "$5.58",
+      "$3.48",
+      "$3.30",
+      "$1.65"
+    ],
+    [
+      "$4.29",
+      "$5.57",
+      "$3.45",
+      "$3.27",
+      "$1.64"
+    ],
+    [
+      "$0.6050",
+      "$0.4750",
+      "$0.3750",
+      "$0.2850",
+      "$0.2200"
+    ],
+    [
+      "$26,243",
+      "$25,110",
+      "$23,286",
+      "$21,312",
+      "$19,723"
+    ],
+    [
+      "$2,771",
+      "$3,320",
+      "$2,821",
+      "$2,541",
+      "$2,434"
+    ],
+    [
+      "$9,853",
+      "$9,641",
+      "$7,784",
+      "$7,358",
+      "$6,775"
+    ],
+    [
+      "134,890,243",
+      "130,256,190",
+      "124,719,765",
+      "118,171,211",
+      "110,496,912"
+    ],
+    [
+      "163,605,833",
+      "157,677,218",
+      "151,740,357",
+      "144,574,882",
+      "135,767,188"
+    ],
+    [
+      "133,322,322",
+      "129,041,420",
+      "124,797,986",
+      "117,499,879",
+      "108,035,133"
+    ],
+    [
+      "159,795,153",
+      "153,811,072",
+      "148,522,051",
+      "140,501,409",
+      "131,003,957"
+    ],
+    [
+      "83.4%",
+      "83.9%",
+      "84.0%",
+      "83.6%",
+      "82.5%"
+    ],
+    [
+      "988",
+      "991",
+      "1,001",
+      "994",
+      "978"
+    ],
+    [
+      "757",
+      "754",
+      "760",
+      "750",
+      "721"
+    ],
+    [
+      "1,375,030",
+      "1,347,893",
+      "1,311,149",
+      "1,267,358",
+      "1,255,502"
+    ],
+    [
+      "207,223,050",
+      "200,878,967",
+      "193,167,695",
+      "184,955,094",
+      "179,733,055"
+    ],
+    [
+      "150.70",
+      "149.03",
+      "147.33",
+      "145.94",
+      "143.16"
+    ],
+    [
+      "$151.64",
+      "$151.73",
+      "$152.89",
+      "$154.85",
+      "$159.80"
+    ],
+    [
+      "15.34",
+      "15.32",
+      "15.28",
+      "15.57",
+      "16.34"
+    ],
+    [
+      "13.75",
+      "13.75",
+      "13.66",
+      "13.98",
+      "14.20"
+    ],
+    [
+      "12.80",
+      "12.85",
+      "12.84",
+      "13.02",
+      "13.48"
+    ],
+    [
+      "11.74",
+      "11.53",
+      "11.29",
+      "11.26",
+      "12.55"
+    ],
+    [
+      "8.85",
+      "8.88",
+      "8.73",
+      "8.60",
+      "8.46"
+    ],
+    [
+      "8.51",
+      "8.53",
+      "8.34",
+      "8.16",
+      "8.19"
+    ],
+    [
+      "$2.20",
+      "$1.99",
+      "$1.90",
+      "$1.96",
+      "$2.97"
+    ],
+    [
+      "$2.20",
+      "$2.06",
+      "$2.00",
+      "$2.13",
+      "$2.95"
+    ],
+    [
+      "2,094",
+      "2,045",
+      "1,996",
+      "1,901",
+      "1,801"
+    ],
+    [
+      "58,803",
+      "56,110",
+      "53,536",
+      "49,583",
+      "46,278"
+    ],
+    [
+      "750",
+      "706",
+      "723",
+      "704",
+      "665"
+    ]
+  ],
+  "id": "tab-32"
+}

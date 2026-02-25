@@ -1,0 +1,137 @@
+You are a clinical research data extraction specialist.
+
+YOUR TASK:
+Analyze this medical research paper and identify the SCHEMA (structure) for data extraction.
+Do NOT extract data values yet - only identify what columns and rows exist.
+
+PHASE 1: IDENTIFY SCHEMA ONLY
+
+PART A - IDENTIFY STUDY ARMS (HMD - Columns):
+Find the comparison groups reported in this study with HIERARCHICAL structure:
+- Each study arm is a PARENT with optional CHILDREN sub-columns
+- PARENT: Group name eng sample size (e.g., "Low-risk pT1 (N=70)")
+- CHILDREN: Sub-columns for that group (if data is broken down further OR has specific descriptors)
+  * Treatment received (e.g., "TEM/TAMIS", "Chemotherapy")
+  * Subgroup classifications
+  * Inclusion Criteria (e.g., "pT1 without risk factors")
+  * Time points
+  * Or empty [] if no sub-columns needed
+- Statistical columns (P-Value, OR, HR) typically have NO children
+- **IMPORTANT**: If a group has descriptive text lines in the header, make each line a CHILD column.
+
+PART B - IDENTIFY REPORTED VARIABLES (VMD - Rows):
+Find ALL quantitative variables reported in the paper's tables and results:
+- Group them by logical categories
+- Only include variables that are ACTUALLY REPORTED
+- Use the paper's own category names when possible
+- Each leaf variable should be measurable (has a number/percentage)
+
+OUTPUT FORMAT (JSON only):
+{{
+  "HMD_Categories": [
+    {{
+      "group": "Group 1 Name (N=X)",
+      "children": [
+        "Sub-column 1 description",
+        "Sub-column 2 description"
+      ]
+    }},
+    {{
+      "group": "Group 2 Name (N=Y)",
+      "children": [
+        "Sub-column 1 description"
+      ]
+    }},
+    {{
+      "group": "P-Value",
+      "children": []
+    }}
+  ],
+  "VMD_Categories": [
+    {{
+      "category": "1. CATEGORY NAME",
+      "variables": [
+        "Variable 1, unit",
+        "Variable 2, n (%)"
+      ]
+    }}
+  ],
+  "total_variables": 12
+}}
+
+CRITICAL RULES:
+1. **Only identify structure** - Do NOT extract actual values
+2. **HMD children are DATA COLUMNS** - They will hold actual values
+3. **Empty children []** - Use when group has no sub-breakdown (like P-Value)
+4. **Be exhaustive** - Find ALL reported variables
+5. **Use paper terminology** - Names from the paper itself
+
+EXAMPLE - Clinical Trial with Treatment Subgroups:
+{{
+  "HMD_Categories": [
+    {{
+      "group": "Low-risk pT1 (N=70)",
+      "children": []
+    }},
+    {{
+      "group": "High-risk pT1 (N=153)",
+      "children": []
+    }},
+    {{
+      "group": "pT2 (N=75)",
+      "children": []
+    }},
+    {{
+      "group": "P-Value",
+      "children": []
+    }}
+  ],
+  "VMD_Categories": [
+    {{
+      "category": "1. Patient Demographics",
+      "variables": ["Age, mean (SD)", "Sex, male, n (%)"]
+    }},
+    {{
+      "category": "2. Tumor Characteristics",
+      "variables": ["Deep SM infiltration, n (%)", "LVI, n (%)"]
+    }},
+    {{
+      "category": "3. Oncological Outcomes",
+      "variables": ["Overall survival, HR (95% CI)", "Local recurrence, %"]
+    }}
+  ],
+  "total_variables": 6
+}}
+
+EXAMPLE - Study with Time-Point Sub-columns:
+{{
+  "HMD_Categories": [
+    {{
+      "group": "Treatment Group A",
+      "children": ["Baseline", "6 months", "12 months"]
+    }},
+    {{
+      "group": "Treatment Group B", 
+      "children": ["Baseline", "6 months", "12 months"]
+    }},
+    {{
+      "group": "P-Value",
+      "children": []
+    }}
+  ],
+  "VMD_Categories": [
+    {{
+      "category": "1. Primary Endpoints",
+      "variables": ["Response rate, %", "Progression-free survival"]
+    }}
+  ],
+  "total_variables": 2
+}}
+
+======== TABLES (PRIMARY SOURCE FOR SCHEMA) ========
+{tables}
+
+======== DOCUMENT TEXT ========
+{text}
+
+JSON OUTPUT (schema only, no data values):

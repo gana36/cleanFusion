@@ -1,0 +1,136 @@
+"Table1.VMD":[
+   {
+    "attribute1": "Financial Data (in millions, except per share amounts):",
+    "children": [
+        { "child_level1.attribute1": "Operating revenues"},
+        { "child_level1.attribute2": "Operating expenses"},
+        { "child_level1.attribute3": "Operating income"}, 
+        { "child_level1.attribute4": "Other expenses (income) net"},
+        { "child_level1.attribute5": "Income before taxes"},
+        { "child_level1.attribute6": "Provision (benefit) for income taxes"},
+        { "child_level1.attribute7": "Net income"},
+        { "child_level1.attribute8": "Net income per share, basic"},
+        { "child_level1.attribute9": "Net income per share, diluted"},
+        { "child_level1.attribute10": "Cash dividends per common share"},
+        { "child_level1.attribute11": "Total assets at period-end"},
+        { "child_level1.attribute12":  "Long-term obligations at period-end"},
+        { "child_level1.attribute13":  "Stockholders\u2019 equity at period-end"}
+    ] },
+ {
+    "attribute2": "Operating Data:",
+    "children": [
+        { "child_level1.attribute1": "Revenue passengers carried (000s)"},
+        { "child_level1.attribute2": "Revenue passenger miles (RPMs) (in millions) (a)"},
+        { "child_level1.attribute3": "Available seat miles (ASMs) (in millions) (b)"},
+        { "child_level1.attribute4": "Load factor (c)"},
+        { "child_level1.attribute5": "Average length of passenger haul (miles)"},
+        { "child_level1.attribute6": "Average aircraft stage length (miles)"},
+        { "child_level1.attribute7": "Trips flown"},
+        { "child_level1.attribute8": "Seats flown (000s) (d)"},
+        { "child_level1.attribute9": "Seats per trip (e)"},
+        { "child_level1.attribute10": "Average passenger fare"},
+        { "child_level1.attribute11": "Passenger revenue yield per RPM (cents) (f)"},
+        { "child_level1.attribute12": "Operating revenues per ASM (cents) (g)(j)"},
+        { "child_level1.attribute13": "Passenger revenue per ASM (cents) (h)"},
+        { "child_level1.attribute14": "Operating expenses per ASM (cents) (i)"},
+        { "child_level1.attribute15": "Operating expenses per ASM, excluding fuel (cents)"},
+        { "child_level1.attribute16": "Operating expenses per ASM, excluding fuel and profitsharing (cents)"},
+        { "child_level1.attribute17": "Fuel costs per gallon, including fuel tax"},
+        { "child_level1.attribute18": "Fuel costs per gallon, including fuel tax, economic"},
+        { "child_level1.attribute19": "Fuel consumed, in gallons (millions)"},
+        { "child_level1.attribute20": "Active fulltime equivalent Employees"},
+        { "child_level1.attribute21": "Aircraft at end of period"}
+    ]
+ }
+]
+
+
+
+
+Slices would be
+
+Partition 1
+"Table1.VMD":[
+{
+    "attribute1": "Financial Data (in millions, except per share amounts):",
+    "children": [
+        { "child_level1.attribute1": "Operating revenues"},
+        { "child_level1.attribute2": "Operating expenses"},
+        { "child_level1.attribute3": "Operating income"}, 
+        { "child_level1.attribute4": "Other expenses (income) net"},
+        { "child_level1.attribute5": "Income before taxes"},
+        { "child_level1.attribute6": "Provision (benefit) for income taxes"},
+        { "child_level1.attribute7": "Net income"},
+        { "child_level1.attribute8": "Net income per share, basic"},
+    ]
+}
+]
+
+Partition 2
+"Table1.VMD":[
+{
+    "attribute1": "Financial Data (in millions, except per share amounts):",
+    "children": [
+        { "child_level1.attribute9": "Net income per share, diluted"},
+        { "child_level1.attribute10": "Cash dividends per common share"},
+        { "child_level1.attribute11": "Total assets at period-end"},
+        { "child_level1.attribute12":  "Long-term obligations at period-end"},
+        { "child_level1.attribute13":  "Stockholders\u2019 equity at period-end"}
+    ] },
+    {
+    "attribute2": "Operating Data:",
+    "children": [
+        { "child_level1.attribute1": "Revenue passengers carried (000s)"},
+        { "child_level1.attribute2": "Revenue passenger miles (RPMs) (in millions) (a)"},
+        { "child_level1.attribute3": "Available seat miles (ASMs) (in millions) (b)"},
+    ]
+    }
+]
+
+Partition 3
+"Table1.VMD":[
+ {
+    "attribute2": "Operating Data:",
+    "children": [
+        { "child_level1.attribute4": "Load factor (c)"},
+        { "child_level1.attribute5": "Average length of passenger haul (miles)"},
+        { "child_level1.attribute6": "Average aircraft stage length (miles)"},
+        { "child_level1.attribute7": "Trips flown"},
+        { "child_level1.attribute8": "Seats flown (000s) (d)"},
+        { "child_level1.attribute9": "Seats per trip (e)"},
+        { "child_level1.attribute10": "Average passenger fare"},
+        { "child_level1.attribute11": "Passenger revenue yield per RPM (cents) (f)"},
+    ]
+ }
+]
+
+Partition 4
+"Table1.VMD":[
+ {
+    "attribute2": "Operating Data:",
+    "children": [
+        { "child_level1.attribute12": "Operating revenues per ASM (cents) (g)(j)"},
+        { "child_level1.attribute13": "Passenger revenue per ASM (cents) (h)"},
+        { "child_level1.attribute14": "Operating expenses per ASM (cents) (i)"},
+        { "child_level1.attribute15": "Operating expenses per ASM, excluding fuel (cents)"},
+        { "child_level1.attribute16": "Operating expenses per ASM, excluding fuel and profitsharing (cents)"},
+        { "child_level1.attribute17": "Fuel costs per gallon, including fuel tax"},
+        { "child_level1.attribute18": "Fuel costs per gallon, including fuel tax, economic"},
+        { "child_level1.attribute19": "Fuel consumed, in gallons (millions)"},
+    ]
+ }
+]
+
+
+Rest of Table 1
+"Table1.VMD":[
+ {
+    "attribute2": "Operating Data:",
+    "children": [
+        { "child_level1.attribute20": "Active fulltime equivalent Employees"},
+        { "child_level1.attribute21": "Aircraft at end of period"}
+
+    ]
+ }
+]
+ 

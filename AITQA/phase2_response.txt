@@ -1,0 +1,272 @@
+{
+  "Table1.HMD": [
+    {
+      "attribute1": "",
+      "children": []
+    },
+    {
+      "attribute2": "Bleeding",
+      "children": [
+        {
+          "child_level1.attribute1": "(n=35)"
+        }
+      ]
+    },
+    {
+      "attribute3": "Non-bleeding",
+      "children": [
+        {
+          "child_level1.attribute1": "(n=377)"
+        }
+      ]
+    },
+    {
+      "attribute4": "P value",
+      "children": []
+    }
+  ],
+  "Table1.VMD": [
+    "Age, mean±SD,y",
+    "Hypertension"
+  ],
+  "Table2.HMD": [
+    {
+      "attribute1": "",
+      "children": []
+    },
+    {
+      "attribute2": "With vaccines",
+      "children": [
+        {
+          "child_level1.attribute1": "(n=48)"
+        }
+      ]
+    },
+    {
+      "attribute3": "Without reactions",
+      "children": [
+        {
+          "child_level1.attribute1": "(n=217)"
+        }
+      ]
+    },
+    {
+      "attribute4": "P value",
+      "children": []
+    }
+  ],
+  "Table2.VMD": [
+    "Age, mean±SD,years",
+    "BMI, mean±SD,years",
+    "Hypertension (H)"
+  ],
+  "HMD_Merged_Schema": [
+    "P value",
+    "Table1.attribute1",
+    "Table1.attribute2",
+    "Table1.attribute2.children.child_level1.attribute1",
+    "Table1.attribute3",
+    "Table1.attribute3.children.child_level1.attribute1",
+    "Table2.attribute1",
+    "Table2.attribute2",
+    "Table2.attribute2.children.child_level1.attribute1",
+    "Table2.attribute3",
+    "Table2.attribute3.children.child_level1.attribute1"
+  ],
+  "VMD_Merged_Schema": [
+    "Age, mean±SD,y/years",
+    "Hypertension",
+    "BMI, mean±SD,years"
+  ],
+  "Merged_Data": [
+    {
+      "P value": {
+        "HMD_value": "",
+        "VMD_values": [
+          {
+            "VMD_attribute": "Age, mean±SD,y/years",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "Hypertension",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "BMI, mean±SD,years",
+            "source1": "",
+            "source2": ""
+          }
+        ]
+      }
+    },
+    {
+      "Table1.attribute1": {
+        "HMD_value": "",
+        "VMD_values": [
+          {
+            "VMD_attribute": "Age, mean±SD,y/years",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "Hypertension",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "BMI, mean±SD,years",
+            "source1": "",
+            "source2": ""
+          }
+        ]
+      }
+    },
+    {
+      "Table1.attribute2.children.child_level1.attribute1": {
+        "HMD_value": "",
+        "VMD_values": [
+          {
+            "VMD_attribute": "Age, mean±SD,y/years",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "Hypertension",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "BMI, mean±SD,years",
+            "source1": "",
+            "source2": ""
+          }
+        ]
+      }
+    },
+    {
+      "Table1.attribute3.children.child_level1.attribute1": {
+        "HMD_value": "",
+        "VMD_values": [
+          {
+            "VMD_attribute": "Age, mean±SD,y/years",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "Hypertension",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "BMI, mean±SD,years",
+            "source1": "",
+            "source2": ""
+          }
+        ]
+      }
+    },
+    {
+      "Table2.attribute1": {
+        "HMD_value": "",
+        "VMD_values": [
+          {
+            "VMD_attribute": "Age, mean±SD,y/years",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "Hypertension",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "BMI, mean±SD,years",
+            "source1": "",
+            "source2": ""
+          }
+        ]
+      }
+    },
+    {
+      "Table2.attribute2.children.child_level1.attribute1": {
+        "HMD_value": "",
+        "VMD_values": [
+          {
+            "VMD_attribute": "Age, mean±SD,y/years",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "Hypertension",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "BMI, mean±SD,years",
+            "source1": "",
+            "source2": ""
+          }
+        ]
+      }
+    },
+    {
+      "Table2.attribute3.children.child_level1.attribute1": {
+        "HMD_value": "",
+        "VMD_values": [
+          {
+            "VMD_attribute": "Age, mean±SD,y/years",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "Hypertension",
+            "source1": "",
+            "source2": ""
+          },
+          {
+            "VMD_attribute": "BMI, mean±SD,years",
+            "source1": "",
+            "source2": ""
+          }
+        ]
+      }
+    }
+  ],
+  "HMD_Map_Schema1": [
+    {
+      "source1": "P value",
+      "source2": "attribute4"
+    }
+  ],
+  "VMD_Map_Schema1": [
+    {
+      "source1": "Age, mean±SD,y/years",
+      "source2": "Age, mean±SD,y"
+    },
+    {
+      "source1": "Hypertension",
+      "source2": "Hypertension"
+    }
+  ],
+  "HMD_Map_Schema2": [
+    {
+      "source1": "P value",
+      "source2": "attribute4"
+    }
+  ],
+  "VMD_Map_Schema2": [
+    {
+      "source1": "Age, mean±SD,y/years",
+      "source2": "Age, mean±SD,years"
+    },
+    {
+      "source1": "Hypertension",
+      "source2": "Hypertension (H)"
+    }
+  ],
+  "Merged_Schema": [],
+  "Map_Schema1": [],
+  "Map_Schema2": []
+}

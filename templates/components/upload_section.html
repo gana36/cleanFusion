@@ -1,0 +1,85 @@
+<style>
+    .quick-load-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea15, #764ba215);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 2px dashed #667eea50;
+    }
+
+    .quick-load-section label {
+        font-weight: 600;
+        color: #667eea;
+        font-size: 14px;
+    }
+
+    .quick-load-select {
+        padding: 10px 20px;
+        border: 2px solid #667eea;
+        border-radius: 8px;
+        background: white;
+        font-size: 14px;
+        font-weight: 500;
+        color: #333;
+        cursor: pointer;
+        min-width: 200px;
+        transition: all 0.2s;
+    }
+
+    .quick-load-select:hover {
+        border-color: #764ba2;
+        box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+    }
+
+    .quick-load-select:focus {
+        outline: none;
+        border-color: #764ba2;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+    }
+</style>
+
+<div class="quick-load-section">
+    <label>⚡ Quick Load:</label>
+    <select class="quick-load-select" id="preloadedPairSelect" onchange="loadPreloadedPair(this.value)">
+        <option value="">-- Select Preloaded Pair --</option>
+        <option value="aitqa_12">📊 AITQA Case 12 </option>
+        <!-- <option value="hemoglobin">🔬 Hemoglobin Tables</option> -->
+        <option value="aitqa_16">📊 AITQA Case 16 </option>
+        <option value="aitqa_17">📊 AITQA Case 17 </option>
+    </select>
+</div>
+
+<div class="upload-section">
+    <div class="upload-box" id="sourceUpload">
+        <h3>Source Schema</h3>
+        <p>Upload table</p>
+        <input type="file" id="sourceFile" class="file-input" accept=".docx,.json,.txt">
+        <button class="upload-btn" onclick="document.getElementById('sourceFile').click()">
+            Choose File
+        </button>
+        <div class="text-input-section">
+            <div class="text-input-toggle" onclick="toggleTextInput('source')">
+                Or paste JSON text
+            </div>
+            <textarea id="sourceText" class="text-input-area" placeholder="Paste JSON content here..."></textarea>
+        </div>
+    </div>
+    <div class="upload-box" id="targetUpload">
+        <h3>Target Schema</h3>
+        <p>Upload table</p>
+        <input type="file" id="targetFile" class="file-input" accept=".docx,.json,.txt">
+        <button class="upload-btn" onclick="document.getElementById('targetFile').click()">
+            Choose File
+        </button>
+        <div class="text-input-section">
+            <div class="text-input-toggle" onclick="toggleTextInput('target')">
+                Or paste JSON text
+            </div>
+            <textarea id="targetText" class="text-input-area" placeholder="Paste JSON content here..."></textarea>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "filename": "cro-0010-0021.pdf",
+  "model": "llama-3.3-70b-versatile",
+  "success": false,
+  "valid": false,
+  "elapsed": 0.0,
+  "error": "Invalid Schema File: 'list' object has no attribute 'keys'",
+  "extracted_data": null,
+  "schema_info": null
+}

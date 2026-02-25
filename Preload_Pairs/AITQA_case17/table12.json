@@ -1,0 +1,327 @@
+{
+    "Table1.HMD": [
+        {
+            "attribute1": ""
+        },
+        {
+            "attribute2": "Year ended December 31,",
+            "children": [
+                {
+                    "child_level1.attribute1": "2019"
+                },
+                {
+                    "child_level1.attribute2": "2018"
+                },
+                {
+                    "child_level1.attribute3": "2017"
+                },
+                {
+                    "child_level1.attribute4": "2016"
+                }
+            ]
+        }
+    ],
+    "Table1.VMD": [
+        {
+            "attribute1": "Financial Data (in millions, except per share amounts):",
+            "children": [
+                {
+                    "child_level1.attribute1": "Operating revenues"
+                },
+                {
+                    "child_level1.attribute2": "Operating expenses"
+                },
+                {
+                    "child_level1.attribute3": "Operating income"
+                },
+                {
+                    "child_level1.attribute4": "Other expenses (income) net"
+                },
+                {
+                    "child_level1.attribute5": "Income before taxes"
+                },
+                {
+                    "child_level1.attribute6": "Provision (benefit) for income taxes"
+                },
+                {
+                    "child_level1.attribute7": "Net income"
+                },
+                {
+                    "child_level1.attribute8": "Net income per share, basic"
+                },
+                {
+                    "child_level1.attribute9": "Net income per share, diluted"
+                },
+                {
+                    "child_level1.attribute10": "Cash dividends per common share"
+                }
+            ]
+        },
+        {
+            "attribute2": "Operating Data:",
+            "children": [
+                {
+                    "child_level1.attribute1": "Revenue passengers carried (000s)"
+                },
+                {
+                    "child_level1.attribute2": "Enplaned passengers (000s)"
+                },
+                {
+                    "child_level1.attribute3": "Revenue passenger miles (RPMs) (in millions) (a)"
+                },
+                {
+                    "child_level1.attribute4": "Available seat miles (ASMs) (in millions) (b)"
+                },
+                {
+                    "child_level1.attribute5": "Load factor (c)"
+                },
+                {
+                    "child_level1.attribute6": "Average length of passenger haul (miles)"
+                },
+                {
+                    "child_level1.attribute7": "Average aircraft stage length (miles)"
+                },
+                {
+                    "child_level1.attribute8": "Trips flown"
+                },
+                {
+                    "child_level1.attribute9": "Seats flown (000s) (d)"
+                },
+                {
+                    "child_level1.attribute10": "Seats per trip (e)"
+                },
+                {
+                    "child_level1.attribute11": "Average passenger fare"
+                },
+                {
+                    "child_level1.attribute12": "Passenger revenue yield per RPM (cents) (f)"
+                },
+                {
+                    "child_level1.attribute13": "Operating revenues per ASM (cents) (g)(j)"
+                },
+                {
+                    "child_level1.attribute14": "Passenger revenue per ASM (cents) (h)"
+                },
+                {
+                    "child_level1.attribute15": "Operating expenses per ASM (cents) (i)"
+                },
+                {
+                    "child_level1.attribute16": "Operating expenses per ASM, excluding fuel (cents)"
+                },
+                {
+                    "child_level1.attribute17": "Operating expenses per ASM, excluding fuel and profitsharing (cents)"
+                },
+                {
+                    "child_level1.attribute18": "Fuel costs per gallon, including fuel tax"
+                },
+                {
+                    "child_level1.attribute19": "Fuel costs per gallon, including fuel tax, economic"
+                },
+                {
+                    "child_level1.attribute20": "Fuel consumed, in gallons (millions)"
+                },
+                {
+                    "child_level1.attribute21": "Active fulltime equivalent Employees"
+                },
+                {
+                    "child_level1.attribute22": "Aircraft at end of period"
+                }
+            ]
+        }
+    ],
+    "Table1.Data": [
+        [
+            "$22,428",
+            "$21,965",
+            "$21,146",
+            "$20,289"
+        ],
+        [
+            "19,471",
+            "18,759",
+            "17,739",
+            "16,767"
+        ],
+        [
+            "2,957",
+            "3,206",
+            "3,407",
+            "3,522"
+        ],
+        [
+            "2014",
+            "42",
+            "142",
+            "72"
+        ],
+        [
+            "2,957",
+            "3,164",
+            "3,265",
+            "3,450"
+        ],
+        [
+            "657",
+            "699",
+            "(92)",
+            "1,267"
+        ],
+        [
+            "$2,300",
+            "$2,465",
+            "$3,357",
+            "$2,183"
+        ],
+        [
+            "$4.28",
+            "$4.30",
+            "$5.58",
+            "$3.48"
+        ],
+        [
+            "$4.27",
+            "$4.29",
+            "$5.57",
+            "$3.45"
+        ],
+        [
+            "$0.700",
+            "$0.605",
+            "$0.475",
+            "$0.375"
+        ],
+        [
+            "134,056",
+            "134,890",
+            "130,256",
+            "124,720"
+        ],
+        [
+            "162,681",
+            "163,606",
+            "157,677",
+            "151,740"
+        ],
+        [
+            "131,345",
+            "133,322",
+            "129,041",
+            "124,798"
+        ],
+        [
+            "157,254",
+            "159,795",
+            "153,811",
+            "148,522"
+        ],
+        [
+            "83.5%",
+            "83.4%",
+            "83.9%",
+            "84.0%"
+        ],
+        [
+            "980",
+            "988",
+            "991",
+            "1,001"
+        ],
+        [
+            "748",
+            "757",
+            "754",
+            "760"
+        ],
+        [
+            "1,367,727",
+            "1,375,030",
+            "1,347,893",
+            "1,311,149"
+        ],
+        [
+            "206,390",
+            "207,223",
+            "200,879",
+            "193,168"
+        ],
+        [
+            "150.9",
+            "150.7",
+            "149.0",
+            "147.3"
+        ],
+        [
+            "$154.98",
+            "$151.64",
+            "$151.73",
+            "$152.89"
+        ],
+        [
+            "15.82",
+            "15.34",
+            "15.32",
+            "15.28"
+        ],
+        [
+            "14.26",
+            "13.75",
+            "13.75",
+            "13.66"
+        ],
+        [
+            "13.21",
+            "12.80",
+            "12.85",
+            "12.84"
+        ],
+        [
+            "12.38",
+            "11.74",
+            "11.53",
+            "11.29"
+        ],
+        [
+            "9.62",
+            "8.85",
+            "8.88",
+            "8.73"
+        ],
+        [
+            "9.19",
+            "8.51",
+            "8.53",
+            "8.34"
+        ],
+        [
+            "$2.09",
+            "$2.20",
+            "$1.99",
+            "$1.90"
+        ],
+        [
+            "$2.09",
+            "$2.20",
+            "$2.06",
+            "$2.00"
+        ],
+        [
+            "2,077",
+            "2,094",
+            "2,045",
+            "1,996"
+        ],
+        [
+            "60,767",
+            "58,803",
+            "56,110",
+            "53,536"
+        ],
+        [
+            "747",
+            "750",
+            "706",
+            "723"
+        ]
+    ],
+    "id": "tab-12"
+}

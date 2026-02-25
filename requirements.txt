@@ -1,0 +1,10 @@
+Flask==2.3.3
+Flask-CORS==4.0.0
+gunicorn==21.2.0
+python-docx==0.8.11
+pymongo==4.5.0
+groq>=0.4.0
+anthropic>=0.7.8
+google-generativeai>=0.3.0
+pydantic>=2.0.0
+sshtunnel==0.4.0

@@ -1,0 +1,110 @@
+{
+  "Merged_Data": {
+    "Financial Data (in millions, except per share amounts):.Income before taxes": {
+      "source": ["2,957","3,164","3,265","3,450","3,479",""],
+      "target": ["","3,164","3,265","3,450","3,479","1,816"]
+    },
+    "Financial Data (in millions, except per share amounts):.Net income": {
+      "source": ["$2,300","$2,465","$3,357","$2,183","$2,181",""],
+      "target": ["","$2,465","$3,357","$2,183","$2,181","$1,136"]
+    },
+    "Financial Data (in millions, except per share amounts):.Operating expenses": {
+      "source": ["19,471","18,759","17,739","16,767","15,821",""],
+      "target": ["","18,759","17,739","16,767","15,821","16,437"]
+    },
+    "Financial Data (in millions, except per share amounts):.Operating income": {
+      "source": ["2,957","3,206","3,407","3,522","3,999",""],
+      "target": ["","3,206","3,407","3,522","3,999","2,168"]
+    },
+    "Financial Data (in millions, except per share amounts):.Operating revenues": {
+      "source": ["$22,428","$21,965","$21,146","$20,289","$19,820",""],
+      "target": ["","$21,965","$21,146","$20,289","$19,820","$18,605"]
+    },
+    "Financial Data (in millions, except per share amounts):.Other expenses (income) net": {
+      "source": ["—","42","142","72","520",""],
+      "target": ["","42","142","72","520","352"]
+    },
+    "Financial Data (in millions, except per share amounts):.Provision (benefit) for income taxes": {
+      "source": ["657","699","(92)","1,267","1,298",""],
+      "target": ["","","","","",""]
+    },
+    "Financial Data (in millions, except per share amounts):.Provision for income taxes": {
+      "source": [ "", "", "", "", "",""],
+      "target": ["","699","(92)","1,267","1,298","680"]
+    },
+    "Financial Data (in millions, except per share amounts):.Cash dividends per common share": {
+      "source": ["$0.700","$0.605","$0.475","$0.375","$0.285","],
+      "target": ["","$0.6050","$0.4750","$0.3750","$0.2850","$0.2200"]
+    },
+    "Financial Data (in millions, except per share amounts):.Long-term obligations at period-end": {
+      "source": ["$1,846","$2,771","$3,320","$2,821","$2,541",""],
+      "target":["","$2,771","$3,320","$2,821","$2,541","$2,434"]
+    },
+    "Financial Data (in millions, except per share amounts):.Net income per share, basic": {
+      "source": ["$4.28","$4.30","$5.58","$3.48","$3.30",""],
+      "target": ["","$4.30","$5.58","$3.48","$3.30","$1.65"]
+    },
+    "Financial Data (in millions, except per share amounts):.Net income per share, diluted": {
+      "source": ["$4.27","$4.29","$5.57","$3.45","$3.27",""],
+      "target": ["","$4.29","$5.57","$3.45","$3.27","$1.64"]
+    },
+    "Financial Data (in millions, except per share amounts):.Stockholders’ equity at period-end": {
+      "source": ["$9,832","$9,853","$9,641","$7,784","$7,358",""],
+      "target": ["","$9,853","$9,641","$7,784","$7,358","$6,775"]
+    },
+    "Financial Data (in millions, except per share amounts):.Total assets at period-end": {
+      "source":["$25,895","$26,243","$25,110","$23,286","$21,312",""],
+      "target": ["","$26,243","$25,110","$23,286","$21,312","$19,723"]
+    },
+    "Operating Data:.Revenue passengers carried": {
+      "source": ["","","","","",""],
+      "target": ["","134,890,243","130,256,190","124,719,765","118,171,211","110,496,912"]
+    },
+    "Operating Data:.Revenue passengers carried (000s)": {
+      "source": ["134,056","134,890","130,256","124,720","118,171","" ],
+      "target": ["","","","","",""]
+    },
+    "Operating Data:.Available seat miles (ASMs) (in millions) (b)": {
+      "source":["131,345","133,322","129,041","124,798","117,500","" ],
+      "target": ["","","","","","" ]
+    },
+    "Operating Data:.Average aircraft stage length (miles)": {
+      "source": ["980",	"988",	"991",	"1,001",	"994",""],
+      "target": ["","757",	"754",	"760",	"750",	"721"]
+    },
+    "Operating Data:.Enplaned passengers": {
+      "source": ["","","","","",""],
+      "target": ["""163,605,833","157,677,218","151,740,357","144,574,882","135,767,188"]
+    }
+  },
+  "HMD_Merged_Schema": [
+    "Year ended December 31,",
+    "Year ended December 31,.2019",
+    "Year ended December 31,.2018",
+    "Year ended December 31,.2017",
+    "Year ended December 31,.2016",
+    "Year ended December 31,.2015",
+    "Year ended December 31,.2014"
+  ],
+  "VMD_Merged_Schema": [
+    "Financial Data (in millions, except per share amounts):.Income before taxes",
+    "Financial Data (in millions, except per share amounts):.Net income",
+    "Financial Data (in millions, except per share amounts):.Operating expenses",
+    "Financial Data (in millions, except per share amounts):.Operating income",
+    "Financial Data (in millions, except per share amounts):.Operating revenues",
+    "Financial Data (in millions, except per share amounts):.Other expenses (income) net",
+    "Financial Data (in millions, except per share amounts):.Provision (benefit) for income taxes",
+    "Financial Data (in millions, except per share amounts):.Provision for income taxes",
+    "Financial Data (in millions, except per share amounts):.Cash dividends per common share",
+    "Financial Data (in millions, except per share amounts):.Long-term obligations at period-end",
+    "Financial Data (in millions, except per share amounts):.Net income per share, basic",
+    "Financial Data (in millions, except per share amounts):.Net income per share, diluted",
+    "Financial Data (in millions, except per share amounts):.Stockholders’ equity at period-end",
+    "Financial Data (in millions, except per share amounts):.Total assets at period-end",
+    "Operating Data:.Revenue passengers carried",
+    "Operating Data:.Revenue passengers carried (000s)",
+    "Operating Data:.Available seat miles (ASMs) (in millions) (b)",
+    "Operating Data:.Average aircraft stage length (miles)",
+    "Operating Data:.Enplaned passengers"
+  ]
+}

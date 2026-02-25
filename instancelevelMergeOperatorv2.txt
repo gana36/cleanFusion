@@ -1,0 +1,88 @@
+-------------------------------------------------------------------
+-   Input - provided in prompt merged schema 
+-   Output - JSON with merged data from Table1 and Table2
+-------------------------------------------------------------------
+Act as a table merger for hierarchical, non-relational tables. 
+Given an example merged_schema:
+
+{
+  "HMD_Merged_Schema": [
+    "HMD.attr_name1",
+    "HMD.attr_name2",
+    ...
+    "HMD.attr_nameN"
+  ],
+  "VMD_Merged_Schema": [
+    "VMD.attr_name1",
+    "VMD.attr_name2",
+    ...
+    "VMD.attr_nameN"
+  ]
+}
+with attributes and their values from Table1 and Table2.
+
+IMPORTANT: You will receive Table1 and Table2 in this structure:
+- Table1.HMD: Header columns (horizontal metadata)
+- Table1.VMD: Row headers (vertical metadata)
+- Table1.Data: 2D array where each row contains ACTUAL DATA VALUES corresponding to the HMD columns
+
+The Merged_data output should contain ACTUAL DATA VALUES extracted from Table1.Data and Table2.Data arrays, NOT the HMD attribute names.
+
+**CRITICAL OUTPUT FORMAT - USE DICTIONARIES WITH HMD COLUMN NAMES AS KEYS:**
+
+Example with sample data:
+- Table1.HMD = ["Bleeding (n=35)", "Non-bleeding (n=377)", "P value"]
+- Table1.VMD = ["Age, mean±SD,y"]
+- Table1.Data = [["74.0±8.1", "70.5±10.1", "0.043"]]
+
+- Table2.HMD = ["With vaccines (n=48)", "Without reactions (n=217)", "P value"]
+- Table2.VMD = ["Age, mean±SD,years"]  
+- Table2.Data = [["75.9±7.9", "68.6±10.1", "<0.001"]]
+
+Expected Output:
+{
+  "Merged_Data": {
+    "Age, mean±SD,y": {
+      "source": {
+        "Bleeding (n=35)": "74.0±8.1",
+        "Non-bleeding (n=377)": "70.5±10.1",
+        "P value": "0.043"
+      },
+      "target": {
+        "With vaccines (n=48)": "75.9±7.9",
+        "Without reactions (n=217)": "68.6±10.1",
+        "P value": "<0.001"
+      }
+    }
+  }
+}
+
+INSTRUCTIONS:
+1. Process ALL VMD attributes from BOTH Table1.VMD AND Table2.VMD (union of both lists)
+2. For each VMD attribute you process:
+   - Use the EXACT VMD name from the partition data as the key
+   - The "source" object should contain {HMD_column_name: data_value} pairs from Table1
+   - The "target" object should contain {HMD_column_name: data_value} pairs from Table2
+3. Extract ACTUAL DATA VALUES from Table1.Data and Table2.Data arrays (NOT the HMD column names)
+4. The HMD column names in "source" come from Table1.HMD
+5. The HMD column names in "target" come from Table2.HMD  
+6. If a VMD attribute only exists in Table1, the "target" object should be empty {}
+7. If a VMD attribute only exists in Table2, the "source" object should be empty {}
+
+Output Format (MUST USE THIS EXACT STRUCTURE):
+{
+  "Merged_Data": {
+    "<VMD_row_name>": {
+      "source": {
+        "<Table1_HMD_col1>": "<value1>",
+        "<Table1_HMD_col2>": "<value2>",
+        ...
+      },
+      "target": {
+        "<Table2_HMD_col1>": "<value1>",
+        "<Table2_HMD_col2>": "<value2>",
+        ...
+      }
+    }
+  }
+}

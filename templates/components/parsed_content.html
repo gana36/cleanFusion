@@ -1,0 +1,67 @@
+<div class="parsed-content-container">
+    <!-- Schema Pool (Visible when 3+ tables are prefilled) -->
+    <div id="fusionPoolContainer" style="display: none; width: 100%; background: #f1f5f9; border-bottom: 2px solid #cbd5e1; padding: 15px; margin-bottom: 20px; border-radius: 12px;">
+        <h4 style="margin: 0 0 10px 0; color: #475569; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 20px;">📚</span> Schema Pool <span style="font-size: 12px; color: #64748b; font-weight: normal;">(Choose which tables to match)</span>
+        </h4>
+        <div id="fusionPoolItems" style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <!-- Pool items will be injected here -->
+        </div>
+    </div>
+
+    <div class="parsed-content" id="sourceParsed">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h4 style="margin: 0;">Source Schema</h4>
+            <div class="view-toggle-buttons">
+                <button class="view-toggle-btn active" onclick="switchView('source', 'preview')">Preview</button>
+                <button class="view-toggle-btn" onclick="switchView('source', 'profile')">Profile</button>
+            </div>
+        </div>
+
+        <!-- Preview Section -->
+        <div id="sourcePreviewSection" class="view-section">
+            <div class="preview-controls">
+                <label class="data-toggle-label">
+                    <input type="checkbox" id="sourceDataToggle" class="data-toggle-checkbox">
+                    <span class="checkmark"></span>
+                    Show Data Values
+                </label>
+                <div class="control-help">Toggle to display actual data values in table cells</div>
+            </div>
+            <div id="sourcePreview"></div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="sourceProfileSection" class="view-section" style="display: none;">
+            <div id="sourceProfile" class="profile-container"></div>
+        </div>
+    </div>
+
+    <div class="parsed-content" id="targetParsed">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h4 style="margin: 0;">Target Schema</h4>
+            <div class="view-toggle-buttons">
+                <button class="view-toggle-btn active" onclick="switchView('target', 'preview')">Preview</button>
+                <button class="view-toggle-btn" onclick="switchView('target', 'profile')">Profile</button>
+            </div>
+        </div>
+
+        <!-- Preview Section -->
+        <div id="targetPreviewSection" class="view-section">
+            <div class="preview-controls">
+                <label class="data-toggle-label">
+                    <input type="checkbox" id="targetDataToggle" class="data-toggle-checkbox">
+                    <span class="checkmark"></span>
+                    Show Data Values
+                </label>
+                <div class="control-help">Toggle to display actual data values in table cells</div>
+            </div>
+            <div id="targetPreview"></div>
+        </div>
+
+        <!-- Profile Section -->
+        <div id="targetProfileSection" class="view-section" style="display: none;">
+            <div id="targetProfile" class="profile-container"></div>
+        </div>
+    </div>
+</div>

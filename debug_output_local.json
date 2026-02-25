@@ -1,0 +1,54 @@
+{
+  "filename": "A.pdf",
+  "model": "Qwen2.5:14B",
+  "success": true,
+  "valid": true,
+  "elapsed": 10.152584314346313,
+  "error": null,
+  "extracted_data": {
+    "Table1": {
+      "HMD": {
+        "SUMMARY COLUMNS": {
+          "Value": ""
+        }
+      },
+      "VMD": {
+        "DEMOGRAPHICS": {
+          "Age": "Not specified in the text",
+          "Gender": "Male"
+        },
+        "BASELINE": {
+          "ECOG PS 0\u20131, n (%)": "--"
+        },
+        "DISEASE": {
+          "Stage IV (Metastatic), n (%)": "--"
+        },
+        "EFFICACY": {
+          "Progression-Free Survival (months)": "4.1",
+          "Objective Response Rate (ORR), %": "--"
+        },
+        "SURVIVAL": {
+          "Overall Survival (months)": "--"
+        }
+      }
+    }
+  },
+  "schema_info": {
+    "hmd_count": 1,
+    "vmd_count": 7,
+    "hmd_cols": [
+      "Table1.HMD.SUMMARY COLUMNS.Value"
+    ],
+    "vmd_rows": [
+      "Table1.VMD.DEMOGRAPHICS.Age",
+      "Table1.VMD.DEMOGRAPHICS.Gender",
+      "Table1.VMD.BASELINE.ECOG PS 0\u20131, n (%)",
+      "Table1.VMD.DISEASE.Stage IV (Metastatic), n (%)",
+      "Table1.VMD.EFFICACY.Progression-Free Survival (months)",
+      "Table1.VMD.EFFICACY.Objective Response Rate (ORR), %",
+      "Table1.VMD.SURVIVAL.Overall Survival (months)"
+    ]
+  },
+  "html": "<div style=\"font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif; margin: 20px 0; overflow-x: auto;\"><div style=\"background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 15px 20px; border-radius: 8px 8px 0 0; border: 1px solid #90caf9; border-bottom: none;\"><h3 style=\"font-size: 18px; font-weight: 600; color: #1565c0; margin: 0;\">Table1</h3></div><table style=\"width: 100%; border-collapse: collapse; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 0 0 8px 8px; overflow: hidden;\"><thead><tr><th style=\"background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%); color: white; padding: 10px 16px; text-align: left; font-weight: 600; border: 1px solid #b71c1c;\"></th><th data-header=\"SUMMARY COLUMNS\" style=\"background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;\">SUMMARY COLUMNS</th></tr></thead><tbody><tr data-row=\"DEMOGRAPHICS\"><td style=\"background: white; color: #c62828; padding: 10px 16px; text-align: left; font-weight: 700; border: 1px solid #e0e0e0; font-size: 15px;\">DEMOGRAPHICS</td><td style=\"background: white; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\"></td></tr><tr data-row=\"Age\"><td style=\"background: white; color: #c62828; padding: 8px 16px 8px 32px; text-align: left; font-weight: 500; border: 1px solid #e0e0e0;\">Age</td><td data-cell-value=\"Not specified in the text\" style=\"background: white; color: #333; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\">Not specified in the text</td></tr><tr data-row=\"Gender\"><td style=\"background: white; color: #c62828; padding: 8px 16px 8px 32px; text-align: left; font-weight: 500; border: 1px solid #e0e0e0;\">Gender</td><td data-cell-value=\"Male\" style=\"background: white; color: #333; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\">Male</td></tr><tr data-row=\"BASELINE\"><td style=\"background: white; color: #c62828; padding: 10px 16px; text-align: left; font-weight: 700; border: 1px solid #e0e0e0; font-size: 15px;\">BASELINE</td><td style=\"background: white; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\"></td></tr><tr data-row=\"ECOG PS 0\u20131, n (%)\"><td style=\"background: white; color: #c62828; padding: 8px 16px 8px 32px; text-align: left; font-weight: 500; border: 1px solid #e0e0e0;\">ECOG PS 0\u20131, n (%)</td><td data-cell-value=\"--\" style=\"background: white; color: #333; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\">--</td></tr><tr data-row=\"DISEASE\"><td style=\"background: white; color: #c62828; padding: 10px 16px; text-align: left; font-weight: 700; border: 1px solid #e0e0e0; font-size: 15px;\">DISEASE</td><td style=\"background: white; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\"></td></tr><tr data-row=\"Stage IV (Metastatic), n (%)\"><td style=\"background: white; color: #c62828; padding: 8px 16px 8px 32px; text-align: left; font-weight: 500; border: 1px solid #e0e0e0;\">Stage IV (Metastatic), n (%)</td><td data-cell-value=\"--\" style=\"background: white; color: #333; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\">--</td></tr><tr data-row=\"EFFICACY\"><td style=\"background: white; color: #c62828; padding: 10px 16px; text-align: left; font-weight: 700; border: 1px solid #e0e0e0; font-size: 15px;\">EFFICACY</td><td style=\"background: white; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\"></td></tr><tr data-row=\"Progression-Free Survival (months)\"><td style=\"background: white; color: #c62828; padding: 8px 16px 8px 32px; text-align: left; font-weight: 500; border: 1px solid #e0e0e0;\">Progression-Free Survival (months)</td><td data-cell-value=\"4.1\" style=\"background: white; color: #333; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\">4.1</td></tr><tr data-row=\"Objective Response Rate (ORR), %\"><td style=\"background: white; color: #c62828; padding: 8px 16px 8px 32px; text-align: left; font-weight: 500; border: 1px solid #e0e0e0;\">Objective Response Rate (ORR), %</td><td data-cell-value=\"--\" style=\"background: white; color: #333; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\">--</td></tr><tr data-row=\"SURVIVAL\"><td style=\"background: white; color: #c62828; padding: 10px 16px; text-align: left; font-weight: 700; border: 1px solid #e0e0e0; font-size: 15px;\">SURVIVAL</td><td style=\"background: white; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\"></td></tr><tr data-row=\"Overall Survival (months)\"><td style=\"background: white; color: #c62828; padding: 8px 16px 8px 32px; text-align: left; font-weight: 500; border: 1px solid #e0e0e0;\">Overall Survival (months)</td><td data-cell-value=\"--\" style=\"background: white; color: #333; padding: 8px 16px; border: 1px solid #e0e0e0; text-align: center; font-size: 13px;\">--</td></tr></tbody></table></div>",
+  "fill_rate": 42.857142857142854
+}

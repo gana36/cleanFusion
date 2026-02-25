@@ -1,0 +1,28 @@
+{
+  "Table1": {
+    "HMD": {
+      "SUMMARY COLUMNS": {
+        "Value": ""
+      }
+    },
+    "VMD": {
+      "DEMOGRAPHICS": {
+        "Age": "",
+        "Gender": ""
+      },
+      "BASELINE": {
+        "ECOG PS 0–1, n (%)": ""
+      },
+      "DISEASE": {
+        "Stage IV (Metastatic), n (%)": ""
+      },
+      "EFFICACY": {
+        "Progression-Free Survival (months)": "",
+        "Objective Response Rate (ORR), %": ""
+      },
+      "SURVIVAL": {
+        "Overall Survival (months)": ""
+      }
+    }
+  }
+}

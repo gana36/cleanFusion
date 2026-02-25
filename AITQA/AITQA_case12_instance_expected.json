@@ -1,0 +1,389 @@
+{
+    "HMD_matches": [
+        {
+            "source": "Year ended December 31,",
+            "target": "Year ended December 31,"
+        },
+        {
+            "source": "Year ended December 31,.2018",
+            "target": "Year ended December 31,.2018"
+        },
+        {
+            "source": "Year ended December 31,.2017",
+            "target": "Year ended December 31,.2017"
+        },
+        {
+            "source": "Year ended December 31,.2016",
+            "target": "Year ended December 31,.2016"
+        },
+        {
+            "source": "Year ended December 31,.2015",
+            "target": "Year ended December 31,.2015"
+        }
+    ],
+    "VMD_matches": [
+        {
+            "source": "Financial Data (in millions, except per share amounts):",
+            "target": "Financial Data (in millions, except per share amounts):"
+        },
+        {
+            "source": "Operating revenues",
+            "target": "Operating revenues"
+        },
+        {
+            "source": "Operating expenses",
+            "target": "Operating expenses"
+        },
+        {
+            "source": "Other expenses (income) net",
+            "target": "Other expenses (income) net"
+        },
+        {
+            "source": "Income before taxes",
+            "target": "Income before taxes"
+        },
+        {
+            "source": "Provision (benefit) for income taxes",
+            "target": "Provision (benefit) for income taxes"
+        },
+        {
+            "source": "Net income",
+            "target": "Net income"
+        },
+        {
+            "source": "Net income per share, basic",
+            "target": "Net income per share, basic"
+        },
+        {
+            "source": "Net income per share, diluted",
+            "target": "Net income per share, diluted"
+        },
+        {
+            "source": "Cash dividends per common share",
+            "target": "Cash dividends per common share"
+        },
+        {
+            "source": "Total assets at period-end",
+            "target": "Total assets at period-end"
+        },
+        {
+            "source": "Long-term obligations at period-end",
+            "target": "Long-term obligations at period-end"
+        },
+        {
+            "source": "Stockholders\u2019 equity at period-end",
+            "target": "Stockholders\u2019 equity at period-end"
+        },
+        {
+            "source": "Operating Data:",
+            "target": "Operating Data:"
+        },
+        {
+            "source": "Revenue passengers carried (000s)",
+            "target": "Revenue passengers carried (000s)"
+        },
+        {
+            "source": "Enplaned passengers (000s)",
+            "target": "Enplaned passengers (000s)"
+        },
+        {
+            "source": "Revenue passenger miles (RPMs) (in millions) (a)",
+            "target": "Revenue passenger miles (RPMs) (000s) (a)"
+        },
+        {
+            "source": "Available seat miles (ASMs) (in millions) (b)",
+            "target": "Available seat miles (ASMs) (000s) (b)"
+        },
+        {
+            "source": "Load factor (c)",
+            "target": "Load factor (c)"
+        },
+        {
+            "source": "Average length of passenger haul (miles)",
+            "target": "Average length of passenger haul (miles)"
+        },
+        {
+            "source": "Average aircraft stage length (miles)",
+            "target": "Average aircraft stage length (miles)"
+        },
+        {
+            "source": "Trips flown",
+            "target": "Trips flown"
+        },
+        {
+            "source": "Seats flown (000s) (d)",
+            "target": "Seats flown (000s) (d)"
+        },
+        {
+            "source": "Seats per trip (e)",
+            "target": "Seats per trip (e)"
+        },
+        {
+            "source": "Average passenger fare",
+            "target": "Average passenger fare"
+        },
+        {
+            "source": "Passenger revenue yield per RPM (cents) (f)",
+            "target": "Passenger revenue yield per RPM (cents) (f)"
+        },
+        {
+            "source": "Operating revenues per ASM (cents) (g)(j)",
+            "target": "Operating revenues per ASM (cents) (g)(j)"
+        },
+        {
+            "source": "Passenger revenue per ASM (cents) (h)",
+            "target": "Passenger revenue per ASM (cents) (h)"
+        },
+        {
+            "source": "Operating expenses per ASM (cents) (i)",
+            "target": "Operating expenses per ASM (cents) (i)"
+        },
+        {
+            "source": "Operating expenses per ASM, excluding fuel (cents)",
+            "target": "Operating expenses per ASM, excluding fuel (cents)"
+        },
+        {
+            "source": "Operating expenses per ASM, excluding fuel and profitsharing (cents)",
+            "target": "Operating expenses per ASM, excluding fuel and profitsharing (cents)"
+        },
+        {
+            "source": "Fuel costs per gallon, including fuel tax",
+            "target": "Fuel costs per gallon, including fuel tax"
+        },
+        {
+            "source": "Fuel costs per gallon, including fuel tax, economic",
+            "target": "Fuel costs per gallon, including fuel tax, economic"
+        },
+        {
+            "source": "Fuel consumed, in gallons (millions)",
+            "target": "Fuel consumed, in gallons (millions)"
+        },
+        {
+            "source": "Active fulltime equivalent Employees",
+            "target": "Active fulltime equivalent Employees"
+        },
+        {
+            "source": "Aircraft at end of period",
+            "target": "Aircraft at end of period"
+        }
+    ],
+    "HMD_Merged_Schema": [
+        "Year ended December 31,.2019",
+        "Year ended December 31,.2018",
+        "Year ended December 31,.2017",
+        "Year ended December 31,.2016",
+        "Year ended December 31,.2015",
+        "Year ended December 31,.2014"
+    ],
+    "VMD_Merged_Schema": [
+        "Financial Data (in millions, except per share amounts):",
+        "Financial Data (in millions, except per share amounts):.Operating revenues",
+        "Financial Data (in millions, except per share amounts):.Operating expenses",
+        "Financial Data (in millions, except per share amounts):.Operating income",
+        "Financial Data (in millions, except per share amounts):.Other expenses (income) net",
+        "Financial Data (in millions, except per share amounts):.Income before taxes",
+        "Financial Data (in millions, except per share amounts):.Provision (benefit) for income taxes",
+        "Financial Data (in millions, except per share amounts):.Net income",
+        "Financial Data (in millions, except per share amounts):.Net income per share, basic",
+        "Financial Data (in millions, except per share amounts):.Net income per share, diluted",
+        "Financial Data (in millions, except per share amounts):.Cash dividends per common share",
+        "Financial Data (in millions, except per share amounts):.Total assets at period-end",
+        "Financial Data (in millions, except per share amounts):.Long-term obligations at period-end",
+        "Financial Data (in millions, except per share amounts):.Stockholders’ equity at period-end",
+        "Operating Data:",
+        "Operating Data:.Revenue passengers carried (000s)",
+        "Operating Data:.Enplaned passengers (000s)",
+        "Operating Data:.Revenue passenger miles (RPMs) (in millions) (a)",
+        "Operating Data:.Available seat miles (ASMs) (in millions) (b)",
+        "Operating Data:.Load factor (c)",
+        "Operating Data:.Average length of passenger haul (miles)",
+        "Operating Data:.Average aircraft stage length (miles)",
+        "Operating Data:.Trips flown",
+        "Operating Data:.Seats flown (000s) (d)",
+        "Operating Data:.Seats per trip (e)",
+        "Operating Data:.Average passenger fare",
+        "Operating Data:.Passenger revenue yield per RPM (cents) (f)",
+        "Operating Data:.Operating revenues per ASM (cents) (g)(j)",
+        "Operating Data:.Passenger revenue per ASM (cents) (h)",
+        "Operating Data:.Operating expenses per ASM (cents) (i)",
+        "Operating Data:.Operating expenses per ASM, excluding fuel (cents)",
+        "Operating Data:.Operating expenses per ASM, excluding fuel and profitsharing (cents)",
+        "Operating Data:.Fuel costs per gallon, including fuel tax",
+        "Operating Data:.Fuel costs per gallon, including fuel tax, economic",
+        "Operating Data:.Fuel consumed, in gallons (millions)",
+        "Operating Data:.Active fulltime equivalent Employees",
+        "Operating Data:.Aircraft at end of period"
+    ],
+    "HMD_matches": [
+        {
+            "source": "Year ended December 31,",
+            "target": "Year ended December 31,"
+        },
+        {
+            "source": "Year ended December 31,.2018",
+            "target": "Year ended December 31,.2018"
+        },
+        {
+            "source": "Year ended December 31,.2017",
+            "target": "Year ended December 31,.2017"
+        },
+        {
+            "source": "Year ended December 31,.2016",
+            "target": "Year ended December 31,.2016"
+        },
+        {
+            "source": "Year ended December 31,.2015",
+            "target": "Year ended December 31,.2015"
+        }
+    ],
+    "VMD_matches": [
+        {
+            "source": "Financial Data (in millions, except per share amounts):",
+            "target": "Financial Data (in millions, except per share amounts):"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Operating revenues",
+            "target": "Financial Data (in millions, except per share amounts):.Operating revenues"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Operating expenses",
+            "target": "Financial Data (in millions, except per share amounts):.Operating expenses"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Operating income",
+            "target": "Financial Data (in millions, except per share amounts):.Operating income"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Other expenses (income) net",
+            "target": "Financial Data (in millions, except per share amounts):.Other expenses (income) net"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Income before taxes",
+            "target": "Financial Data (in millions, except per share amounts):.Income before taxes"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Provision (benefit) for income taxes",
+            "target": "Financial Data (in millions, except per share amounts):.Provision for income taxes"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Net income",
+            "target": "Financial Data (in millions, except per share amounts):.Net income"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Net income per share, basic",
+            "target": "Financial Data (in millions, except per share amounts):.Net income per share, basic"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Net income per share, diluted",
+            "target": "Financial Data (in millions, except per share amounts):.Net income per share, diluted"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Cash dividends per common share",
+            "target": "Financial Data (in millions, except per share amounts):.Cash dividends per common share"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Total assets at period-end",
+            "target": "Financial Data (in millions, except per share amounts):.Total assets at period-end"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Long-term obligations at period-end",
+            "target": "Financial Data (in millions, except per share amounts):.Long-term obligations at period-end"
+        },
+        {
+            "source": "Financial Data (in millions, except per share amounts):.Stockholders’ equity at period-end",
+            "target": "Financial Data (in millions, except per share amounts):.Stockholders’ equity at period-end"
+        },
+        {
+            "source": "Operating Data:",
+            "target": "Operating Data:"
+        },
+        {
+            "source": "Operating Data:.Revenue passengers carried (000s)",
+            "target": "Operating Data:.Revenue passengers carried"
+        },
+        {
+            "source": "Operating Data:.Enplaned passengers (000s)",
+            "target": "Operating Data:.Enplaned passengers"
+        },
+        {
+            "source": "Operating Data:.Revenue passenger miles (RPMs) (in millions) (a)",
+            "target": "Operating Data:.Revenue passenger miles (RPMs) (000s) (a)"
+        },
+        {
+            "source": "Operating Data:.Available seat miles (ASMs) (in millions) (b)",
+            "target": "Operating Data:.Available seat miles (ASMs) (000s) (b)"
+        },
+        {
+            "source": "Operating Data:.Load factor (c)",
+            "target": "Operating Data:.Load factor (c)"
+        },
+        {
+            "source": "Operating Data:.Average length of passenger haul (miles)",
+            "target": "Operating Data:.Average length of passenger haul (miles)"
+        },
+        {
+            "source": "Operating Data:.Average aircraft stage length (miles)",
+            "target": "Operating Data:.Average aircraft stage length (miles)"
+        },
+        {
+            "source": "Operating Data:.Trips flown",
+            "target": "Operating Data:.Trips flown"
+        },
+        {
+            "source": "Operating Data:.Seats flown (000s) (d)",
+            "target": "Operating Data:.Seats flown (d)"
+        },
+        {
+            "source": "Operating Data:.Seats per trip (e)",
+            "target": "Operating Data:.Seats per trip (e)"
+        },
+        {
+            "source": "Operating Data:.Average passenger fare",
+            "target": "Operating Data:.Average passenger fare"
+        },
+        {
+            "source": "Operating Data:.Passenger revenue yield per RPM (cents) (f)",
+            "target": "Operating Data:.Passenger revenue yield per RPM (cents) (f)"
+        },
+        {
+            "source": "Operating Data:.Operating revenues per ASM (cents) (g)(j)",
+            "target": "Operating Data:.Operating revenue per ASM (cents) (g)(j)"
+        },
+        {
+            "source": "Operating Data:.Passenger revenue per ASM (cents) (h)",
+            "target": "Operating Data:.Passenger revenue per ASM (cents) (h)"
+        },
+        {
+            "source": "Operating Data:.Operating expenses per ASM (cents) (i)",
+            "target": "Operating Data:.Operating expenses per ASM (cents) (i)"
+        },
+        {
+            "source": "Operating Data:.Operating expenses per ASM, excluding fuel (cents)",
+            "target": "Operating Data:.Operating expenses per ASM, excluding fuel (cents)"
+        },
+        {
+            "source": "Operating Data:.Operating expenses per ASM, excluding fuel and profitsharing (cents)",
+            "target": "Operating Data:.Operating expenses per ASM, excluding fuel and profitsharing (cents)"
+        },
+        {
+            "source": "Operating Data:.Fuel costs per gallon, including fuel tax",
+            "target": "Operating Data:.Fuel costs per gallon, including fuel tax"
+        },
+        {
+            "source": "Operating Data:.Fuel costs per gallon, including fuel tax, economic",
+            "target": "Operating Data:.Fuel costs per gallon, including fuel tax, economic"
+        },
+        {
+            "source": "Operating Data:.Fuel consumed, in gallons (millions)",
+            "target": "Operating Data:.Fuel consumed, in gallons (millions)"
+        },
+        {
+            "source": "Operating Data:.Active fulltime equivalent Employees",
+            "target": "Operating Data:.Active fulltime equivalent Employees"
+        },
+        {
+            "source": "Operating Data:.Aircraft at end of period",
+            "target": "Operating Data:.Aircraft at end of period"
+        }
+    ]
+}

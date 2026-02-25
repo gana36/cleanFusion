@@ -1,0 +1,29 @@
+{
+  "model_name": "bert_cost",
+  "backend": "bert",
+  "feature_columns": [
+    "input_prompt_tokens",
+    "output_tokens",
+    "schema_type",
+    "Match Operator",
+    "Match Method",
+    "LLM used for matching",
+    "Merge Operator",
+    "Merge Method",
+    "LLM used for merging"
+  ],
+  "numeric_features": [
+    "input_prompt_tokens",
+    "output_tokens"
+  ],
+  "categorical_features": [
+    "schema_type",
+    "Match Operator",
+    "Match Method",
+    "LLM used for matching",
+    "Merge Operator",
+    "Merge Method",
+    "LLM used for merging"
+  ],
+  "text_features": []
+}

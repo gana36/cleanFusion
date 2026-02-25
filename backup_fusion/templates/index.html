@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Table Pipeline Planner</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Main JS -->
+  <script src="/static/js/main.js" defer></script>
+</head>
+
+<body class="bg-slate-50 min-h-screen">
+  <div class="max-w-4xl mx-auto py-8 px-4 space-y-6">
+
+    <!-- Header -->
+    <header class="space-y-1">
+      <h1 class="text-2xl font-bold text-slate-900">Table Pipeline Planner</h1>
+      <p class="text-sm text-slate-600">
+        Upload two JSON tables, select a <span class="font-semibold">Model</span> and
+        <span class="font-semibold">Operation</span>.  
+        The app previews the tables, classifies them as simple/complex,
+        and predicts optimal plans.
+      </p>
+    </header>
+
+    <!-- INPUT FORM -->
+    <form id="uploadForm" enctype="multipart/form-data"
+          class="bg-white border border-slate-200 rounded-xl shadow-sm p-4 space-y-3">
+      <h2 class="text-lg font-semibold text-slate-900 mb-1">Inputs</h2>
+
+      <div class="space-y-1">
+        <label for="backend" class="block text-sm font-medium text-slate-700">Model</label>
+        <select id="backend" name="backend"
+                class="block w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm shadow-sm">
+          <option value="rf" selected>Random Forest (RF)</option>
+          <option value="xgb">XGBoost (XGB)</option>
+          <option value="svm">Support Vector Machine (SVM)</option>
+          <option value="mlp">MLP</option>
+          <option value="perceptron">Perceptron</option>
+          <option value="gru">GRU (if wired)</option>
+          <option value="lstm">LSTM (if wired)</option>
+        </select>
+      </div>
+
+      <div class="space-y-1">
+        <label for="mode" class="block text-sm font-medium text-slate-700">Operation</label>
+        <select id="mode" name="mode"
+                class="block w-full rounded-md border border-slate-300 px-2 py-1.5 text-sm shadow-sm">
+          <option value="merge" selected>Merge</option>
+          <option value="match">Match</option>
+        </select>
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-slate-700">Table 1 JSON</label>
+        <input id="file_a" name="file_a" type="file" accept=".json"
+               class="block w-full text-sm border rounded-md px-2 py-1" />
+      </div>
+
+      <div class="space-y-1">
+        <label class="block text-sm font-medium text-slate-700">Table 2 JSON</label>
+        <input id="file_b" name="file_b" type="file" accept=".json"
+               class="block w-full text-sm border rounded-md px-2 py-1" />
+      </div>
+
+      <div class="pt-1 flex items-center gap-3">
+        <button id="submitBtn" type="submit"
+                class="rounded-md bg-indigo-600 px-4 py-1.5 text-sm font-semibold text-white hover:bg-indigo-700">
+          Predict
+        </button>
+        <p id="error" class="text-xs text-red-600"></p>
+      </div>
+    </form>
+
+    <!-- RESULTS -->
+    <div id="results"
+         class="bg-white shadow-sm rounded-xl border border-slate-200 p-4 space-y-4 min-h-[140px] overflow-x-auto">
+      <em class="text-sm text-slate-500">Upload two tables and click Predict.</em>
+    </div>
+
+    <!-- 🔥 EXECUTE BUTTON (ADDED HERE) -->
+    <div id="executeContainer" class="hidden">
+      <button class="w-full bg-emerald-600 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-emerald-700">
+        Execute Pipeline Plan
+      </button>
+    </div>
+
+  </div>
+</body>
+</html>

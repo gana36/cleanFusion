@@ -1,0 +1,40 @@
+TASK: Extract specific medical values from the text/tables below.
+INPUTS: HMD (Columns), VMD (Rows).
+OUTPUT: Nested JSON matching the VMD structure.
+
+### RULES
+1. **EXTRACT VALUES ONLY**: No summary, no explanation, no markdown.
+2. **STRICT STRUCTURE**: Return JSON where keys MATCH the "VMD Variables" list EXACTLY.
+   - Do NOT invent headers (like "Medical History").
+   - Follow the provided hierarchy (e.g., `Table1.VMD.Age` -> `{ "Table1": { "VMD": { "Age": "..." } } }`).
+3. **EXACT FORMATTING**: Copy values literally (preserve %, (), ranges, decimals).
+   - If missing, return "--".
+4. **NO HALLUCINATION**: Do not infer or calculate.
+5. **GENERIC EXAMPLE (STRUCTURE ONLY)**:
+   {{
+     "Section": {{
+         "Subsection": {{ "Variable": "Value" }}
+     }}
+   }}
+   *Do NOT copy these keys. Use YOUR specific schema keys.*
+
+### DATA SOURCES
+======== tables ========
+{tables}
+
+======== TEXT ========
+{text}
+
+======== HMD COLUMNS ========
+{hmd_json}
+
+======== VMD VARIABLES (SCHEMA) ========
+{chunk_rows}
+
+=======================================================
+FINAL INSTRUCTION:
+Return ONLY VALID JSON.
+Do NOT include "Based on the information..." or any analysis.
+Do NOT use markdown code blocks (```json).
+Just the raw JSON object starting with {{ and ending with }}.
+=======================================================

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Schema Fusion - Home{% endblock %}
+
+{% block extra_css %}
+<style>
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+        /* Centered vertically */
+        text-align: center;
+    }
+
+    .hero-text {
+        margin-bottom: 50px;
+    }
+
+    .hero-text h1 {
+        font-size: 4em;
+        margin-bottom: 15px;
+        color: #ffffff;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        font-weight: 800;
+        letter-spacing: -1px;
+    }
+
+    .hero-text p {
+        font-size: 1.4em;
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 400;
+    }
+
+    .cards-container {
+        display: flex;
+        gap: 30px;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 1200px;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        width: 300px;
+        text-decoration: none;
+        color: inherit;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: #667eea;
+    }
+
+    .icon-wrapper {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #e0e7ff 0%, #f3e8ff 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 25px;
+        font-size: 2em;
+        color: #667eea;
+    }
+
+    .feature-card h3 {
+        font-size: 1.5em;
+        margin: 0 0 15px 0;
+        color: #333;
+    }
+
+    .feature-card p {
+        margin: 0;
+        color: #666;
+        line-height: 1.5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="background: transparent; box-shadow: none;">
+    <div class="home-container">
+        <div class="hero-text">
+            <h1>Intelligent Schema Fusion</h1>
+            <p>Select a tool to get started</p>
+        </div>
+
+        <div class="cards-container">
+            <!-- Option 1: Schema Extraction -->
+            <a href="/fuze/tool?mode=pdf" class="feature-card">
+                <div class="icon-wrapper">
+                    📊
+                </div>
+                <h3>Schema Extraction</h3>
+                <p>Extract schemas from various file formats and data sources intelligently.</p>
+            </a>
+
+            <!-- Option 2: Automated Schema Fusion (Existing Tool) -->
+            <a href="/fuze/tool?mode=auto-fusion" class="feature-card">
+                <div class="icon-wrapper">
+                    ⚡
+                </div>
+                <h3>Automated Schema Fusion</h3>
+                <p>Seamlessly fuse schemas using advanced AI models with automated mapping.</p>
+            </a>
+
+            <!-- Option 3: Manual Schema Fusion -->
+            <a href="/fuze/tool?mode=fusion" class="feature-card">
+                <div class="icon-wrapper">
+                    🛠️
+                </div>
+                <h3>Manual Schema Fusion</h3>
+                <p>Manually define and refine schema mappings with fine-grained control.</p>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

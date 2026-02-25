@@ -1,0 +1,75 @@
+You are a clinical research data extraction specialist.
+
+YOUR TASK:
+Extract data values for the specific variables listed below.
+The schema (columns and rows) has already been identified - you just need to find the VALUES.
+
+INPUTS PROVIDED:
+1. "HMD Columns" - The column headers (flattened from parent > child structure)
+2. "VMD Variables" - The specific row variables to extract in this chunk
+3. Document text and tables containing the data
+
+UNDERSTANDING THE COLUMNS:
+- Each column is defined as "Parent > Child" or just "Parent" if no children
+- Example: "Low-risk pT1 > Baseline" means the baseline measurement for Low-risk pT1 group
+- Example: "P-Value" (no child) means the overall p-value column
+- Your job is to find the value for each VMD variable × HMD column combination
+
+OUTPUT FORMAT:
+Return a JSON object with a single key "ChunkData".
+"ChunkData" must be a 2D array (list of lists) containing the extracted values.
+
+CRITICAL RULES:
+1. **Row Count Match**: Generate exactly ONE array for each item in "VMD Variables"
+2. **Column Count Match**: Each array must have exactly one value per "HMD Columns" column
+3. **Missing Data**: If a value is not reported, use "--"
+4. **Exact Values**: Extract numbers exactly as they appear (with units, %, ranges)
+5. **No Hallucination**: Only extract what is explicitly stated in the document
+6. **Flexible Matching**: Variable names may differ slightly - match by meaning
+7. **Column Alignment**: CAREFULLY match data to the correct HMD column!
+8. **ENGLISH ONLY**: Extract data in English only.
+
+WHERE TO LOOK:
+1. FIRST: Check the HTML TABLES - data is usually in tables
+2. SECOND: Check the document text for values mentioned in Results section
+3. If not found anywhere, return "--"
+
+EXAMPLE:
+
+HMD Columns: ["Treatment A > Baseline", "Treatment A > 6 months", "Treatment B > Baseline", "Treatment B > 6 months", "P-Value"]
+VMD Variables: ["1. Outcomes > Response rate, %", "1. Outcomes > Survival, months"]
+
+Output:
+{{
+  "ChunkData": [
+    ["45%", "68%", "42%", "55%", "0.023"],
+    ["--", "12.5", "--", "10.2", "0.041"]
+  ]
+}}
+
+ANOTHER EXAMPLE (No children - simple columns):
+
+HMD Columns: ["Low-risk pT1 (N=70)", "High-risk pT1 (N=153)", "pT2 (N=75)", "P-Value"]
+VMD Variables: ["1. Demographics > Age, mean (SD)", "1. Demographics > Sex, male, n (%)"]
+
+Output:
+{{
+  "ChunkData": [
+    ["67.5 (12.0)", "70.8 (11.8)", "74.0 (11.1)", "0.001"],
+    ["41 (58.6%)", "85 (55.6%)", "42 (56.0%)", "0.892"]
+  ]
+}}
+
+======== TABLES (PRIMARY DATA SOURCE) ========
+{tables}
+
+======== DOCUMENT TEXT ========
+{text}
+
+======== HMD COLUMNS ========
+{hmd_json}
+
+======== VMD VARIABLES FOR THIS CHUNK ========
+{chunk_rows}
+
+JSON OUTPUT:

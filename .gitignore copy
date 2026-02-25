@@ -1,0 +1,8 @@
+.claude
+_pycache_
+schema_extraction_UI/fusion_latest/FusionFrontend/.env
+schema_extraction_UI/fusion_latest/FusionFrontend/.env.example
+schema_extraction_UI/fusion_latest/.env
+modules/_pycache_/
+partition_*
+__pycache__
