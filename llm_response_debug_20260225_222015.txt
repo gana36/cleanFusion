@@ -1,0 +1,291 @@
+================================================================================
+LLM RESPONSE DEBUG - JSON PARSING FAILED
+================================================================================
+
+Error: Expecting ',' delimiter: line 163 column 6 (char 7284)
+Response Length: 7398 characters
+Response Lines: 167
+
+--------------------------------------------------------------------------------
+RAW RESPONSE (first 2000 chars):
+--------------------------------------------------------------------------------
+{
+  "HMD_matches": [
+    {
+      "source": "Table1.HMD.Year ended December 31,",
+      "target": "Table2.HMD.Year ended December 31,"
+    },
+    {
+      "source": "Table1.HMD.Year ended December 31,.2018",
+      "target": "Table2.HMD.Year ended December 31,.2018"
+    },
+    {
+      "source": "Table1.HMD.Year ended December 31,.2017",
+      "target": "Table2.HMD.Year ended December 31,.2017"
+    },
+    {
+      "source": "Table1.HMD.Year ended December 31,.2016",
+      "target": "Table2.HMD.Year ended December 31,.2016"
+    },
+    {
+      "source": "Table1.HMD.Year ended December 31,.2015",
+      "target": "Table2.HMD.Year ended December 31,.2015"
+    }
+  ],
+  "VMD_matches": [
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:",
+      "target": "Table2.VMD.Operating Data:"
+    },
+    {
+      "source": "Table1.VMD.Customer & Revenue Metrics:",
+      "target": "Table2.VMD.Customer & Revenue Metrics:"
+    },
+    {
+      "source": "Table1.VMD.Cost & Efficiency Metrics:",
+      "target": "Table2.VMD.Cost & Efficiency Metrics:"
+    },
+    {
+      "source": "Table1.VMD.Workforce & HR Metrics:",
+      "target": "Table2.VMD.Workforce & Risk Metrics:"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Operating revenues",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Operating revenues"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Operating expenses",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Operating expenses"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Operating income",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Operating incom
+
+--------------------------------------------------------------------------------
+RAW RESPONSE (last 2000 chars):
+--------------------------------------------------------------------------------
+urce": "Table1.VMD.Operating Data:.Average aircraft stage length (miles)",
+      "target": "Table2.VMD.Operating Data:.Average aircraft stage length (miles)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Seats flown (000s)",
+      "target": "Table2.VMD.Operating Data:.Seats flown"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Seats per trip",
+      "target": "Table2.VMD.Operating Data:.Seats per trip"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Average passenger fare",
+      "target": "Table2.VMD.Operating Data:.Average passenger fare"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Passenger revenue yield per RPM (cents)",
+      "target": "Table2.VMD.Operating Data:.Passenger revenue yield per RPM (cents)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Operating revenues per ASM (cents)",
+      "target": "Table2.VMD.Operating Data:.Operating revenue per ASM (cents)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Passenger revenue per ASM (cents)",
+      "target": "Table2.VMD.Operating Data:.Passenger revenue per ASM (cents)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Operating expenses per ASM (cents)",
+      "target": "Table2.VMD.Operating Data:.Operating expenses per ASM (cents)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Operating expenses per ASM, excluding fuel",
+      "target": "Table2.VMD.Operating Data:.Operating expenses per ASM, excluding fuel"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Operating expenses per ASM, excluding fuel and profitsharing",
+      "target": "Table2.VMD.Operating Data:.Operating expenses per ASM, excluding fuel and profitsharing"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Fuel costs per gallon, including fuel tax",
+      "target": "Table2.VMD.Operating Data:.Fuel costs per gallon, including fuel tax"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Fuel costs per gallon, economic",
+      "target": "Table2.V
+
+--------------------------------------------------------------------------------
+FULL RAW RESPONSE:
+--------------------------------------------------------------------------------
+{
+  "HMD_matches": [
+    {
+      "source": "Table1.HMD.Year ended December 31,",
+      "target": "Table2.HMD.Year ended December 31,"
+    },
+    {
+      "source": "Table1.HMD.Year ended December 31,.2018",
+      "target": "Table2.HMD.Year ended December 31,.2018"
+    },
+    {
+      "source": "Table1.HMD.Year ended December 31,.2017",
+      "target": "Table2.HMD.Year ended December 31,.2017"
+    },
+    {
+      "source": "Table1.HMD.Year ended December 31,.2016",
+      "target": "Table2.HMD.Year ended December 31,.2016"
+    },
+    {
+      "source": "Table1.HMD.Year ended December 31,.2015",
+      "target": "Table2.HMD.Year ended December 31,.2015"
+    }
+  ],
+  "VMD_matches": [
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:",
+      "target": "Table2.VMD.Operating Data:"
+    },
+    {
+      "source": "Table1.VMD.Customer & Revenue Metrics:",
+      "target": "Table2.VMD.Customer & Revenue Metrics:"
+    },
+    {
+      "source": "Table1.VMD.Cost & Efficiency Metrics:",
+      "target": "Table2.VMD.Cost & Efficiency Metrics:"
+    },
+    {
+      "source": "Table1.VMD.Workforce & HR Metrics:",
+      "target": "Table2.VMD.Workforce & Risk Metrics:"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Operating revenues",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Operating revenues"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Operating expenses",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Operating expenses"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Operating income",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Operating income"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Other expenses (income) net",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Other expenses (income) net"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Income before taxes",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Income before taxes"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Provision (benefit) for income taxes",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Provision for income taxes"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Net income",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Net income"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Net income per share, basic",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Net income per share, basic"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Net income per share, diluted",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Net income per share, diluted"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Cash dividends per common share",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Cash dividends per common share"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Total assets at period-end",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Total assets at period-end"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Long-term obligations at period-end",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Long-term obligations at period-end"
+    },
+    {
+      "source": "Table1.VMD.Financial Data (in millions, except per share amounts):.Stockholders’ equity at period-end",
+      "target": "Table2.VMD.Financial Data (in millions, except per share amounts):.Stockholders’ equity at period-end"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Revenue passengers carried (000s)",
+      "target": "Table2.VMD.Operating Data:.Revenue passengers carried"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Revenue passenger miles (RPMs) (in millions)",
+      "target": "Table2.VMD.Operating Data:.Revenue passenger miles (RPMs) (000s)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Available seat miles (ASMs) (in millions)",
+      "target": "Table2.VMD.Operating Data:.Available seat miles (ASMs) (000s)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Trips flown",
+      "target": "Table2.VMD.Operating Data:.Trips flown"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Load factor",
+      "target": "Table2.VMD.Operating Data:.Load factor"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Average length of passenger haul (miles)",
+      "target": "Table2.VMD.Operating Data:.Average length of passenger haul (miles)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Average aircraft stage length (miles)",
+      "target": "Table2.VMD.Operating Data:.Average aircraft stage length (miles)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Seats flown (000s)",
+      "target": "Table2.VMD.Operating Data:.Seats flown"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Seats per trip",
+      "target": "Table2.VMD.Operating Data:.Seats per trip"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Average passenger fare",
+      "target": "Table2.VMD.Operating Data:.Average passenger fare"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Passenger revenue yield per RPM (cents)",
+      "target": "Table2.VMD.Operating Data:.Passenger revenue yield per RPM (cents)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Operating revenues per ASM (cents)",
+      "target": "Table2.VMD.Operating Data:.Operating revenue per ASM (cents)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Passenger revenue per ASM (cents)",
+      "target": "Table2.VMD.Operating Data:.Passenger revenue per ASM (cents)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Operating expenses per ASM (cents)",
+      "target": "Table2.VMD.Operating Data:.Operating expenses per ASM (cents)"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Operating expenses per ASM, excluding fuel",
+      "target": "Table2.VMD.Operating Data:.Operating expenses per ASM, excluding fuel"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Operating expenses per ASM, excluding fuel and profitsharing",
+      "target": "Table2.VMD.Operating Data:.Operating expenses per ASM, excluding fuel and profitsharing"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Fuel costs per gallon, including fuel tax",
+      "target": "Table2.VMD.Operating Data:.Fuel costs per gallon, including fuel tax"
+    },
+    {
+      "source": "Table1.VMD.Operating Data:.Fuel costs per gallon, economic",
+      "target": "Table2.V
+
+================================================================================
+END OF DEBUG FILE
+================================================================================

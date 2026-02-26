@@ -629,7 +629,7 @@ function updatePipelineVisualization() {
     var mergeLLM = document.getElementById('mergeLLM').value;
     var visualization = document.getElementById('pipelineVisualization');
     var mergeContainer = document.getElementById('mergeStepContainer');
-    var isMergeVisible = mergeContainer.style.display !== 'none';
+    var isMergeVisible = document.getElementById('mergeOperation') && document.getElementById('mergeOperation').value !== '';
     if (!matchOperation || !matchingType) {
         visualization.innerHTML = `<div style="text-align: center; color: #718096; font-style: italic; padding: 20px;">
         <span style="font-size: 24px; display: block; margin-bottom: 8px;">📂®</span>
@@ -662,8 +662,9 @@ function updatePipelineVisualization() {
     var llmDisplay = (llmToUse && llmToUse.includes && llmToUse.includes('claude')) ? '🤖 Claude' :
         (llmToUse && llmToUse.includes && llmToUse.includes('llama')) ? '🦙 Llama' :
             (llmToUse && llmToUse.includes && llmToUse.includes('gemini')) ? '💎 Gemini' :
-                (llmToUse && llmToUse.includes && llmToUse.includes('qwen')) ? '📂· Qwen' :
-                    (llmToUse && llmToUse.includes && llmToUse.includes('deepseek')) ? '📂 DeepSeek' : '🤖 Auto';
+                (llmToUse && llmToUse.includes && llmToUse.includes('qwen')) ? '📂 Qwen' :
+                    (llmToUse && llmToUse.includes && llmToUse.includes('gpt')) ? '🧠 GPT' :
+                        (llmToUse && llmToUse.includes && llmToUse.includes('deepseek')) ? '📂 DeepSeek' : '🤖 Auto';
     steps.push({
         name: matchingNames[matchingType] || matchingType,
         type: 'matching',
@@ -691,8 +692,9 @@ function updatePipelineVisualization() {
         var mergeLLMDisplay = (mergeLLMToUse && mergeLLMToUse.includes && mergeLLMToUse.includes('claude')) ? '🤖 Claude' :
             (mergeLLMToUse && mergeLLMToUse.includes && mergeLLMToUse.includes('llama')) ? '🦙 Llama' :
                 (mergeLLMToUse && mergeLLMToUse.includes && mergeLLMToUse.includes('gemini')) ? '💎 Gemini' :
-                    (mergeLLMToUse && mergeLLMToUse.includes && mergeLLMToUse.includes('qwen')) ? '📂· Qwen' :
-                        (mergeLLMToUse && mergeLLMToUse.includes && mergeLLMToUse.includes('deepseek')) ? '📂 DeepSeek' : '🤖 Auto';
+                    (mergeLLMToUse && mergeLLMToUse.includes && mergeLLMToUse.includes('qwen')) ? '📂 Qwen' :
+                        (mergeLLMToUse && mergeLLMToUse.includes && mergeLLMToUse.includes('gpt')) ? '🧠 GPT' :
+                            (mergeLLMToUse && mergeLLMToUse.includes && mergeLLMToUse.includes('deepseek')) ? '📂 DeepSeek' : '🤖 Auto';
         var operationPrefix = mergeOperation === 'instance_merge' ? 'Instance ' : '';
         steps.push({
             name: operationPrefix + (mergeNames[mergeMethod] || mergeMethod),
@@ -803,7 +805,7 @@ function updateControls() {
     var schemaTypeInfo = document.getElementById('schemaTypeInfo');
     var schemaTypeText = document.getElementById('schemaTypeText');
     var mergeContainer = document.getElementById('mergeStepContainer');
-    var isMergeVisible = mergeContainer.style.display !== 'none';
+    var isMergeVisible = document.getElementById('mergeOperation') && document.getElementById('mergeOperation').value !== '';
     // Update pipeline visualization when controls change
     updatePipelineVisualization();
     // Can process if we have data and match operation and matching method, and if merge is visible then both merge operation and method
@@ -1051,7 +1053,7 @@ document.getElementById('processBtn')?.addEventListener('click', async function 
     var mergeOperation = document.getElementById('mergeOperation').value;
     var mergeMethod = document.getElementById('mergeMethod').value;
     var mergeContainer = document.getElementById('mergeStepContainer');
-    var isMergeVisible = mergeContainer.style.display !== 'none';
+    var isMergeVisible = document.getElementById('mergeOperation') && document.getElementById('mergeOperation').value !== '';
     if (!matchOperation) {
         showError('Please select a match operation');
         return;
@@ -2128,42 +2130,50 @@ function applyEditedJson() {
         // Update the stored result
         if (window.lastResult) {
             window.lastResult.data = editedData;
-        }
-
-        // Re-render the mappings with edited data
-        console.log('✅ Applying user-edited mappings from Raw Results');
-        displayEnhancedMapping(editedData);
-
-        // If it's a merge operation, also update merged schema mappings
-        const hmdMerged = editedData.HMD_Merged_Schema || (editedData.Merged_Schema && editedData.Merged_Schema.HMD_Merged_Schema);
-        const vmdMerged = editedData.VMD_Merged_Schema || (editedData.Merged_Schema && editedData.Merged_Schema.VMD_Merged_Schema);
-
-        if (hmdMerged || vmdMerged) {
-            displayMergedSchemaMappings(editedData);
-
-            // Update main merged table
-            const mainMergedContainer = document.getElementById('mainMergedSchemaDisplay');
-            if (mainMergedContainer) {
-                mainMergedContainer.innerHTML = '';
-                const mergedSchemaTable = createMergedSchemaTable(editedData);
-                if (Object.keys(mergedSchemaTable).length > 0) {
-                    mainMergedContainer.innerHTML = createEnhancedTable(mergedSchemaTable, 'main-merged', null);
-                    setTimeout(function () {
-                        const checkbox = document.getElementById('sourceDataToggle');
-                        const showData = checkbox ? checkbox.checked : true;
-                        updateTableDataDisplay('mainMergedSchemaDisplay', showData);
-                        addVerticalDashedLines('mainMergedSchemaDisplay');
-                    }, 100);
-                }
+            // CRITICAL: Overwrite the cached match_result too, otherwise switchTab('mapping')
+            // will silently restore the old ML mappings and ignore the user's edits!
+            if (window.lastResult.match_result) {
+                window.lastResult.match_result = editedData;
             }
         }
 
-        // Switch to Schema Mapping tab to see changes
+        // Switch to Schema Mapping tab to see changes first so bounding boxes are valid
         switchTab('mapping');
 
-        // Show success message
-        statusEl.textContent = '✅ Changes applied successfully!';
-        statusEl.style.color = '#2E7D32';
+        // Re-render the mappings with edited data after tab transition gives the DOM time to settle
+        setTimeout(() => {
+            console.log('✅ Applying user-edited mappings from Raw Results');
+            displayEnhancedMapping(editedData);
+
+            // If it's a merge operation, also update merged schema mappings
+            const hmdMerged = editedData.HMD_Merged_Schema || (editedData.Merged_Schema && editedData.Merged_Schema.HMD_Merged_Schema);
+            const vmdMerged = editedData.VMD_Merged_Schema || (editedData.Merged_Schema && editedData.Merged_Schema.VMD_Merged_Schema);
+
+            if (hmdMerged || vmdMerged) {
+                displayMergedSchemaMappings(editedData);
+
+                // Update main merged table
+                const mainMergedContainer = document.getElementById('mainMergedSchemaDisplay');
+                if (mainMergedContainer) {
+                    mainMergedContainer.innerHTML = '';
+                    const mergedSchemaTable = createMergedSchemaTable(editedData);
+                    if (Object.keys(mergedSchemaTable).length > 0) {
+                        mainMergedContainer.innerHTML = createEnhancedTable(mergedSchemaTable, 'main-merged', null);
+                        setTimeout(function () {
+                            const checkbox = document.getElementById('sourceDataToggle');
+                            const showData = checkbox ? checkbox.checked : true;
+                            updateTableDataDisplay('mainMergedSchemaDisplay', showData);
+                            addVerticalDashedLines('mainMergedSchemaDisplay');
+                        }, 100);
+                    }
+                }
+            }
+
+            // Show success message
+            statusEl.textContent = '✅ Changes applied successfully!';
+            statusEl.style.color = '#2E7D32';
+            setTimeout(() => { statusEl.textContent = ''; }, 3000);
+        }, 300);
         setTimeout(() => { statusEl.textContent = ''; }, 3000);
 
     } catch (error) {
@@ -2412,10 +2422,12 @@ function _findInSide(side, dataAttr, value) {
         try {
             const escapedValue = CSS.escape(cleanValue);
             element = root.querySelector(`[data-${dataAttr}="${escapedValue}"]`);
-        } catch (e) {
-            console.warn(`CSS.escape failed for value: ${cleanValue}`, e);
-        }
+        } catch (e) { }
     }
+
+    // Log if exact match failed
+    if (!element) console.log(`[MAP_DEBUG] Exact match failed for ${side} ${dataAttr}="${cleanValue}". Falling back to fuzzy.`);
+
     // If still no match, try fuzzy matching for rows (with VMD hierarchy support)
     if (!element && dataAttr === 'row') {
         element = _findRowFuzzyWithVMD(root, cleanValue);
@@ -2425,10 +2437,10 @@ function _findInSide(side, dataAttr, value) {
         element = _findHeaderFuzzy(root, cleanValue);
     }
     if (!element) {
-        console.warn(`Could not find element with data-${dataAttr}="${cleanValue}" on ${side} side`);
-        // Debug: log all available elements
-        const allElements = root.querySelectorAll(`[data-${dataAttr}]`);
-        console.log(`Available elements on ${side} side:`, Array.from(allElements).map(el => el.getAttribute(`data-${dataAttr}`)));
+        console.warn(`[MAP_DEBUG] Could not find ANY element for ${side} ${dataAttr}="${cleanValue}"`);
+    } else {
+        console.log(`[MAP_DEBUG] Successfully resolved ${side} ${dataAttr}="${cleanValue}" to element:`,
+            dataAttr === 'header' ? element.getAttribute('data-header') : element.getAttribute('data-row'));
     }
     return element;
 }
@@ -2545,8 +2557,9 @@ function _findHeaderFuzzy(root, searchValue) {
         const val = (header.getAttribute('data-header') || '').trim().toLowerCase();
         // Exact match
         if (val === needle) return header;
-        // Contains match
-        if (val.includes(needle) || needle.includes(val)) return header;
+        // Contains match - VERY CAREFUL: only if it's a substantive match, not just "n" matching "Total N"
+        if (val.includes(needle) && needle.length > 3) return header;
+        if (needle.includes(val) && val.length > 3) return header;
         // Similar match (for slight variations)
         if (_isSimilar(val, needle)) return header;
     }
@@ -2555,21 +2568,48 @@ function _findHeaderFuzzy(root, searchValue) {
 // Helper function to check if two strings are similar
 function _isSimilar(str1, str2) {
     if (str1 === str2) return true;
-    // Remove common punctuation and spaces
+
+    // Instead of stripping all spaces right away which concatenates words (e.g. "Total N" -> "totaln"),
+    // let's compare word by word first to prevent "totaln" from matching "hospitalizationn".
+    const words1 = str1.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 0);
+    const words2 = str2.toLowerCase().replace(/[^\w\s]/g, '').split(/\s+/).filter(w => w.length > 0);
+
+    // Check if one is an exact subset of the other (e.g., "Total N" vs "Total N N 207")
+    // Only if the smaller string has at least 2 words or is a long word.
+    if (words1.length > 0 && words2.length > 0) {
+        const smaller = words1.length < words2.length ? words1 : words2;
+        const larger = words1.length < words2.length ? words2 : words1;
+
+        let allMatch = true;
+        for (const word of smaller) {
+            if (!larger.includes(word)) {
+                allMatch = false;
+                break;
+            }
+        }
+        // If it's a substantive subset match (not just the letter "n")
+        if (allMatch && (smaller.length > 1 || smaller[0].length > 3)) {
+            return true;
+        }
+
+        // Check overlap percentage for longer phrases
+        const commonWords = words1.filter(word => words2.includes(word));
+        if (commonWords.length >= Math.min(words1.length, words2.length) * 0.7 && commonWords.length > 1) {
+            return true;
+        }
+    }
+
+    // Fallback: Remove common punctuation and spaces, but demand almost exact match
     const clean1 = str1.replace(/[^\w]/g, '').toLowerCase();
     const clean2 = str2.replace(/[^\w]/g, '').toLowerCase();
     if (clean1 === clean2) return true;
-    // Check if one is contained in the other
-    if (clean1.includes(clean2) || clean2.includes(clean1)) return true;
-    // Check for common abbreviations (e.g., "P value" vs "P-value")
-    const words1 = clean1.split(/\s+/);
-    const words2 = clean2.split(/\s+/);
-    if (words1.length === 1 && words2.length === 1) {
-        return clean1 === clean2;
+
+    // ONLY allow includes if the strings are exceptionally long, preventing "n" from matching "hospitalizationn"
+    if (clean1.length > 8 && clean2.length > 8) {
+        if (clean1.includes(clean2) || clean2.includes(clean1)) return true;
     }
-    // Check if most words match
-    const commonWords = words1.filter(word => words2.includes(word));
-    return commonWords.length >= Math.min(words1.length, words2.length) * 0.7;
+
+    return false;
 }
 // Helper functions (unchanged)
 function _tableEl(side) {
@@ -6154,14 +6194,14 @@ function saveApiKeys() {
     // Save to localStorage
     if (groqKey) localStorage.setItem('groq_api_key', groqKey);
     if (geminiKey) localStorage.setItem('gemini_api_key', geminiKey);
-    if (anthropicKey) localStorage.setItem('anthropic_api_key', anthropicKey);
+    // if (anthropicKey) localStorage.setItem('anthropic_api_key', anthropicKey);
     showApiKeyStatus('✅ API keys saved successfully!', 'success');
 }
 function clearApiKeys() {
     // Clear from localStorage
     localStorage.removeItem('groq_api_key');
     localStorage.removeItem('gemini_api_key');
-    localStorage.removeItem('anthropic_api_key');
+    // localStorage.removeItem('anthropic_api_key');
     // Clear input fields
     document.getElementById('groqApiKey').value = '';
     document.getElementById('geminiApiKey').value = '';
@@ -6172,16 +6212,16 @@ function loadSavedApiKeys() {
     // Load from localStorage
     const groqKey = localStorage.getItem('groq_api_key');
     const geminiKey = localStorage.getItem('gemini_api_key');
-    const anthropicKey = localStorage.getItem('anthropic_api_key');
+    // const anthropicKey = localStorage.getItem('anthropic_api_key');
     if (groqKey) {
         document.getElementById('groqApiKey').value = groqKey;
     }
     if (geminiKey) {
         document.getElementById('geminiApiKey').value = geminiKey;
     }
-    if (anthropicKey) {
-        document.getElementById('anthropicApiKey').value = anthropicKey;
-    }
+    // if (anthropicKey) {
+    //     document.getElementById('anthropicApiKey').value = anthropicKey;
+    // }
 }
 async function testApiKeys() {
     showApiKeyStatus('🔄 Testing API keys...', 'info');
@@ -6240,10 +6280,10 @@ function getApiKeysForRequest() {
     const keys = {};
     const groqKey = localStorage.getItem('groq_api_key');
     const geminiKey = localStorage.getItem('gemini_api_key');
-    const anthropicKey = localStorage.getItem('anthropic_api_key');
+    // const anthropicKey = localStorage.getItem('anthropic_api_key');
     if (groqKey) keys.groq = groqKey;
     if (geminiKey) keys.gemini = geminiKey;
-    if (anthropicKey) keys.anthropic = anthropicKey;
+    // if (anthropicKey) keys.anthropic = anthropicKey;
     return keys;
 }
 
@@ -6268,7 +6308,7 @@ async function fetchPipelineMetrics() {
     const matchMethod = document.getElementById('schemaMatchingType').value;
     const matchLLM = document.getElementById('matchingLLM').value;
     const mergeContainer = document.getElementById('mergeStepContainer');
-    const isMergeVisible = mergeContainer && mergeContainer.style.display !== 'none';
+    const isMergeVisible = document.getElementById('mergeOperation') && document.getElementById('mergeOperation').value !== '';
     const mergeOperation = isMergeVisible ? document.getElementById('mergeOperation').value : null;
     const mergeMethod = isMergeVisible ? document.getElementById('mergeMethod').value : null;
     const mergeLLM = isMergeVisible ? document.getElementById('mergeLLM').value : null;

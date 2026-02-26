@@ -24,7 +24,7 @@ def normalize_model_name(model_name: str) -> str:
     # Mapping from frontend display names to CSV names
     model_mapping = {
         "gemini-2.5-flash": "Gemini 2.5 Flash",
-        "gemini-2.0-flash-exp": "Gemini 2.0 Flash Exp",
+        "gemini-2.0-flash": "Gemini 2.0 Flash",
         "gemini-1.5-flash": "Gemini 1.5 Flash",
         "claude-3-5-haiku-20241022": "Claude 3.5 Haiku",
         "claude-3-5-sonnet-20241022": "Claude 3.5 Sonnet",

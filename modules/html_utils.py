@@ -736,8 +736,13 @@ def build_enhanced_headers(hmd_data, vmd_header_label=""):
     childless_parents = []
 
     for item in hmd_data:
-        if isinstance(item, dict) and item.get("is_childless"):
-            childless_parents.append(item)
+        if isinstance(item, dict):
+            # If it explicitly says it's childless, or if it has no 'children' dict/list
+            if item.get("is_childless") or not item.get("children"):
+                childless_parents.append(item)
+            else:
+                # If a dict has children but was left here, it will be ignored by this basic renderer
+                pass
         elif isinstance(item, str):
             hierarchical_items.append(item)
 
@@ -755,6 +760,12 @@ def build_enhanced_headers(hmd_data, vmd_header_label=""):
         for item in childless_parents:
             colspan = item.get("colspan", 1)
             text = item.get("text", "")
+            if not text:
+                # Fallback to attribute1, attribute2, etc. (like "attribute2": "Total N")
+                for k, v in item.items():
+                    if k.startswith("attribute") and isinstance(v, str):
+                        text = v.strip()
+                        break
             headers.append(f'<th data-header="{text}" colspan="{colspan}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{text}</th>')
         
         headers.append('</tr>')
@@ -796,6 +807,11 @@ def build_enhanced_headers(hmd_data, vmd_header_label=""):
             
             for item in childless_parents:
                 text = item.get("text", "")
+                if not text:
+                    for k, v in item.items():
+                        if k.startswith("attribute") and isinstance(v, str):
+                            text = v.strip()
+                            break
                 headers.append(f'<th data-header="{text}" rowspan="{max_levels}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{text}</th>')
         else:
             for item in hierarchical_items:

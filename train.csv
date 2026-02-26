@@ -3,163 +3,163 @@ llm_response_2025-09-25T16-01-16_694743_a751eda2.json,complex,1.9132,2.21,Operat
 llm_response_2025-09-23T20-00-19_238266_82d80bd8.json,complex,0,0,Operator,JSON,Gemini 1.5 Flash,,,,0.00041655,1945,208,0.4
 llm_response_2025-09-24T13-40-23_587713_07c5e4e5.json,complex,34.2353,89.436,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0041938,3796,1222,1
 llm_response_2025-09-24T13-50-53_845016_0dbcbb26.json,complex,0,0,Operator,JSON,GPT Oss 20B,,,,0.00054882,1740,1309,1
-llm_response_2025-09-24T13-51-40_361547_f75e66a6.json,complex,0,0,Operator,JSON,Gemini 2.0 Flash Exp,,,,0.0002409,1945,116,1
-llm_response_2025-09-24T13-53-03_388950_5c8271a4.json,complex,1.1302,8.4977,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009796,3648,1537,1
+llm_response_2025-09-24T13-51-40_361547_f75e66a6.json,complex,0,0,Operator,JSON,Gemini 2.0 Flash ,,,,0.0002409,1945,116,1
+llm_response_2025-09-24T13-53-03_388950_5c8271a4.json,complex,1.1302,8.4977,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009796,3648,1537,1
 llm_response_2025-09-24T13-57-04_221332_199bfb0d.json,complex,0,0,Operator,JSON,Gemini 1.5 Flash,,,,0.00041655,1945,208,0.4
 llm_response_2025-09-24T13-58-46_756867_38a51d3b.json,complex,0,0,Operator,JSON,Gemini 2.5 Flash,,,,0.0008735,1945,116,1
 llm_response_2025-09-24T14-00-04_220160_f7dce397.json,complex,0,0,Operator,JSON,GPT Oss 120B,,,,0.00195406,1740,1174,1
-llm_response_2025-09-24T14-00-59_252269_c32c3330.json,complex,0,0,Operator,JSON,Gemini 2.0 Flash Exp,,,,0.0002409,1945,116,1
+llm_response_2025-09-24T14-00-59_252269_c32c3330.json,complex,0,0,Operator,JSON,Gemini 2.0 Flash ,,,,0.0002409,1945,116,1
 llm_response_2025-09-24T14-01-23_265318_69a7a7ba.json,complex,0,0,Operator,Knowledge Graph,GPT Oss 20B,,,,0.00042048,1840,496,1
 llm_response_2025-09-24T14-01-33_630894_529d28a0.json,complex,0,0,Operator,Knowledge Graph,Gemini 1.5 Flash,,,,0.0004518,2044,242,0.6
-llm_response_2025-09-24T14-01-48_158009_870713db.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,,,,0.0002792,2044,187,0.6
+llm_response_2025-09-24T14-01-48_158009_870713db.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.0 Flash ,,,,0.0002792,2044,187,0.6
 llm_response_2025-09-24T14-01-57_475693_ed1e0829.json,complex,0,0,Operator,Knowledge Graph,GPT Oss 120B,,,,0.00166546,1840,734,1
 llm_response_2025-09-24T14-02-27_988606_3b5084c1.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.5 Flash,,,,0.0009035,2045,116,1
 llm_response_2025-09-24T14-03-00_199911_9d99ff0e.json,complex,7.641,0,Operator,JSON,GPT Oss 20B,,,,0.0001386,519,251,1
 llm_response_2025-09-24T14-03-28_273662_87f6d2b4.json,complex,22.2834,0,Operator,JSON,Gemini 1.5 Flash,,,,0.00029475,429,384,0.4
-llm_response_2025-09-24T14-03-41_404958_ca828941.json,complex,5.9789,0,Operator,JSON,Gemini 2.0 Flash Exp,,,,0.0001293,429,216,1
+llm_response_2025-09-24T14-03-41_404958_ca828941.json,complex,5.9789,0,Operator,JSON,Gemini 2.0 Flash ,,,,0.0001293,429,216,1
 llm_response_2025-09-24T14-03-54_753034_d977f045.json,complex,8.2833,0,Operator,JSON,GPT Oss 120B,,,,0.00052109,519,272,1
 llm_response_2025-09-24T14-05-47_431695_caa8512e.json,complex,108.5691,0,Operator,JSON,Gemini 2.5 Flash,,,,0.0006687,429,216,1
 llm_response_2025-09-24T14-07-06_012631_846854fb.json,complex,1.3019,3.1279,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.0012537,3213,3752,1
 llm_response_2025-09-24T14-07-46_023096_c2b6b5b5.json,complex,1.6482,11.1196,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 1.5 Flash,0.00168288,3416,2582,0.67
-llm_response_2025-09-24T14-08-01_336958_fbedc151.json,complex,1.6854,6.4953,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash Exp,0.00116158,3479,2410,1
+llm_response_2025-09-24T14-08-01_336958_fbedc151.json,complex,1.6854,6.4953,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash ,0.00116158,3479,2410,1
 llm_response_2025-09-24T14-12-02_648969_e7bddb40.json,complex,1.7321,128.4251,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.5 Flash,0.00554452,3412,2638,0.67
 llm_response_2025-09-24T14-14-02_102598_1c60b19e.json,complex,1.6797,17.1629,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.00138618,3384,4317,1
-llm_response_2025-09-24T14-22-21_286816_aefb8d80.json,complex,1.6326,5.6385,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash Exp,0.001038,3572,1882,0.67
+llm_response_2025-09-24T14-22-21_286816_aefb8d80.json,complex,1.6326,5.6385,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash ,0.001038,3572,1882,0.67
 llm_response_2025-09-24T14-25-10_102041_999b09b5.json,complex,1.5873,6.4729,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 120B,0.00378116,3334,3875,0.67
 llm_response_2025-09-24T14-25-38_598987_1d447d40.json,complex,1.3064,183.5425,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 1.5 Flash,0.00155802,3572,2211,0.67
 llm_response_2025-09-24T14-26-18_440242_6f689776.json,complex,2.5841,3.1813,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,GPT Oss 20B,0.00123519,3493,3208,0.4
 llm_response_2025-09-24T14-26-43_431619_22e5b4dc.json,complex,1.7606,85.8209,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.5 Flash,0.0038567,3591,2346,1
 llm_response_2025-09-24T14-34-42_450744_c39b7b44.json,complex,1.8901,3.1035,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,GPT Oss 20B,0.00123519,3493,3208,0.4
 llm_response_2025-09-24T14-35-03_832879_cdf3b6e6.json,complex,1.768,12.8326,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00177435,3729,2025,0.4
-llm_response_2025-09-24T14-35-19_120482_d18a1439.json,complex,1.7438,8.2529,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.00115695,3729,1613,0.4
+llm_response_2025-09-24T14-35-19_120482_d18a1439.json,complex,1.7438,8.2529,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.00115695,3729,1613,0.4
 llm_response_2025-09-24T14-35-32_439059_bc0700ce.json,complex,1.7273,7.1078,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,GPT Oss 120B,0.00371659,3501,3228,0.111111111
 llm_response_2025-09-24T14-37-27_697611_980de8e3.json,complex,1.865,109.5583,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.00646575,3744,2427,0.111111111
 llm_response_2025-09-24T14-38-41_223089_f4e9a56e.json,complex,1.8711,3.8051,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,GPT Oss 20B,0.00126093,3636,3208,0.4
 llm_response_2025-09-24T14-38-59_994523_d81f5b9a.json,complex,1.9156,12.2446,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00175995,3905,1957,0.111111111
-llm_response_2025-09-24T14-39-17_566948_5a952b51.json,complex,1.9709,9.7311,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.00126975,3905,1841,0.111111111
+llm_response_2025-09-24T14-39-17_566948_5a952b51.json,complex,1.9709,9.7311,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.00126975,3905,1841,0.111111111
 llm_response_2025-09-24T14-41-26_224447_8b3d8eab.json,complex,1.8272,107.9961,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.00488085,3876,1762,0.4
-llm_response_2025-09-24T14-43-00_485197_e2a14b77.json,complex,1.038,4.0501,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 20B,0.00104604,3418,3116,1
-llm_response_2025-09-24T14-43-19_930872_177b50c8.json,complex,1.059,11.602,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 1.5 Flash,0.00143715,3648,1684,1
-llm_response_2025-09-24T14-43-33_498925_2d8d1580.json,complex,1.0926,7.4382,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009796,3648,1537,1
-llm_response_2025-09-24T14-43-50_171758_f9412eee.json,complex,1.1549,6.4408,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 120B,0.00347997,3418,3116,1
-llm_response_2025-09-24T14-45-22_693533_1011261d.json,complex,0.9327,87.5402,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.0046656,3644,1682,1
-llm_response_2025-09-24T14-46-11_018830_a48eb4ae.json,complex,1.1947,3.2922,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 20B,0.00107178,3561,3116,1
-llm_response_2025-09-24T14-46-26_321290_409dd59b.json,complex,0.9731,9.3872,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 1.5 Flash,0.00133275,3804,1471,1
-llm_response_2025-09-24T14-46-39_706959_5b5b684c.json,complex,0.9582,5.5255,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0008216,3804,1103,1
-llm_response_2025-09-24T14-48-44_984430_8992327b.json,complex,1.1204,104.1249,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.0035612,3796,1222,1
+llm_response_2025-09-24T14-43-00_485197_e2a14b77.json,complex,1.038,4.0501,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 20B,0.00104604,3418,3116,1
+llm_response_2025-09-24T14-43-19_930872_177b50c8.json,complex,1.059,11.602,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 1.5 Flash,0.00143715,3648,1684,1
+llm_response_2025-09-24T14-43-33_498925_2d8d1580.json,complex,1.0926,7.4382,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009796,3648,1537,1
+llm_response_2025-09-24T14-43-50_171758_f9412eee.json,complex,1.1549,6.4408,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 120B,0.00347997,3418,3116,1
+llm_response_2025-09-24T14-45-22_693533_1011261d.json,complex,0.9327,87.5402,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.0046656,3644,1682,1
+llm_response_2025-09-24T14-46-11_018830_a48eb4ae.json,complex,1.1947,3.2922,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 20B,0.00107178,3561,3116,1
+llm_response_2025-09-24T14-46-26_321290_409dd59b.json,complex,0.9731,9.3872,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 1.5 Flash,0.00133275,3804,1471,1
+llm_response_2025-09-24T14-46-39_706959_5b5b684c.json,complex,0.9582,5.5255,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0008216,3804,1103,1
+llm_response_2025-09-24T14-48-44_984430_8992327b.json,complex,1.1204,104.1249,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.0035612,3796,1222,1
 llm_response_2025-09-24T14-50-59_307559_8d4d3efe.json,complex,1.9317,3.519,Operator,JSON,GPT Oss 120B,Operator,JSON,GPT Oss 20B,0.00238504,3241,3694,1
 llm_response_2025-09-24T14-51-20_715974_1e7c04d0.json,complex,1.7801,13.4499,Operator,JSON,GPT Oss 120B,Operator,JSON,Gemini 1.5 Flash,0.00266245,3443,2079,1
-llm_response_2025-09-24T14-51-35_790630_d39059bb.json,complex,2.4575,7.6559,Operator,JSON,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash Exp,0.00241997,3443,2187,1
+llm_response_2025-09-24T14-51-35_790630_d39059bb.json,complex,2.4575,7.6559,Operator,JSON,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash ,0.00241997,3443,2187,1
 llm_response_2025-09-24T14-53-31_507153_4295c0b4.json,complex,1.7795,93.2715,Operator,JSON,GPT Oss 120B,Operator,JSON,Gemini 2.5 Flash,0.00581141,3439,2195,1
 llm_response_2025-09-24T14-55-30_293239_11cf5dd1.json,complex,7.3444,3.3186,Operator,JSON,GPT Oss 120B,Operator,JSON,GPT Oss 20B,0.00257085,3356,3903,1
 llm_response_2025-09-24T14-55-56_852091_bc0a31a6.json,complex,2.9172,11.3555,Operator,JSON,GPT Oss 120B,Operator,JSON,Gemini 1.5 Flash,0.00281476,3599,2291,1
-llm_response_2025-09-24T14-56-10_548404_a19bba02.json,complex,1.7739,5.8982,Operator,JSON,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash Exp,0.00216741,3599,1696,1
+llm_response_2025-09-24T14-56-10_548404_a19bba02.json,complex,1.7739,5.8982,Operator,JSON,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash ,0.00216741,3599,1696,1
 llm_response_2025-09-24T14-58-24_755684_2d5b89ce.json,complex,23.7211,67.8719,Operator,JSON,GPT Oss 120B,Operator,JSON,Gemini 2.5 Flash,0.00635,3627,2669,1
 llm_response_2025-09-24T15-00-34_290205_6a71affa.json,complex,32.5279,3.083,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,GPT Oss 20B,0.00167864,3418,3116,1
 llm_response_2025-09-24T15-01-55_390623_f4c70e41.json,complex,33.5739,10.709,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00206855,3648,1682,1
-llm_response_2025-09-24T15-02-56_691968_64a62e95.json,complex,35.9526,8.1736,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0016122,3648,1537,1
+llm_response_2025-09-24T15-02-56_691968_64a62e95.json,complex,35.9526,8.1736,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0016122,3648,1537,1
 llm_response_2025-09-24T15-06-15_724058_687a647e.json,complex,29.3938,100.2995,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0050982,3644,1602,1
 llm_response_2025-09-24T15-11-15_150280_4b2f0325.json,complex,36.0009,3.12,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,GPT Oss 20B,0.00170438,3561,3116,1
 llm_response_2025-09-24T15-12-05_515426_77cd95fe.json,complex,33.2909,9.4105,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00196535,3804,1471,1
-llm_response_2025-09-24T15-12-52_314679_4a060304.json,complex,35.3342,6.4239,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0014994,3804,1216,1
+llm_response_2025-09-24T15-12-52_314679_4a060304.json,complex,35.3342,6.4239,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0014994,3804,1216,1
 llm_response_2025-09-24T15-15-42_094696_c3339f1c.json,complex,37.9026,6.6213,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,GPT Oss 120B,0.00419694,3561,3116,1
 llm_response_2025-09-24T15-18-01_120008_03138f74.json,complex,30.6493,93.5174,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0041938,3796,1222,1
 llm_response_2025-09-24T15-18-51_671606_51d090d7.json,complex,31.4208,3.1408,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,GPT Oss 20B,0.00167864,3418,3116,1
 llm_response_2025-09-24T15-19-44_250600_a38d5269.json,complex,30.943,11.9337,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00206495,3648,1676,1
-llm_response_2025-09-24T15-20-32_576043_f8594106.json,complex,33.9036,7.94,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0015614,3648,1410,1
+llm_response_2025-09-24T15-20-32_576043_f8594106.json,complex,33.9036,7.94,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0015614,3648,1410,1
 llm_response_2025-09-24T15-21-25_882417_0543dd1f.json,complex,40.7775,6.5349,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,GPT Oss 120B,0.00411257,3418,3116,1
 llm_response_2025-09-24T15-23-53_486778_295f26dc.json,complex,34.8238,104.4017,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0050982,3644,1602,1
 llm_response_2025-09-24T15-25-49_159775_3f42e90b.json,complex,1.3748,3.1161,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.00122562,3313,3496,1
 llm_response_2025-09-24T15-26-05_763170_3f8263c9.json,complex,1.0241,9.7812,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,Gemini 1.5 Flash,0.00150333,3543,1875,1
-llm_response_2025-09-24T15-26-20_369044_dda62653.json,complex,1.0736,8.1691,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash Exp,0.00113518,3543,1857,1
+llm_response_2025-09-24T15-26-20_369044_dda62653.json,complex,1.0736,8.1691,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash ,0.00113518,3543,1857,1
 llm_response_2025-09-24T15-26-34_329032_01860130.json,complex,1.4453,7.2233,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,GPT Oss 120B,0.0036161,3313,3441,1
 llm_response_2025-09-24T15-28-27_440878_56718059.json,complex,1.9714,104.0975,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,Gemini 2.5 Flash,0.00464518,3539,1982,1
 llm_response_2025-09-24T15-29-39_860819_20a2880f.json,complex,0.8704,16.2604,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.00125136,3456,3496,1
 llm_response_2025-09-24T15-30-25_152473_482178a5.json,complex,30.1677,10.5606,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,Gemini 1.5 Flash,0.00161313,3699,2019,1
-llm_response_2025-09-24T15-30-38_386239_09c9e448.json,complex,3.1008,6.0455,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash Exp,0.00100118,3699,1483,1
+llm_response_2025-09-24T15-30-38_386239_09c9e448.json,complex,3.1008,6.0455,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash ,0.00100118,3699,1483,1
 llm_response_2025-09-24T15-32-36_622010_7e8fb43e.json,complex,7.3625,89.018,Operator,Knowledge Graph,GPT Oss 20B,Operator,JSON,Gemini 2.5 Flash,0.00374078,3691,1602,1
 llm_response_2025-09-24T15-33-16_753420_290d6f98.json,complex,2.0679,3.2897,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,GPT Oss 20B,0.00126582,3613,3228,0.6
 llm_response_2025-09-24T15-33-36_703994_611899f6.json,complex,2.0319,12.7938,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.0017766,3872,1993,0.6
-llm_response_2025-09-24T15-33-54_011826_5364a543.json,complex,2.17,10.6296,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0013418,3872,2010,0.6
+llm_response_2025-09-24T15-33-54_011826_5364a543.json,complex,2.17,10.6296,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0013418,3872,2010,0.6
 llm_response_2025-09-24T15-34-07_299721_fcf01703.json,complex,2.0969,6.5304,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,GPT Oss 120B,0.00375577,3627,3242,0.6
 llm_response_2025-09-24T15-35-54_089997_57ba70fc.json,complex,2.097,100.1931,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0045487,3867,1662,0.6
 llm_response_2025-09-24T15-36-45_561544_bfc0546d.json,complex,2.2117,3.284,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,GPT Oss 20B,0.00130248,3770,3242,0.6
 llm_response_2025-09-24T15-37-05_533997_d0a3f67b.json,complex,4.4565,11.7434,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.0017334,4028,1882,0.6
-llm_response_2025-09-24T15-37-25_750242_fb2a321b.json,complex,2.2159,9.2821,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0012958,4028,1856,0.6
+llm_response_2025-09-24T15-37-25_750242_fb2a321b.json,complex,2.2159,9.2821,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0012958,4028,1856,0.6
 llm_response_2025-09-24T15-39-26_735770_1b1a8fab.json,complex,2.1389,100.7607,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0034943,4019,1222,0.6
 llm_response_2025-09-24T15-39-41_854028_b90d4183.json,complex,1.9728,3.3028,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,GPT Oss 20B,0.00127674,3627,3242,0.6
 llm_response_2025-09-24T15-40-00_393826_e81c96a5.json,complex,2.0565,12.651,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.0017994,3872,2031,0.6
-llm_response_2025-09-24T15-40-21_191018_0f27fbda.json,complex,2.1472,9.8286,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0013418,3872,2010,0.6
+llm_response_2025-09-24T15-40-21_191018_0f27fbda.json,complex,2.1472,9.8286,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0013418,3872,2010,0.6
 llm_response_2025-09-24T15-40-34_668462_d19d8002.json,complex,2.1076,6.4217,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,GPT Oss 120B,0.00368941,3627,3158,0.6
 llm_response_2025-09-24T15-42-13_495710_4573350c.json,complex,2.4963,91.9989,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0045487,3867,1662,0.6
-llm_response_2025-09-24T15-42-35_714223_d63eae86.json,complex,1.5596,3.2508,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 20B,0.00109478,3575,3187,0.6
-llm_response_2025-09-24T15-42-57_698392_6c41982a.json,complex,1.4885,11.5951,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 1.5 Flash,0.0015629,3818,1883,0.6
-llm_response_2025-09-24T15-43-11_889048_11237a9a.json,complex,1.5017,8.8207,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0010842,3818,1756,0.6
-llm_response_2025-09-24T15-45-03_102123_56b4589c.json,complex,1.4025,91.5372,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.004438,3815,1638,0.6
+llm_response_2025-09-24T15-42-35_714223_d63eae86.json,complex,1.5596,3.2508,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 20B,0.00109478,3575,3187,0.6
+llm_response_2025-09-24T15-42-57_698392_6c41982a.json,complex,1.4885,11.5951,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 1.5 Flash,0.0015629,3818,1883,0.6
+llm_response_2025-09-24T15-43-11_889048_11237a9a.json,complex,1.5017,8.8207,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0010842,3818,1756,0.6
+llm_response_2025-09-24T15-45-03_102123_56b4589c.json,complex,1.4025,91.5372,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.004438,3815,1638,0.6
 llm_response_2025-09-24T19-41-10_549860_d631f76d.json,complex,0,0,Operator,Knowledge Graph,GPT Oss 120B,,,,0.00203292,1875,1173,0.8
 llm_response_2025-09-24T19-50-21_350017_8b035627.json,complex,0,0,Operator,Knowledge Graph,GPT Oss 120B,,,,0.00206215,1875,1210,0.428571429
 llm_response_2025-09-24T19-51-55_819942_510e7704.json,complex,0,0,Operator,Knowledge Graph,GPT Oss 120B,,,,0.00206215,1875,1210,0.43
-llm_response_2025-09-24T19-52-44_705546_7302d5cf.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,,,,0.0002863,2075,197,0.43
-llm_response_2025-09-24T19-53-28_218855_579008c4.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,,,,0.0002863,2075,197,0.43
+llm_response_2025-09-24T19-52-44_705546_7302d5cf.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.0 Flash ,,,,0.0002863,2075,197,0.43
+llm_response_2025-09-24T19-53-28_218855_579008c4.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.0 Flash ,,,,0.0002863,2075,197,0.43
 llm_response_2025-09-24T19-54-57_706912_897698d3.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.5 Flash,,,,0.000929,2080,122,0.6
 llm_response_2025-09-24T19-56-19_785638_033e93a5.json,complex,0,0,Operator,Knowledge Graph,Gemini 2.5 Flash,,,,0.0011215,2080,199,0.43
 llm_response_2025-09-24T19-57-41_293924_254bc8f3.json,complex,9.5456,0,Operator,JSON,GPT Oss 20B,,,,0.00025812,1212,222,0.4
 llm_response_2025-09-24T19-58-35_738973_200ceb74.json,complex,9.1737,0,Operator,JSON,GPT Oss 20B,,,,0.0002619,1212,243,0.6
-llm_response_2025-09-24T20-05-11_332944_e9f8b5ba.json,complex,6.6123,0,Operator,JSON,Gemini 2.0 Flash Exp,,,,0.0002499,999,375,0.43
-llm_response_2025-09-24T20-05-57_533987_cbd577b6.json,complex,6.5434,0,Operator,JSON,Gemini 2.0 Flash Exp,,,,0.0002499,999,375,0.43
+llm_response_2025-09-24T20-05-11_332944_e9f8b5ba.json,complex,6.6123,0,Operator,JSON,Gemini 2.0 Flash ,,,,0.0002499,999,375,0.43
+llm_response_2025-09-24T20-05-57_533987_cbd577b6.json,complex,6.5434,0,Operator,JSON,Gemini 2.0 Flash ,,,,0.0002499,999,375,0.43
 llm_response_2025-09-24T20-09-02_248583_ad761089.json,complex,132.5215,0,Operator,JSON,Gemini 2.5 Flash,,,,0.0008697,999,228,0.6
 llm_response_2025-09-24T20-11-59_968126_f07d17eb.json,complex,121.6719,0,Operator,JSON,Gemini 2.5 Flash,,,,0.0008697,999,228,0.6
 llm_response_2025-09-24T20-20-38_881689_2f0e2f70.json,complex,9.9178,0,Operator,JSON,GPT Oss 120B,,,,0.00097104,1212,324,0.6
 llm_response_2025-09-24T20-21-30_754840_0dee6d5e.json,complex,24.6838,0,Operator,JSON,GPT Oss 120B,,,,0.00097104,1212,324,0.6
-llm_response_2025-09-24T20-24-49_687238_9a8c0961.json,complex,1.6864,8.7661,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0011396,4420,1744,0.43
-llm_response_2025-09-24T20-32-06_441901_05a3b907.json,complex,0,0,Operator,JSON,Gemini 2.0 Flash Exp,Instance Merge,JSON,Gemini 2.0 Flash Exp,0.0015207,999,3552,0.43
-llm_response_2025-09-24T20-35-57_390875_3bc3282c.json,complex,2.0719,124.7593,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.006788,4473,2502,0.43
+llm_response_2025-09-24T20-24-49_687238_9a8c0961.json,complex,1.6864,8.7661,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0011396,4420,1744,0.43
+llm_response_2025-09-24T20-32-06_441901_05a3b907.json,complex,0,0,Operator,JSON,Gemini 2.0 Flash ,Instance Merge,JSON,Gemini 2.0 Flash ,0.0015207,999,3552,0.43
+llm_response_2025-09-24T20-35-57_390875_3bc3282c.json,complex,2.0719,124.7593,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.006788,4473,2502,0.43
 llm_response_2025-09-24T21-14-50_744829_bfc2b224.json,complex,2.1148,3.9542,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.0014427,3838,4177,0.6
-llm_response_2025-09-24T21-38-47_760861_3790a1c5.json,relational,0.579,2.2704,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0002713,953,440,1
+llm_response_2025-09-24T21-38-47_760861_3790a1c5.json,relational,0.579,2.2704,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0002713,953,440,1
 llm_response_2025-09-25T13-13-03_877004_0027e7fe.json,complex,159.1731,193.2738,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0295988,6646,11042,0
 llm_response_2025-09-25T13-24-03_896849_d9d8df36.json,complex,0,0,Operator,Knowledge Graph,GPT Oss 120B,,,,0.0017197,1948,722,0
-llm_response_2025-09-25T13-41-50_378535_02eee2f7.json,complex,1.3775,20.5767,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0018396,4440,3489,0
+llm_response_2025-09-25T13-41-50_378535_02eee2f7.json,complex,1.3775,20.5767,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0018396,4440,3489,0
 llm_response_2025-09-25T13-55-26_892201_680e99d0.json,complex,0,0,Operator,JSON,GPT Oss 120B,,,,0.00189708,1859,1013,0
 llm_response_2025-09-25T14-14-01_549703_0a72df10.json,relational,0,0,Operator,JSON,GPT Oss 120B,,,,0.00056784,542,314,1
-llm_response_2025-09-25T14-21-10_591061_8f364eff.json,complex,0,0,Operator,JSON,Gemini 2.0 Flash Exp,,,,0.0002113,1909,51,1
-llm_response_2025-09-25T14-32-50_216382_ecc8dc81.json,complex,1.8658,7.0985,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0008609,3709,1225,0.92
-llm_response_2025-09-25T14-33-07_954945_f954794f.json,complex,1.8988,84.7192,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.004438,3815,1638,0.6
-llm_response_2025-09-25T14-35-45_915232_d920d424.json,complex,2.1201,3.7081,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 20B,0.00112052,3718,3187,0.6
-llm_response_2025-09-25T14-36-48_709074_ef952c71.json,complex,1.4647,56.8525,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 1.5 Flash,0.0011717,3974,1192,0.6
-llm_response_2025-09-25T14-37-06_375701_c575ffe0.json,complex,1.4174,11.0423,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0011358,3974,1846,0.6
-llm_response_2025-09-25T14-37-18_169906_0c35a142.json,complex,1.8943,6.1319,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 120B,0.00348044,3718,2989,0.6
-llm_response_2025-09-25T14-38-56_339813_426a2d86.json,complex,1.6722,91.2819,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.0046711,3967,1713,0.6
-llm_response_2025-09-25T14-39-17_085868_17918895.json,complex,1.6449,3.5732,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 20B,0.00109478,3575,3187,0.6
-llm_response_2025-09-25T14-39-43_087579_28f5ad00.json,complex,1.3322,18.3246,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 1.5 Flash,0.0015803,3818,1912,0.6
-llm_response_2025-09-25T14-39-58_119347_f685c05e.json,complex,1.7678,8.7113,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0010842,3818,1756,0.6
-llm_response_2025-09-25T14-40-05_591682_72d487fe.json,complex,1.3361,41.2721,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 1.5 Flash,0.0015629,3818,1883,0.6
+llm_response_2025-09-25T14-21-10_591061_8f364eff.json,complex,0,0,Operator,JSON,Gemini 2.0 Flash ,,,,0.0002113,1909,51,1
+llm_response_2025-09-25T14-32-50_216382_ecc8dc81.json,complex,1.8658,7.0985,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0008609,3709,1225,0.92
+llm_response_2025-09-25T14-33-07_954945_f954794f.json,complex,1.8988,84.7192,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.004438,3815,1638,0.6
+llm_response_2025-09-25T14-35-45_915232_d920d424.json,complex,2.1201,3.7081,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 20B,0.00112052,3718,3187,0.6
+llm_response_2025-09-25T14-36-48_709074_ef952c71.json,complex,1.4647,56.8525,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 1.5 Flash,0.0011717,3974,1192,0.6
+llm_response_2025-09-25T14-37-06_375701_c575ffe0.json,complex,1.4174,11.0423,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0011358,3974,1846,0.6
+llm_response_2025-09-25T14-37-18_169906_0c35a142.json,complex,1.8943,6.1319,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 120B,0.00348044,3718,2989,0.6
+llm_response_2025-09-25T14-38-56_339813_426a2d86.json,complex,1.6722,91.2819,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.0046711,3967,1713,0.6
+llm_response_2025-09-25T14-39-17_085868_17918895.json,complex,1.6449,3.5732,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 20B,0.00109478,3575,3187,0.6
+llm_response_2025-09-25T14-39-43_087579_28f5ad00.json,complex,1.3322,18.3246,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 1.5 Flash,0.0015803,3818,1912,0.6
+llm_response_2025-09-25T14-39-58_119347_f685c05e.json,complex,1.7678,8.7113,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0010842,3818,1756,0.6
+llm_response_2025-09-25T14-40-05_591682_72d487fe.json,complex,1.3361,41.2721,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 1.5 Flash,0.0015629,3818,1883,0.6
 llm_response_2025-09-25T14-40-59_552983_015b05c8.json,relational,2.2735,3.2453,Operator,JSON,GPT Oss 120B,Operator,JSON,GPT Oss 120B,0.00219306,1019,2015,0.33
-llm_response_2025-09-25T14-41-35_347094_22a00242.json,complex,1.411,82.9793,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.0046855,3815,1737,0.6
-llm_response_2025-09-25T14-41-45_991723_887ea011.json,complex,1.5002,80.3812,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.0046855,3815,1737,0.6
+llm_response_2025-09-25T14-41-35_347094_22a00242.json,complex,1.411,82.9793,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.0046855,3815,1737,0.6
+llm_response_2025-09-25T14-41-45_991723_887ea011.json,complex,1.5002,80.3812,Operator,Knowledge Graph,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.0046855,3815,1737,0.6
 llm_response_2025-09-25T14-42-06_099321_b00a18f2.json,complex,2.245,4.0996,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,GPT Oss 20B,0.00263018,3313,3936,1
 llm_response_2025-09-25T14-42-25_140627_8dbe8f34.json,complex,1.9186,11.7363,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 1.5 Flash,0.00282215,3543,2250,1
-llm_response_2025-09-25T14-42-42_253080_9d0b4618.json,complex,1.9984,9.2915,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash Exp,0.00234625,3543,2019,1
+llm_response_2025-09-25T14-42-42_253080_9d0b4618.json,complex,1.9984,9.2915,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash ,0.00234625,3543,2019,1
 llm_response_2025-09-25T14-45-37_956705_d7318c41.json,complex,1.7973,74.9737,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.5 Flash,0.00606093,3539,2263,1
 llm_response_2025-09-25T14-47-50_252653_8346b6c5.json,complex,1.9409,4.3308,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,GPT Oss 20B,0.00249318,3456,3730,1
 llm_response_2025-09-25T14-48-07_437124_b4b92c30.json,complex,10.0553,2.976,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 1.5 Flash,0.00210668,3262,1105,0
-llm_response_2025-09-25T14-48-30_226223_6a02c92a.json,complex,10.9114,6.9477,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash Exp,0.0022882,3699,1830,1
+llm_response_2025-09-25T14-48-30_226223_6a02c92a.json,complex,10.9114,6.9477,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash ,0.0022882,3699,1830,1
 llm_response_2025-09-25T14-52-52_223981_1342a367.json,complex,2.5074,86.1731,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.5 Flash,0.00495653,3691,1803,1
 llm_response_2025-09-25T14-53-16_643504_29bd7725.json,complex,1.8822,3.615,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,GPT Oss 20B,0.00246744,3313,3730,1
 llm_response_2025-09-25T14-54-20_176128_37d0080f.json,complex,2.7162,55.9655,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 1.5 Flash,0.00275147,3543,2117,1
-llm_response_2025-09-25T14-54-36_616210_4309a60c.json,complex,2.2889,9.3975,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash Exp,0.002401,3543,2151,1
+llm_response_2025-09-25T14-54-36_616210_4309a60c.json,complex,2.2889,9.3975,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.0 Flash ,0.002401,3543,2151,1
 llm_response_2025-09-25T14-56-46_575600_e97ceff9.json,complex,2.0016,84.1335,Operator,Knowledge Graph,GPT Oss 120B,Operator,JSON,Gemini 2.5 Flash,0.00613045,3539,2351,1
 llm_response_2025-09-25T14-57-29_932728_b199aede.json,complex,21.1945,3.9124,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,GPT Oss 20B,0.00170864,3518,3116,1
 llm_response_2025-09-25T14-58-09_046789_e7ef1ac9.json,complex,23.0871,11.239,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00208655,3748,1662,1
-llm_response_2025-09-25T14-58-44_095026_fbae8c86.json,complex,21.8596,8.7287,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0016182,3748,1477,1
+llm_response_2025-09-25T14-58-44_095026_fbae8c86.json,complex,21.8596,8.7287,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0016182,3748,1477,1
 llm_response_2025-09-25T15-01-36_898652_1f6508b7.json,complex,22.8233,75.323,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0053282,3744,1682,1
 llm_response_2025-09-25T15-04-31_166570_a3abecdf.json,complex,17.5062,3.9998,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,GPT Oss 20B,0.00173438,3661,3116,1
 llm_response_2025-09-25T15-05-08_172798_b945b17c.json,complex,21.7028,10.1294,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00199535,3904,1471,1
-llm_response_2025-09-25T15-05-39_941389_b51cc2dc.json,complex,19.5621,5.8538,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0014842,3904,1103,1
+llm_response_2025-09-25T15-05-39_941389_b51cc2dc.json,complex,19.5621,5.8538,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0014842,3904,1103,1
 llm_response_2025-09-25T15-06-12_460477_5921cc2b.json,complex,20.5883,6.2426,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,GPT Oss 120B,0.00407763,3661,2927,1
 llm_response_2025-09-25T15-08-16_147648_a72add59.json,complex,23.4191,94.3901,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0042238,3896,1222,1
 llm_response_2025-09-25T15-08-56_721393_158433a9.json,complex,21.2734,4.05,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,GPT Oss 20B,0.00170864,3518,3116,1
 llm_response_2025-09-25T15-09-43_525077_14288ca6.json,complex,21.9597,18.4706,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00198635,3748,1495,1
-llm_response_2025-09-25T15-10-19_869101_44b3113f.json,complex,22.5903,8.2848,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0016182,3748,1477,1
+llm_response_2025-09-25T15-10-19_869101_44b3113f.json,complex,22.5903,8.2848,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0016182,3748,1477,1
 llm_response_2025-09-25T15-10-52_765612_be7baf95.json,complex,19.9896,7.3887,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,GPT Oss 120B,0.00414257,3518,3116,1
 llm_response_2025-09-25T15-12-33_497568_66b70953.json,complex,21.1835,73.9712,Operator,Knowledge Graph,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0053282,3744,1682,1
 llm_response_2025-09-25T15-13-10_542106_6e8d8ade.json,complex,1.2568,4.1984,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.00125046,3213,3734,1
@@ -173,7 +173,7 @@ llm_response_2025-09-25T15-18-46_085068_0cfe69e5.json,complex,26.3614,20.1994,Op
 llm_response_2025-09-25T15-19-37_636696_42ce0390.json,complex,27.3778,19.4215,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.00125784,3241,3747,1
 llm_response_2025-09-25T15-20-30_989997_5f7c3e2c.json,complex,27.2027,19.8549,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.0012699,3213,3842,1
 llm_response_2025-09-25T15-46-48_278201_451bfb8d.json,complex,2.9738,12.4916,Operator,Multi-Step,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.0016458,3312,1915,0.6
-llm_response_2025-09-25T15-47-10_707085_3bfe49f6.json,complex,1.6745,9.8725,Operator,Multi-Step,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0011485,3312,1757,0.6
+llm_response_2025-09-25T15-47-10_707085_3bfe49f6.json,complex,1.6745,9.8725,Operator,Multi-Step,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0011485,3312,1757,0.6
 llm_response_2025-09-25T15-49-01_155845_aa0411ad.json,complex,1.8186,86.4212,Operator,Multi-Step,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0045023,3309,1639,0.6
 llm_response_2025-09-25T15-51-05_468986_0fd51807.json,complex,14.0988,13.9687,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00183975,3729,2134,0.4
 llm_response_2025-09-25T15-53-10_325132_b498ab19.json,complex,1.807,14.7827,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00176355,3729,2007,0.4
@@ -185,66 +185,66 @@ llm_response_2025-09-25T15-55-24_862207_560e7c60.json,complex,1.7201,14.7869,Ope
 llm_response_2025-09-25T15-55-46_876513_6de82e8f.json,complex,1.9155,14.8852,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00186735,3729,2180,0.4
 llm_response_2025-09-25T15-56-06_670696_f2858f8c.json,complex,1.8368,13.6608,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.00176355,3729,2007,0.4
 llm_response_2025-09-25T15-56-26_885646_57edfc30.json,complex,1.5492,4.1744,Operator,Multi-Step,Gemini 1.5 Flash,Operator,JSON,GPT Oss 20B,0.00115908,3069,3188,0.6
-llm_response_2025-09-25T15-59-39_699991_9c44f717.json,complex,1.7788,9.9512,Operator,Multi-Step,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0012217,3312,1940,0.6
+llm_response_2025-09-25T15-59-39_699991_9c44f717.json,complex,1.7788,9.9512,Operator,Multi-Step,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0012217,3312,1940,0.6
 llm_response_2025-09-25T16-01-16_694743_a751eda2.json,complex,1.9132,78.8085,Operator,Multi-Step,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0045023,3309,1639,0.6
-llm_response_2025-09-25T16-01-41_232498_ca34ee37.json,complex,1.1242,7.8128,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009556,3648,1477,1
-llm_response_2025-09-25T16-01-55_205415_b7e11bae.json,complex,1.1221,7.8621,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009556,3648,1477,1
-llm_response_2025-09-25T16-02-09_252038_d9f6eb9f.json,complex,1.0637,8.3528,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009796,3648,1537,1
-llm_response_2025-09-25T16-02-23_493613_f6d7a054.json,complex,1.3246,8.139,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009556,3648,1477,1
-llm_response_2025-09-25T16-02-38_339506_0bf96974.json,complex,1.0819,7.7913,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009288,3648,1410,1
-llm_response_2025-09-25T16-03-43_187787_508ccb51.json,complex,1.4772,8.3043,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009796,3648,1537,1
-llm_response_2025-09-25T16-04-00_247524_6e558acd.json,complex,1.1497,7.9444,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009288,3648,1410,1
-llm_response_2025-09-25T16-04-13_470481_fc2d648d.json,complex,1.301,8.1444,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009288,3648,1410,1
-llm_response_2025-09-25T16-04-27_043369_9b24077c.json,complex,1.0614,8.5296,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009796,3648,1537,1
-llm_response_2025-09-25T16-05-22_633389_3e27852d.json,complex,1.7126,7.8802,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0009556,3648,1477,1
+llm_response_2025-09-25T16-01-41_232498_ca34ee37.json,complex,1.1242,7.8128,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009556,3648,1477,1
+llm_response_2025-09-25T16-01-55_205415_b7e11bae.json,complex,1.1221,7.8621,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009556,3648,1477,1
+llm_response_2025-09-25T16-02-09_252038_d9f6eb9f.json,complex,1.0637,8.3528,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009796,3648,1537,1
+llm_response_2025-09-25T16-02-23_493613_f6d7a054.json,complex,1.3246,8.139,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009556,3648,1477,1
+llm_response_2025-09-25T16-02-38_339506_0bf96974.json,complex,1.0819,7.7913,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009288,3648,1410,1
+llm_response_2025-09-25T16-03-43_187787_508ccb51.json,complex,1.4772,8.3043,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009796,3648,1537,1
+llm_response_2025-09-25T16-04-00_247524_6e558acd.json,complex,1.1497,7.9444,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009288,3648,1410,1
+llm_response_2025-09-25T16-04-13_470481_fc2d648d.json,complex,1.301,8.1444,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009288,3648,1410,1
+llm_response_2025-09-25T16-04-27_043369_9b24077c.json,complex,1.0614,8.5296,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009796,3648,1537,1
+llm_response_2025-09-25T16-05-22_633389_3e27852d.json,complex,1.7126,7.8802,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0009556,3648,1477,1
 llm_response_2025-09-25T16-17-34_329326_8b1a4847.json,complex,2.1465,11.9893,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.0017334,4028,1882,0.6
 llm_response_2025-09-25T16-20-01_538415_903f0430.json,complex,2.2046,100.4312,Operator,Knowledge Graph,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0034943,4019,1222,0.6
 llm_response_2025-09-25T16-29-10_625632_40c2d154.json,relational,1.3556,3.0562,Operator,JSON,GPT Oss 120B,Operator,JSON,GPT Oss 120B,0.00207535,1019,1866,0.33
-llm_response_2025-09-25T16-29-51_897446_405a18e0.json,relational,0.7264,3.0898,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 120B,0.00152108,960,1457,0.33
+llm_response_2025-09-25T16-29-51_897446_405a18e0.json,relational,0.7264,3.0898,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 120B,0.00152108,960,1457,0.33
 llm_response_2025-09-25T16-32-58_577507_1cb83542.json,relational,0,0,Operator,JSON,Gemini 1.5 Flash,,,,0.00013635,345,141,0.2
-llm_response_2025-09-25T16-33-16_926040_6392cddb.json,relational,0,0,Operator,JSON,Gemini 2.0 Flash Exp,,,,6.25E-05,345,70,0.33
+llm_response_2025-09-25T16-33-16_926040_6392cddb.json,relational,0,0,Operator,JSON,Gemini 2.0 Flash ,,,,6.25E-05,345,70,0.33
 llm_response_2025-09-25T16-33-27_843873_04ed5554.json,relational,0,0,Operator,JSON,GPT Oss 120B,,,,0.00061677,404,479,0.33
 llm_response_2025-09-25T16-33-57_555877_d9952591.json,relational,0,0,Operator,JSON,Gemini 2.5 Flash,,,,0.0002985,345,78,0.33
 llm_response_2025-09-25T16-34-21_280316_d25cf63b.json,relational,0,0,Operator,Knowledge Graph,Gemini 1.5 Flash,,,,0.0001833,538,171,0.2
-llm_response_2025-09-25T16-34-29_618506_a5223718.json,relational,0,0,Operator,Knowledge Graph,Gemini 2.0 Flash Exp,,,,8.26E-05,538,72,0.33
+llm_response_2025-09-25T16-34-29_618506_a5223718.json,relational,0,0,Operator,Knowledge Graph,Gemini 2.0 Flash ,,,,8.26E-05,538,72,0.33
 llm_response_2025-09-25T16-34-40_440379_77306e47.json,relational,0,0,Operator,Knowledge Graph,GPT Oss 120B,,,,0.00082979,595,606,0.33
 llm_response_2025-09-25T16-35-42_424030_76795e08.json,relational,0,0,Operator,Knowledge Graph,Gemini 2.5 Flash,,,,0.000512,540,140,0.2
 llm_response_2025-09-25T16-36-40_105050_d2be2854.json,relational,6.0617,0,Operator,JSON,Gemini 1.5 Flash,,,,0.00023805,255,333,0.2
-llm_response_2025-09-25T16-36-50_979427_d13aed62.json,relational,4.2315,0,Operator,JSON,Gemini 2.0 Flash Exp,,,,8.43E-05,255,147,0.33
+llm_response_2025-09-25T16-36-50_979427_d13aed62.json,relational,4.2315,0,Operator,JSON,Gemini 2.0 Flash ,,,,8.43E-05,255,147,0.33
 llm_response_2025-09-25T16-37-02_818147_68dc70f7.json,relational,5.7626,0,Operator,JSON,GPT Oss 120B,,,,0.00035058,309,213,0.33
 llm_response_2025-09-25T16-38-20_755208_bd6b5189.json,relational,71.2295,0,Operator,JSON,Gemini 2.5 Flash,,,,0.0003415,255,106,0.33
 llm_response_2025-09-25T16-38-50_696018_9b0cb7fe.json,relational,0,0,Baseline,JSON,Gemini 1.5 Flash,,,,7.38E-05,192,75,0.25
-llm_response_2025-09-25T16-38-59_745754_95eecae7.json,relational,0,0,Baseline,JSON,Gemini 2.0 Flash Exp,,,,4.48E-05,192,64,1
+llm_response_2025-09-25T16-38-59_745754_95eecae7.json,relational,0,0,Baseline,JSON,Gemini 2.0 Flash ,,,,4.48E-05,192,64,1
 llm_response_2025-09-25T16-39-08_768672_1df4626c.json,relational,0,0,Baseline,JSON,GPT Oss 120B,,,,0.00045458,263,379,1
 llm_response_2025-09-25T16-39-33_651505_5a651578.json,relational,0,0,Baseline,JSON,Gemini 2.5 Flash,,,,0.0002848,191,91,0.67
 llm_response_2025-09-25T16-42-51_162381_dd001f84.json,relational,1.2546,3.5059,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.0005181,1022,608,0.2
-llm_response_2025-09-25T16-43-03_016075_70b92c26.json,relational,1.2122,3.7851,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.00045045,1022,757,0.2
+llm_response_2025-09-25T16-43-03_016075_70b92c26.json,relational,1.2122,3.7851,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.00045045,1022,757,0.2
 llm_response_2025-09-25T16-43-14_864240_9c0bf534.json,relational,0.9307,3.0779,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,GPT Oss 120B,0.00155533,960,1462,0.2
 llm_response_2025-09-25T16-44-00_812724_edf4398e.json,relational,1.2557,28.4734,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.00133135,1020,538,0.2
 llm_response_2025-09-25T16-45-07_826430_1e139e04.json,relational,1.2827,3.626,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 1.5 Flash,0.0005181,1022,608,0.2
-llm_response_2025-09-25T18-26-02_835097_bf2497a1.json,relational,1.7626,3.9337,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.00045045,1022,757,0.2
+llm_response_2025-09-25T18-26-02_835097_bf2497a1.json,relational,1.7626,3.9337,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.00045045,1022,757,0.2
 llm_response_2025-09-25T18-30-54_664855_4d018160.json,relational,1.5844,3.5191,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,GPT Oss 120B,0.00177804,1028,1709,0.2
 llm_response_2025-09-25T18-32-16_663830_e978f250.json,relational,2.3952,32.0258,Operator,JSON,Gemini 1.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.00133135,1020,538,0.2
 llm_response_2025-09-25T18-34-39_753658_8d88a595.json,relational,0.8517,2.6047,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.00059472,1020,2284,1
-llm_response_2025-09-25T18-34-59_984232_6f1c6c7b.json,relational,0.7072,3.0165,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash Exp,0.00035088,999,743,1
+llm_response_2025-09-25T18-34-59_984232_6f1c6c7b.json,relational,0.7072,3.0165,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash ,0.00035088,999,743,1
 llm_response_2025-09-25T18-35-13_894603_d24d8610.json,relational,1.1357,2.6137,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 120B,0.00141366,1020,1513,1
 llm_response_2025-09-25T18-35-54_970892_4cf375c4.json,relational,1.4476,32.4215,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.5 Flash,0.00116608,997,1129,0.33
 llm_response_2025-09-25T18-36-40_726518_76d0e60f.json,relational,1.0693,2.3744,Operator,JSON,GPT Oss 20B,Operator,JSON,GPT Oss 20B,0.00053532,1020,1954,1
-llm_response_2025-09-25T18-37-09_857463_92994402.json,relational,1.0566,2.5659,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash Exp,0.00038402,999,921,0.33
-llm_response_2025-09-25T18-38-19_229734_b099b4d6.json,relational,0.7622,3.1362,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 120B,0.00152108,960,1457,0.33
-llm_response_2025-09-25T18-39-10_367406_26b41546.json,relational,0.7136,28.1278,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.0010079,938,377,0.33
-llm_response_2025-09-25T18-39-44_610541_42868d1d.json,relational,0.8551,3.1325,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 20B,0.00063436,960,2632,0.33
-llm_response_2025-09-25T18-40-23_393858_b9f50e6b.json,relational,1.1444,3.286,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 120B,0.00152108,960,1457,0.33
-llm_response_2025-09-25T18-41-01_653757_5f19f8a0.json,relational,0.6447,28.9154,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.0010079,938,377,0.33
-llm_response_2025-09-25T18-41-16_673610_da07c5ad.json,relational,0.9256,3.0935,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0002784,940,461,0.33
-llm_response_2025-09-25T18-41-49_779460_dd84987b.json,relational,0.6763,3.3986,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 20B,0.0005665,960,2255,0.33
-llm_response_2025-09-25T18-42-08_775542_287c90a0.json,relational,0.7117,3.2128,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.0 Flash Exp,0.0002952,940,503,0.33
-llm_response_2025-09-25T18-44-06_199685_42356801.json,relational,0.7075,3.1173,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,GPT Oss 120B,0.00152108,960,1457,0.33
-llm_response_2025-09-25T18-44-44_482255_1b91c0eb.json,relational,0.8096,29.3023,Operator,JSON,Gemini 2.0 Flash Exp,Operator,JSON,Gemini 2.5 Flash,0.0014004,938,534,0.33
-llm_response_2025-09-25T18-47-49_043929_2e8294ac.json,relational,18.7724,2.4115,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0005176,928,480,0.33
+llm_response_2025-09-25T18-37-09_857463_92994402.json,relational,1.0566,2.5659,Operator,JSON,GPT Oss 20B,Operator,JSON,Gemini 2.0 Flash ,0.00038402,999,921,0.33
+llm_response_2025-09-25T18-38-19_229734_b099b4d6.json,relational,0.7622,3.1362,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 120B,0.00152108,960,1457,0.33
+llm_response_2025-09-25T18-39-10_367406_26b41546.json,relational,0.7136,28.1278,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.0010079,938,377,0.33
+llm_response_2025-09-25T18-39-44_610541_42868d1d.json,relational,0.8551,3.1325,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 20B,0.00063436,960,2632,0.33
+llm_response_2025-09-25T18-40-23_393858_b9f50e6b.json,relational,1.1444,3.286,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 120B,0.00152108,960,1457,0.33
+llm_response_2025-09-25T18-41-01_653757_5f19f8a0.json,relational,0.6447,28.9154,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.0010079,938,377,0.33
+llm_response_2025-09-25T18-41-16_673610_da07c5ad.json,relational,0.9256,3.0935,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0002784,940,461,0.33
+llm_response_2025-09-25T18-41-49_779460_dd84987b.json,relational,0.6763,3.3986,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 20B,0.0005665,960,2255,0.33
+llm_response_2025-09-25T18-42-08_775542_287c90a0.json,relational,0.7117,3.2128,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.0 Flash ,0.0002952,940,503,0.33
+llm_response_2025-09-25T18-44-06_199685_42356801.json,relational,0.7075,3.1173,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,GPT Oss 120B,0.00152108,960,1457,0.33
+llm_response_2025-09-25T18-44-44_482255_1b91c0eb.json,relational,0.8096,29.3023,Operator,JSON,Gemini 2.0 Flash ,Operator,JSON,Gemini 2.5 Flash,0.0014004,938,534,0.33
+llm_response_2025-09-25T18-47-49_043929_2e8294ac.json,relational,18.7724,2.4115,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0005176,928,480,0.33
 llm_response_2025-09-25T18-48-30_497743_85c058b8.json,relational,26.2671,4.1303,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,GPT Oss 120B,0.0013451,930,1046,0.5
 llm_response_2025-09-25T18-49-27_199316_5ac98f9d.json,relational,20.9005,22.8194,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0012403,926,385,0.33
-llm_response_2025-09-25T18-55-02_733104_459c56c3.json,relational,19.3565,2.4967,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash Exp,0.0005176,928,480,0.33
+llm_response_2025-09-25T18-55-02_733104_459c56c3.json,relational,19.3565,2.4967,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.0 Flash ,0.0005176,928,480,0.33
 llm_response_2025-09-25T18-55-39_931961_8044f370.json,relational,22.6348,2.3803,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,GPT Oss 120B,0.0013451,930,1046,0.5
 llm_response_2025-09-25T18-56-30_998033_1d93bf13.json,relational,20.9737,20.2401,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0011803,926,361,0.33
 llm_response_2025-09-25T18-57-40_247348_3275c329.json,relational,18.6039,19.5225,Operator,JSON,Gemini 2.5 Flash,Operator,JSON,Gemini 2.5 Flash,0.0011803,926,361,0.33

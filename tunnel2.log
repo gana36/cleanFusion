@@ -1,0 +1,29 @@
+[2026-02-25 15:41:01] Starting SSH tunnel for bl6.cs.fsu.edu...
+[2026-02-25 15:41:01] Local port: 11434
+[2026-02-25 15:41:01] Target: localhost:11434 on karthik@bl6.cs.fsu.edu
+[2026-02-25 15:41:01] Log file: /home/sai/Spring26/FUSIONFRONTEND/tunnel2.log
+[2026-02-25 15:41:01] PID file: /home/sai/Spring26/FUSIONFRONTEND/tunnel2.pid
+[2026-02-25 15:41:01] 
+Warning: Permanently added 'bl6.cs.fsu.edu' (ED25519) to the list of known hosts.
+karthik@bl6.cs.fsu.edu: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).
+[2026-02-25 15:41:04] ERROR: Tunnel failed to start. Check /home/sai/Spring26/FUSIONFRONTEND/tunnel2.log for details.
+[2026-02-25 15:43:33] Starting SSH tunnel for bl6.cs.fsu.edu...
+[2026-02-25 15:43:33] Local port: 11434
+[2026-02-25 15:43:33] Target: localhost:11434 on karthik@bl6.cs.fsu.edu
+[2026-02-25 15:43:33] Log file: /home/sai/Spring26/FUSIONFRONTEND/tunnel2.log
+[2026-02-25 15:43:33] PID file: /home/sai/Spring26/FUSIONFRONTEND/tunnel2.pid
+[2026-02-25 15:43:33] 
+Warning: Permanently added 'bl6.cs.fsu.edu' (ED25519) to the list of known hosts.
+karthik@bl6.cs.fsu.edu: Permission denied (publickey,gssapi-keyex,gssapi-with-mic,password).
+[2026-02-25 15:43:36] ERROR: Tunnel failed to start. Check /home/sai/Spring26/FUSIONFRONTEND/tunnel2.log for details.
+[2026-02-25 15:44:58] Starting SSH tunnel for bl6.cs.fsu.edu...
+[2026-02-25 15:44:58] Local port: 11434
+[2026-02-25 15:44:58] Target: localhost:11434 on sai@bl6.cs.fsu.edu
+[2026-02-25 15:44:58] Log file: /home/sai/Spring26/FUSIONFRONTEND/tunnel2.log
+[2026-02-25 15:44:58] PID file: /home/sai/Spring26/FUSIONFRONTEND/tunnel2.pid
+[2026-02-25 15:44:58] 
+Warning: Permanently added 'bl6.cs.fsu.edu' (ED25519) to the list of known hosts.
+bind [127.0.0.1]:11434: Address already in use
+[2026-02-25 15:45:01] Tunnel started successfully (PID: 2835741)
+[2026-02-25 15:45:01] To stop the tunnel, run: kill 2835741 or kill $(cat /home/sai/Spring26/FUSIONFRONTEND/tunnel2.pid)
+[2026-02-25 15:45:01] To view logs: tail -f /home/sai/Spring26/FUSIONFRONTEND/tunnel2.log

@@ -1230,7 +1230,7 @@
                                 <optgroup label="[AUTO] Balanced Models">
                                     <!-- <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option> -->
                                     <!-- <option value="qwen/qwen3-32b">Qwen 3 32B</option> -->
-                                    <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash</option>
+                                    <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
                                 </optgroup>
                                 <optgroup label="[START] Premium Models">
                                     <!-- <option value="claude-3-opus-20240229">Claude 3 Opus</option> -->
@@ -1308,7 +1308,7 @@
                                 </optgroup>
                                 <optgroup label="[AUTO] Balanced Models">
                                     <!-- <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option> -->
-                                    <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash</option>
+                                    <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
                                 </optgroup>
                                 <optgroup label="[START] Premium Models">
                                     <!-- <option value="claude-3-opus-20240229">Claude 3 Opus</option> -->
@@ -5917,44 +5917,44 @@
             // Save to localStorage
             if (groqKey) localStorage.setItem('groq_api_key', groqKey);
             if (geminiKey) localStorage.setItem('gemini_api_key', geminiKey);
-            if (anthropicKey) localStorage.setItem('anthropic_api_key', anthropicKey);
+            // if (anthropicKey) localStorage.setItem('anthropic_api_key', anthropicKey);
             showApiKeyStatus('✅ API keys saved successfully!', 'success');
         }
         function clearApiKeys() {
             // Clear from localStorage
             localStorage.removeItem('groq_api_key');
             localStorage.removeItem('gemini_api_key');
-            localStorage.removeItem('anthropic_api_key');
+            // localStorage.removeItem('anthropic_api_key');
             // Clear input fields
             document.getElementById('groqApiKey').value = '';
             document.getElementById('geminiApiKey').value = '';
-            document.getElementById('anthropicApiKey').value = '';
+            // document.getElementById('anthropicApiKey').value = '';
             showApiKeyStatus('🗑️ API keys cleared!', 'info');
         }
         function loadSavedApiKeys() {
             // Load from localStorage
             const groqKey = localStorage.getItem('groq_api_key');
             const geminiKey = localStorage.getItem('gemini_api_key');
-            const anthropicKey = localStorage.getItem('anthropic_api_key');
+            // const anthropicKey = localStorage.getItem('anthropic_api_key');
             if (groqKey) {
                 document.getElementById('groqApiKey').value = groqKey;
             }
             if (geminiKey) {
                 document.getElementById('geminiApiKey').value = geminiKey;
             }
-            if (anthropicKey) {
-                document.getElementById('anthropicApiKey').value = anthropicKey;
-            }
+            // if (anthropicKey) {
+            //     document.getElementById('anthropicApiKey').value = anthropicKey;
+            // }
         }
         async function testApiKeys() {
             showApiKeyStatus('🔄 Testing API keys...', 'info');
             const apiKeys = {};
             const groqKey = document.getElementById('groqApiKey').value.trim();
             const geminiKey = document.getElementById('geminiApiKey').value.trim();
-            const anthropicKey = document.getElementById('anthropicApiKey').value.trim();
+            // const anthropicKey = document.getElementById('anthropicApiKey').value.trim();
             if (groqKey) apiKeys.groq = groqKey;
             if (geminiKey) apiKeys.gemini = geminiKey;
-            if (anthropicKey) apiKeys.anthropic = anthropicKey;
+            // if (anthropicKey) apiKeys.anthropic = anthropicKey;
             try {
                 const response = await fetch(API_BASE_URL + '/test-api-keys', {
                     method: 'POST',
@@ -5966,7 +5966,7 @@
                     let message = '✅ API Key Test Results:\\n';
                     if (result.results.groq) message += `• Groq: ${result.results.groq}\\n`;
                     if (result.results.gemini) message += `• Gemini: ${result.results.gemini}\\n`;
-                    if (result.results.anthropic) message += `• Anthropic: ${result.results.anthropic}\\n`;
+                    // if (result.results.anthropic) message += `• Anthropic: ${result.results.anthropic}\\n`;
                     showApiKeyStatus(message, 'success');
                 } else {
                     showApiKeyStatus(`❌ Test failed: ${result.error}`, 'error');
@@ -6003,7 +6003,7 @@
             const keys = {};
             const groqKey = localStorage.getItem('groq_api_key');
             const geminiKey = localStorage.getItem('gemini_api_key');
-            const anthropicKey = localStorage.getItem('anthropic_api_key');
+            // const anthropicKey = localStorage.getItem('anthropic_api_key');
             if (groqKey) keys.groq = groqKey;
             if (geminiKey) keys.gemini = geminiKey;
             if (anthropicKey) keys.anthropic = anthropicKey;

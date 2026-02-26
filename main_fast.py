@@ -2139,6 +2139,12 @@ PRELOADED_PAIRS = {
         'source': 'Preload_Pairs/AITQA_case16/table12.json',
         'target': 'Preload_Pairs/AITQA_case16/table32.json'
     },
+    'aitqa_13': {
+        'name': 'AITQA Case 13',
+        'description': 'Complex hierarchical tables from AI-TQA dataset',
+        'source': 'Preload_Pairs/AITQA_case13/table12.json',
+        'target': 'Preload_Pairs/AITQA_case13/table32.json'
+    },
     'aitqa_17': {
         'name': 'AITQA Case 17',
         'description': 'Complex hierarchical tables from AI-TQA dataset',

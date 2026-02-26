@@ -206,7 +206,7 @@ MODEL_MAP = {
     
     # Gemini models
     "gemini-1.5-flash": "gemini-1.5-flash",
-    "gemini-2.0-flash-exp": "gemini-2.0-flash",
+    "gemini-2.0-flash": "gemini-2.0-flash",
     "gemini-2.5-flash":"gemini-2.5-flash"
 }
 
@@ -229,7 +229,7 @@ MODEL_PRICING = {
 
     # Gemini models - Official 2025 pricing from ai.google.dev/gemini-api/docs/pricing
     "gemini-1.5-flash": {"input": 0.15, "output": 0.60},  # Official Gemini 1.5 Flash pricing
-    "gemini-2.0-flash-exp": {"input": 0.10, "output": 0.40},  # Currently free in API
+    "gemini-2.0-flash": {"input": 0.10, "output": 0.40},  # Currently free in API
     "gemini-2.5-flash": {"input": 0.30, "output": 2.50},  # Official unified pricing (2025 update)
 }
 

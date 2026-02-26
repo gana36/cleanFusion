@@ -1,3 +1,57 @@
+<style>
+    .results-container {
+        margin-top: 20px;
+        background: white;
+        border-radius: 12px;
+        border: 2px solid #e0e0e0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .results-tabs {
+        display: flex;
+        gap: 0;
+        margin-bottom: 0;
+        padding-left: 0;
+        background-color: white;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    .results-tabs .tab {
+        padding: 16px 24px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 14px;
+        color: #718096;
+        background: transparent;
+        border: none;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -1px;
+        transition: all 0.2s;
+    }
+
+    .results-tabs .tab:hover {
+        color: #4a5568;
+    }
+
+    .results-tabs .tab.active {
+        color: #667eea;
+        font-weight: 600;
+        border-bottom: 3px solid #667eea;
+    }
+
+    .tab-content {
+        display: none;
+        background: white;
+        border: none;
+        padding: 20px;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+</style>
+
 <div class="results-container" id="resultsContainer">
     <div class="results-tabs">
         <div class="tab active" data-tab="mapping">Schema Mapping</div>

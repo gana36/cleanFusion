@@ -279,7 +279,7 @@ MODEL_MAP = {
     
     # Gemini models
     "gemini-1.5-flash": "gemini-1.5-flash",
-    "gemini-2.0-flash-exp": "gemini-2.0-flash",
+    "gemini-2.0-flash": "gemini-2.0-flash",
     "gemini-2.5-flash":"gemini-2.5-flash",
     "default": "Qwen2.5:14B",
     "Qwen2.5:14B": "Qwen2.5:14B",
