@@ -24,7 +24,7 @@ from pathlib import Path
 from modules.dynamic_pdf import process_single_pdf
 
 # Create FastAPI app
-app = FastAPI(title="Enhanced Schema Fusion App - FastAPI")
+app = FastAPI(title="Fusion App")
 
 # HTTP Basic Authentication with session invalidation
 security = HTTPBasic()
@@ -40,7 +40,7 @@ class AuthMiddleware(BaseHTTPMiddleware):
     """Middleware to invalidate cached credentials on page reload"""
     async def dispatch(self, request: Request, call_next):
         # Skip auth for static files
-        if request.url.path.startswith("/static") or request.url.path.startswith("/fuze/static"):
+        if request.url.path.startswith("/static") or request.url.path.startswith("/HemolixFusion/static"):
             return await call_next(request)
 
         # Removed the logic that forced a 401 to make the user re-login every time
@@ -89,8 +89,8 @@ templates = Jinja2Templates(directory=TEMPLATE_DIR)
 
 # Mount static files
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-# Also mount at /fuze/static for compatibility with server deployment
-app.mount("/fuze/static", StaticFiles(directory=STATIC_DIR), name="fuze_static")
+# Also mount at /HemolixFusion/static for compatibility with server deployment
+app.mount("/HemolixFusion/static", StaticFiles(directory=STATIC_DIR), name="fuze_static")
 
 
 
@@ -138,24 +138,24 @@ except Exception as e:
 
 @app.get("/")
 async def root():
-    return RedirectResponse(url="/fuze/")
+    return RedirectResponse(url="/HemolixFusion/")
 
-@app.get("/fuze/", response_class=HTMLResponse)
+@app.get("/HemolixFusion/", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.get("/fuze/tool", response_class=HTMLResponse)
+@app.get("/HemolixFusion/tool", response_class=HTMLResponse)
 async def tool(request: Request, mode: str = "fusion"):
     return templates.TemplateResponse("tool.html", {"request": request, "mode": mode})
 
-# @app.post("/fuze/upload")
+# @app.post("/HemolixFusion/upload")
 # async def upload_file(file: UploadFile = File(...), type: str = Form(...)):
-# @app.get("/fuze/", response_class=HTMLResponse)
-# async def index(request: Request, username: str = Depends(verify_credentials)):
+# @app.get("/HemolixFusion/", response_class=HTMLResponse)
+# async def index(request: Request):
 #     return templates.TemplateResponse("index.html", {"request": request})
 
-@app.post("/fuze/upload")
-async def upload_file(file: UploadFile = File(...), type: str = Form(...), username: str = Depends(verify_credentials)):
+@app.post("/HemolixFusion/upload")
+async def upload_file(file: UploadFile = File(...), type: str = Form(...)):
     try:
         from modules.profiler import calculate_schema_profile, format_profile_for_display
 
@@ -229,7 +229,7 @@ async def upload_file(file: UploadFile = File(...), type: str = Form(...), usern
     except Exception as e:
         return JSONResponse({'success': False, 'error': f'File processing error: {str(e)}'})
 
-@app.post("/fuze/predict")
+@app.post("/HemolixFusion/predict")
 async def predict_automated(request: Request):
     try:
         from modules.automated_fusion import extract_combined_features, predict_best_paths
@@ -264,8 +264,8 @@ async def predict_automated(request: Request):
         traceback.print_exc()
         return JSONResponse({'success': False, 'error': f'Prediction error: {str(e)}'})
 
-@app.post("/fuze/parse-text")
-async def parse_text(request: Request, username: str = Depends(verify_credentials)):
+@app.post("/HemolixFusion/parse-text")
+async def parse_text(request: Request):
     try:
         from modules.profiler import calculate_schema_profile, format_profile_for_display
 
@@ -284,7 +284,7 @@ async def parse_text(request: Request, username: str = Depends(verify_credential
     except Exception as e:
         return JSONResponse({'success': False, 'error': f'Text parsing error: {str(e)}'})
 
-@app.get("/fuze/models")
+@app.get("/HemolixFusion/models")
 async def get_models():
     """Get available LLM models from configuration"""
     try:
@@ -418,8 +418,8 @@ def convert_partition_merge_to_ui_format(partition_merged_data, hmd_merged_schem
     print(f"[FORMAT] Converted partition merge format to UI format: {len(ui_format)} HMD columns")
     return ui_format
 
-@app.post("/fuze/create-partitions")
-async def create_partitions(request: Request, username: str = Depends(verify_credentials)):
+@app.post("/HemolixFusion/create-partitions")
+async def create_partitions(request: Request):
     """Create partition analysis when table partition method is selected"""
     try:
         data = await request.json()
@@ -604,8 +604,8 @@ async def create_partitions(request: Request, username: str = Depends(verify_cre
         traceback.print_exc()
         return JSONResponse({'success': False, 'error': f'Partition creation error: {str(e)}'})
 
-@app.post("/fuze/merge-partitions")
-async def merge_partitions(request: Request, username: str = Depends(verify_credentials)):
+@app.post("/HemolixFusion/merge-partitions")
+async def merge_partitions(request: Request):
     """Merge all partitions and stack results - Phase 4 of partition HITL workflow"""
     try:
         data = await request.json()
@@ -1437,8 +1437,8 @@ def stack_partition_results(partition_results, hmd_schema, vmd_schema, match_res
     return result
 
 
-@app.post("/fuze/process")
-async def process_schemas(request: Request, username: str = Depends(verify_credentials)):
+@app.post("/HemolixFusion/process")
+async def process_schemas(request: Request):
     try:
         data = await request.json()
         source_schema = data.get('sourceSchema', '')
@@ -1932,23 +1932,169 @@ Return only the JSON in the Merged_Data format specified in the instructions abo
                 actual_operation_type = 'match'
                 print(f"[HITL] Match-only mode: forcing operation_type from '{operation_type}' to 'match'")
             
-            # HITL: If pre-approved match result is provided, pass it to processor
-            # This allows user-edited match results to be used for merge
-            result = process_with_llm_enhanced(source_schema, target_schema, schema_type, processing_type, actual_operation_type, llm_model,
-                                             max_tokens=parameters.get('maxTokens'),
-                                             temperature=parameters.get('temperature'),
-                                             top_p=parameters.get('topP'),
-                                             frequency_penalty=parameters.get('frequencyPenalty'),
-                                             presence_penalty=parameters.get('presencePenalty'),
-                                             use_merge_multi_step=use_merge_multi_step,
-                                             match_operation=match_operation,
-                                             matching_method=matching_method,
-                                             merge_method=llm_merge_method,
-                                             matching_llm=matching_llm,
-                                             merge_llm=merge_llm,
-                                             user_api_keys=user_api_keys,
-                                             merge_value_strategy=merge_value_strategy,
-                                             pre_approved_match_result=pre_approved_match_result)
+            # FAST JSON INSTANCE MERGE: Build data in backend instead of via LLM
+            if llm_merge_method == 'json_default' and actual_operation_type == 'instance_merge':
+                print(f"[FAST-MERGE] Intercepting json_default instance_merge to auto-construct data")
+                
+                import json
+                source_data = json.loads(source_schema) if isinstance(source_schema, str) else source_schema
+                target_data = json.loads(target_schema) if isinstance(target_schema, str) else target_schema
+                
+                source_hmd = source_data.get('Table1.HMD', [])
+                target_hmd = target_data.get('Table2.HMD', [])
+                source_vmd = source_data.get('Table1.VMD', [])
+                target_vmd = target_data.get('Table2.VMD', [])
+                
+                # Helper to flatten dicts/lists to dot-separated string paths for leaf nodes only
+                def flatten_to_strings(schema_array, parent_path=""):
+                    leaves = []
+                    for item in schema_array:
+                        if isinstance(item, str):
+                            leaves.append(item if not parent_path else f"{parent_path}.{item}")
+                        elif isinstance(item, dict):
+                            attr_key = next((k for k in item.keys() if 'attribute' in k), None)
+                            name = str(item[attr_key]) if attr_key else ""
+                            
+                            current_path = f"{parent_path}.{name}" if parent_path and name else name or parent_path
+                            
+                            if 'children' in item and isinstance(item['children'], list) and len(item['children']) > 0:
+                                leaves.extend(flatten_to_strings(item['children'], current_path))
+                            else:
+                                leaves.append(current_path)
+                    return leaves
+                    
+                flat_source_hmd = flatten_to_strings(source_hmd)
+                flat_target_hmd = flatten_to_strings(target_hmd)
+                flat_source_vmd = flatten_to_strings(source_vmd)
+                flat_target_vmd = flatten_to_strings(target_vmd)
+                
+                # Deterministically build the merged schemas
+                hmd_mapper = {}
+                vmd_mapper = {}
+                if pre_approved_match_result:
+                    for match in pre_approved_match_result.get('HMD_matches', []):
+                        if match.get('source') and match.get('target'):
+                            hmd_mapper[match['target']] = match['source']
+                    for match in pre_approved_match_result.get('VMD_matches', []):
+                        if match.get('source') and match.get('target'):
+                            vmd_mapper[match['target']] = match['source']
+                
+                # 1. Start with source schemas
+                flat_hmd_schema = list(flat_source_hmd)
+                flat_vmd_schema = list(flat_source_vmd)
+                
+                # 2. Append unmapped target schemas
+                for t_col in flat_target_hmd:
+                    if t_col not in hmd_mapper.values() and t_col not in hmd_mapper.keys() and t_col not in flat_hmd_schema:
+                        if t_col == "" and "" in flat_hmd_schema:
+                            continue
+                        flat_hmd_schema.append(t_col)
+                        
+                for t_row in flat_target_vmd:
+                    if t_row not in vmd_mapper.values() and t_row not in vmd_mapper.keys() and t_row not in flat_vmd_schema:
+                        flat_vmd_schema.append(t_row)
+                
+                # Build hierarchy for UI (we can just use the flat lists as the structured schema for now to fix alignment)
+                hmd_schema = flat_hmd_schema
+                vmd_schema = flat_vmd_schema
+
+                # 3. Create a pseudo-partition result to feed to the stacker
+                pseudo_result = {
+                    'success': True,
+                    'is_remainder': False,
+                    'partition_id': 0,
+                    'source_hmd': flat_source_hmd,
+                    'target_hmd': flat_target_hmd,
+                    'data': {
+                        'Merged_Data': {}
+                    }
+                }
+                
+                # Helper to map data rows to dicts keyed by HMD column names
+                def map_data_to_dict(vmd_list, data_matrix, hmd_list):
+                    mapped = {}
+                    if not vmd_list and data_matrix:
+                        vmd_list = [f"Row_{i+1}" for i in range(len(data_matrix))]
+                        
+                    for i, vmd_row in enumerate(vmd_list):
+                        if i < len(data_matrix):
+                            row_data = data_matrix[i]
+                            row_dict = {}
+                            
+                            # Handle empty first column offset (like VMD row headers placeholder)
+                            # If the schema's first HMD column is "", all data array items should map from index 1 onwards
+                            needs_offset = False
+                            if hmd_list and hmd_list[0] == "":
+                                needs_offset = True
+                            
+                            for j, val in enumerate(row_data):
+                                hmd_idx = j + 1 if needs_offset else j
+                                if hmd_idx < len(hmd_list):
+                                    row_dict[hmd_list[hmd_idx]] = val
+                                    
+                            mapped[vmd_row] = row_dict
+                    return mapped
+
+                source_data_rows = source_data.get('Table1.Data', [])
+                target_data_rows = target_data.get('Table2.Data', [])
+                # Also fallbacks if they're purely SimpleTable
+                if not source_data_rows: source_data_rows = source_data.get('SimpleTable.Data', [])
+                if not target_data_rows: target_data_rows = target_data.get('SimpleTable.Data', [])
+                
+                mapped_source = map_data_to_dict(flat_source_vmd, source_data_rows, flat_source_hmd)
+                mapped_target = map_data_to_dict(flat_target_vmd, target_data_rows, flat_target_hmd)
+                
+                combined_merged_data = {}
+                all_vmds = set(list(mapped_source.keys()) + list(mapped_target.keys()))
+                for vmd in all_vmds:
+                    combined_merged_data[vmd] = {
+                        'source': mapped_source.get(vmd, {}),
+                        'target': mapped_target.get(vmd, {})
+                    }
+                
+                pseudo_result['data']['Merged_Data'] = combined_merged_data
+                
+                # 4. Use backend stacker
+                print(f"[FAST-MERGE] Running backend stacker with {len(combined_merged_data)} VMD rows and {len(flat_hmd_schema)} HMD cols")
+                stacked_result = stack_partition_results([pseudo_result], flat_hmd_schema, flat_vmd_schema, match_result=pre_approved_match_result)
+                
+                # Setup final data payload for UI using flattened schemas to ensure stacker sees everything correctly
+                frontend_merged_data = {
+                    'Merged_Data': stacked_result.get('Merged_Data', []),
+                    'HMD_Merged_Schema': hmd_schema,
+                    'VMD_Merged_Schema': vmd_schema
+                }
+                
+                # Apply strategy
+                from modules.processors import apply_merge_value_strategy
+                frontend_merged_data = apply_merge_value_strategy(frontend_merged_data, merge_value_strategy)
+                
+                result = {
+                    'success': True,
+                    'data': frontend_merged_data,
+                    'metrics': {},
+                    'raw_response': 'FAST JSON Instance Merge',
+                    'match_result': pre_approved_match_result
+                }
+                
+            else:
+                # HITL: If pre-approved match result is provided, pass it to processor
+                # This allows user-edited match results to be used for merge
+                result = process_with_llm_enhanced(source_schema, target_schema, schema_type, processing_type, actual_operation_type, llm_model,
+                                                 max_tokens=parameters.get('maxTokens'),
+                                                 temperature=parameters.get('temperature'),
+                                                 top_p=parameters.get('topP'),
+                                                 frequency_penalty=parameters.get('frequencyPenalty'),
+                                                 presence_penalty=parameters.get('presencePenalty'),
+                                                 use_merge_multi_step=use_merge_multi_step,
+                                                 match_operation=match_operation,
+                                                 matching_method=matching_method,
+                                                 merge_method=llm_merge_method,
+                                                 matching_llm=matching_llm,
+                                                 merge_llm=merge_llm,
+                                                 user_api_keys=user_api_keys,
+                                                 merge_value_strategy=merge_value_strategy,
+                                                 pre_approved_match_result=pre_approved_match_result)
             
             # HITL: If match-only mode, add a flag to help the frontend know approval is needed
             if match_only and result.get('success'):
@@ -2101,7 +2247,7 @@ Return only the JSON in the Merged_Data format specified in the instructions abo
     except Exception as e:
         return JSONResponse({'success': False, 'error': f'Processing error: {str(e)}'})
 
-@app.get("/fuze/health")
+@app.get("/HemolixFusion/health")
 async def health():
     import datetime
     return JSONResponse({
@@ -2145,6 +2291,12 @@ PRELOADED_PAIRS = {
         'source': 'Preload_Pairs/AITQA_case13/table12.json',
         'target': 'Preload_Pairs/AITQA_case13/table32.json'
     },
+    'aitqa_13_short': {
+        'name': 'AITQA Case 13 Short',
+        'description': 'Complex hierarchical tables from AI-TQA dataset',
+        'source': 'Preload_Pairs/AITQA_case13_short/table12.json',
+        'target': 'Preload_Pairs/AITQA_case13_short/table32.json'
+    },
     'aitqa_17': {
         'name': 'AITQA Case 17',
         'description': 'Complex hierarchical tables from AI-TQA dataset',
@@ -2153,7 +2305,7 @@ PRELOADED_PAIRS = {
     }
 }
 
-@app.get("/fuze/preloaded-pairs")
+@app.get("/HemolixFusion/preloaded-pairs")
 async def get_preloaded_pairs():
     """List available preloaded table pairs"""
     return JSONResponse({
@@ -2164,7 +2316,7 @@ async def get_preloaded_pairs():
         ]
     })
 
-@app.get("/fuze/load-pair/{pair_name}")
+@app.get("/HemolixFusion/load-pair/{pair_name}")
 async def load_pair(pair_name: str):
     """Load a preloaded table pair by name"""
     if pair_name not in PRELOADED_PAIRS:
@@ -2249,7 +2401,7 @@ async def load_pair(pair_name: str):
             'error': f'Error loading pair: {str(e)}'
         }, status_code=500)
 
-@app.get("/fuze/logs")
+@app.get("/HemolixFusion/logs")
 async def get_logs(limit: int = 10):
     import datetime
     try:
@@ -2267,7 +2419,7 @@ async def get_logs(limit: int = 10):
     except Exception as e:
         return JSONResponse({'success': False, 'error': f'Logs query error: {str(e)}'})
 
-@app.get("/fuze/results")
+@app.get("/HemolixFusion/results")
 async def list_results():
     import datetime
     try:
@@ -2287,7 +2439,7 @@ async def list_results():
     except Exception as e:
         return JSONResponse({'success': False, 'error': f'Storage query error: {str(e)}'})
 
-@app.post("/fuze/test-api-keys")
+@app.post("/HemolixFusion/test-api-keys")
 async def test_api_keys(request: Request):
     from groq import Groq
     from anthropic import Anthropic
@@ -2340,7 +2492,7 @@ async def test_api_keys(request: Request):
     except Exception as e:
         return JSONResponse({'success': False, 'error': f'API key test error: {str(e)}'})
 
-@app.post("/fuze/pipeline-metrics")
+@app.post("/HemolixFusion/pipeline-metrics")
 async def get_pipeline_metrics(request: Request):
     """Get average performance metrics for a pipeline configuration"""
     try:
@@ -2391,8 +2543,8 @@ async def get_pipeline_metrics(request: Request):
 # ============================================================================
 # PDF Extraction Endpoint
 # ============================================================================
-@app.get("/fuze/list-pdf-preloads")
-async def list_pdf_preloads(username: str = Depends(verify_credentials)):
+@app.get("/HemolixFusion/list-pdf-preloads")
+async def list_pdf_preloads():
     """List available PDF-Schema pairs in the preloads directory."""
     preload_dir = Path(__file__).parent / "pdf_preloads"
     if not preload_dir.exists():
@@ -2410,10 +2562,10 @@ async def list_pdf_preloads(username: str = Depends(verify_credentials)):
     
     return JSONResponse(content={"preloads": sorted(preloads)})
 
-@app.post("/fuze/run-pdf-preload")
+@app.post("/HemolixFusion/run-pdf-preload")
 async def run_pdf_preload(
     request: Request,
-    username: str = Depends(verify_credentials)
+    
 ):
     """Execute extraction for a preloaded local folder."""
     print(f"DEBUG: [run-pdf-preload] Received request from user: {username}")
@@ -2455,7 +2607,7 @@ async def run_pdf_preload(
         traceback.print_exc()
         return JSONResponse(status_code=500, content={"error": str(e)})
 
-@app.post("/fuze/extract_pdf")
+@app.post("/HemolixFusion/extract_pdf")
 async def extract_pdf(
     files: List[UploadFile] = File(...),
     schema_files: List[UploadFile] = File(...),
@@ -2542,11 +2694,11 @@ async def extract_pdf(
 
 @app.on_event("startup")
 async def startup_event():
-    print("[START] Enhanced Schema Fusion App (FastAPI)")
+    print("Fusion App (FastAPI)")
     print("[INFO] All functionality imported from fusion_helpers.py")
-    print("[INFO] Access at: http://localhost:8000/fuze/")
+    print("[INFO] Access at: http://localhost:8000/HemolixFusion/")
     print("[INFO] API docs at: http://localhost:8000/docs")
-    print("[INFO] Public URL: http://cancerkg.org/fuze/")
+    print("[INFO] Public URL: http://cancerkg.org/HemolixFusion/")
 
 if __name__ == '__main__':
     import uvicorn

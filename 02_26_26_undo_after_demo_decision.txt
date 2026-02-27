@@ -1,0 +1,9 @@
+check out the index.html file and uncomment the schema extraction option from the index.html file
+
+upload_section.html file and uncomment the aitqa_12 option from the upload_section.html file
+
+
+add authentication again
+add seperations like delimeted, average, custom etc. 
+remove all the bl6 and GPT OSS models, horizontal partition.  (main.js)
+uncommented the merge value strategy (controls.html)

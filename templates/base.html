@@ -2,22 +2,22 @@
 <html>
 
 <head>
-    <title>{% block title %}Enhanced Schema Fusion App{% endblock %}</title>
+    <title>{% block title %}Fusion App{% endblock %}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/fuze/static/css/styles.css">
+    <link rel="stylesheet" href="/HemolixFusion/static/css/styles.css">
     {% block extra_css %}{% endblock %}
 </head>
 
 <body>
     {% block content %}{% endblock %}
     <script>
-        window.onerror = function(msg, url, line, col, error) {
+        window.onerror = function (msg, url, line, col, error) {
             alert("JS Error: " + msg + "\nLine: " + line + "\nCol: " + col);
             return false;
         };
     </script>
-    <script src="/fuze/static/js/main.js?v=14"></script>
+    <script src="/HemolixFusion/static/js/main.js?v=20"></script>
     {% block extra_js %}{% endblock %}
 </body>
 

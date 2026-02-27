@@ -1,5 +1,5 @@
 // Base URL for API calls
-const API_BASE_URL = '/fuze';
+const API_BASE_URL = '/HemolixFusion';
 var sourceData = null;
 var targetData = null;
 var sourcePreviewHTML = null;  // Store preview HTML from backend
@@ -537,7 +537,7 @@ function updateMergeMethodOptions() {
     } else if (mergeOperation === 'instance_merge') {
         // Instance Merge methods: JSON and Table partition options
         mergeMethodSelect.innerHTML += '<option value="json_default">🏠 JSON (Default)</option>';
-        mergeMethodSelect.innerHTML += '<option value="table_partition_horizontal">↔️ Table partition</option>';
+        // mergeMethodSelect.innerHTML += '<option value="table_partition_horizontal">↔️ Table partition</option>';
         // mergeMethodSelect.innerHTML += '<option value="table_partition_vertical">↕️ Table partition (Vertical)</option>';
     } else if (mergeOperation === 'baseline') {
         // Baseline Merge methods: Only JSON
@@ -2313,67 +2313,80 @@ function drawCleanVmdConnections(svg, vmdMatches, rect) {
     if (!sourceTable || !targetTable) return;
     const sourceRect = sourceTable.getBoundingClientRect();
     const targetRect = targetTable.getBoundingClientRect();
+
     // Calculate routing coordinates using minimal space for efficient routing
     const leftMargin = 50; // Further reduced left routing space
     const rightMargin = 30; // Further reduced right routing space
     const bottomMargin = 40; // Significantly reduced bottom routing space
+
     // Force ALL lines to start from the LEFT edge of the source table
-    const sourceLeftX = sourceRect.left - rect.left; // Source table left edge
-    // Left routing area - force ALL lines to go left first (ALWAYS to the left of source)
-    // CRITICAL: This MUST be to the left of the source table to avoid text overlap
-    const leftRoutingX = sourceLeftX - leftMargin; // FORCE left routing - NO boundary check to ensure left movement
+    const sourceLeftX = sourceRect.left - rect.left;
+    const leftRoutingX = sourceLeftX - leftMargin;
+
     // Bottom routing area (below both tables) - ensure we stay within container height
     const bottomRoutingY = Math.min(rect.height - 50, Math.max(sourceRect.bottom, targetRect.bottom) - rect.top + bottomMargin);
+
     // Middle routing area (between tables) - ensure ALL lines go through this area
     const middleRoutingX = sourceRect.right + (targetRect.left - sourceRect.right) / 2 - rect.left;
-    // Right routing area (right of target table) - ensure we stay within container width
     const rightRoutingX = Math.min(rect.width - 20, rect.width - rightMargin);
+    const targetLeftX = targetRect.left - rect.left;
     const laneSpacing = 15; // Further reduced spacing for more compact VMD routing
 
     // Helper to extract child name from hierarchical VMD path
-    // e.g., "Financial Data (in millions...):.Operating revenues" -> "Operating revenues"
     function extractVmdChildName(vmdPath) {
         if (!vmdPath) return vmdPath;
-        const separatorIndex = vmdPath.indexOf('.');
+        const separatorIndex = vmdPath.lastIndexOf('.');
         if (separatorIndex !== -1) {
             return vmdPath.substring(separatorIndex + 1); // Skip ":."
         }
         return vmdPath; // No hierarchy, return as-is
     }
 
+    const connectionData = [];
+    const colors = ['#e57373', '#f06292', '#ba68c8', '#9575cd', '#7986cb', '#64b5f6', '#4db6ac', '#81c784', '#ffb74d'];
+
+    // Pre-calculate all coordinates
     vmdMatches.forEach((match, index) => {
-        // Extract child names from hierarchical paths for row lookup
         const sourceRowName = extractVmdChildName(match.source);
         const targetRowName = extractVmdChildName(match.target);
 
         const sourceRow = _findInSide('source', 'row', sourceRowName);
         const targetRow = _findInSide('target', 'row', targetRowName);
         if (!sourceRow || !targetRow) return;
+
         const sourceRowRect = sourceRow.getBoundingClientRect();
         const targetRowRect = targetRow.getBoundingClientRect();
-        // Source row center coordinates - ALWAYS start from the LEFT edge of the source table
+
+        // Center Y coordinates relative to container
         const sourceY = (sourceRowRect.top + sourceRowRect.height / 2) - rect.top;
-        // Target row center coordinates - end at the LEFT edge of the target table
         const targetY = (targetRowRect.top + targetRowRect.height / 2) - rect.top;
-        const targetLeftX = targetRect.left - rect.left;
-        // Each connection gets its own lane to avoid overlap - use more compact routing
-        const laneOffset = index * laneSpacing;
-        // Optimized routing: use fixed bottom area, vary only horizontal offset
-        const routingBottom = bottomRoutingY + Math.min(laneOffset, 60); // Cap the bottom extension
-        // Create the left → down → right → up → right path with compact routing
-        const path = `M ${sourceLeftX} ${sourceY} ` +                    // Start at source LEFT edge
-            `L ${leftRoutingX + laneOffset} ${sourceY} ` +      // Go LEFT from source (forced left movement)
-            `L ${leftRoutingX + laneOffset} ${routingBottom} ` + // Go DOWN (limited extension)
-            `L ${middleRoutingX + laneOffset} ${routingBottom} ` + // Go RIGHT across bottom (to middle)
-            `L ${middleRoutingX + laneOffset} ${targetY} ` +     // Go UP to target level
-            `L ${targetLeftX} ${targetY}`;                       // Go RIGHT to target LEFT edge
-        // Use different colors for each connection
-        const colors = ['#e57373', '#f06292', '#ba68c8', '#9575cd', '#7986cb', '#64b5f6', '#4db6ac', '#81c784', '#ffb74d'];
         const color = colors[index % colors.length];
-        _drawPath(svg, path, color, 2.5, 0.9);
-        // Add connection indicators at start and end points
-        _drawConnectionIndicator(svg, sourceLeftX, sourceY, color);
-        _drawConnectionIndicator(svg, targetLeftX, targetY, color);
+
+        connectionData.push({ match, sourceY, targetY, color });
+    });
+
+    // Ensure the bus lanes don't cross! Sort by source Y so highest rows get the furthest outer lane
+    connectionData.sort((a, b) => a.sourceY - b.sourceY);
+
+    // Draw lines sequentially to prevent SVG overlap
+    connectionData.forEach((conn, index) => {
+        // Each connection gets its own sorted lane to avoid crossover 
+        const laneOffset = index * laneSpacing;
+
+        // Optimized routing: use fixed bottom area, vary only horizontal offset
+        const routingBottom = bottomRoutingY + Math.min(laneOffset, 60);
+
+        // Create the left → down → right → up → right path with compact routing
+        const path = `M ${sourceLeftX} ${conn.sourceY} ` +
+            `L ${leftRoutingX + laneOffset} ${conn.sourceY} ` +
+            `L ${leftRoutingX + laneOffset} ${routingBottom} ` +
+            `L ${middleRoutingX + laneOffset} ${routingBottom} ` +
+            `L ${middleRoutingX + laneOffset} ${conn.targetY} ` +
+            `L ${targetLeftX} ${conn.targetY}`;
+
+        _drawPath(svg, path, conn.color, 2.5, 0.9);
+        _drawConnectionIndicator(svg, sourceLeftX, conn.sourceY, conn.color);
+        _drawConnectionIndicator(svg, targetLeftX, conn.targetY, conn.color);
     });
 }
 // Helper function to draw connection indicators
@@ -2446,8 +2459,61 @@ function _findInSide(side, dataAttr, value) {
 }
 // Enhanced row finding with VMD hierarchy support
 function _findRowFuzzyWithVMD(root, searchValue) {
-    const needle = searchValue.toLowerCase();
+    let originalNeedle = searchValue.toLowerCase();
+    let needle = originalNeedle;
+    let categoryPart = null;
 
+    // extract child part immediately to prevent false fuzzy matches on parent names
+    const separatorIndex = needle.indexOf(':.');
+    if (separatorIndex !== -1) {
+        // e.g., "Financial Data (in millions...):.Operating revenues"
+        categoryPart = needle.substring(0, separatorIndex).split('.').pop();
+        needle = needle.substring(separatorIndex + 2); // Skip ":." 
+    } else if (needle.includes('.')) {
+        // e.g., "Table1.VMD.Age.<65"
+        const parts = needle.split('.');
+        if (parts.length >= 2) {
+            categoryPart = parts[parts.length - 2];
+            needle = parts[parts.length - 1];
+        }
+    }
+
+    // Now needle is just the actual row target, like "<65" or "White"
+    needle = needle.trim();
+    if (categoryPart) categoryPart = categoryPart.trim();
+
+    // 1. Precise Parent-Child DOM Matching
+    // If we have a category part, try to find the EXACT child under that specific category
+    if (categoryPart) {
+        const categoryRows = root.querySelectorAll('tr[id*="-vmd-category-"]');
+        let categoryIndex = null;
+
+        // Find category row first
+        for (const catTr of categoryRows) {
+            const catVal = (catTr.getAttribute('data-row') || '').trim().toLowerCase();
+            if (catVal === categoryPart || _isSimilar(catVal, categoryPart)) {
+                // Found category! Extract its index from ID (e.g. "source-vmd-category-5")
+                const match = catTr.id.match(/-vmd-category-(\d+)/);
+                if (match) {
+                    categoryIndex = match[1];
+                    break;
+                }
+            }
+        }
+
+        // If we found the category index, search ONLY its children
+        if (categoryIndex !== null) {
+            const childRows = root.querySelectorAll(`tr[id*="-vmd-child-${categoryIndex}-"]`);
+            for (const childTr of childRows) {
+                const childVal = (childTr.getAttribute('data-row') || '').trim().toLowerCase();
+                if (childVal === needle || _isSimilar(childVal, needle)) {
+                    return childTr;
+                }
+            }
+        }
+    }
+
+    // 2. Fallbacks if the strict parent-child match failed
     // First try exact match in flat rows
     const flatRows = root.querySelectorAll('tr[data-row]');
     for (const tr of flatRows) {
@@ -2460,76 +2526,20 @@ function _findRowFuzzyWithVMD(root, searchValue) {
         if (_isSimilar(val, needle)) return tr;
     }
 
-    // If no flat match, try hierarchical path matching
-    // VMD matches use ":." separator (e.g., "Financial Data (in millions...):Operating revenues")
-    // FIXED: Look for ":." or "." separator for hierarchical paths
-    const separatorIndex = needle.indexOf(':.');
-    if (separatorIndex !== -1) {
-        // Split on ":." separator
-        const categoryPart = needle.substring(0, separatorIndex).toLowerCase();
-        const childPart = needle.substring(separatorIndex + 2).toLowerCase(); // Skip ":." 
-
-        console.log(`[VMD-FIND] Looking for child: "${childPart}" under category: "${categoryPart}"`);
-
-        // Try to find child row that matches the child name
-        const allRows = root.querySelectorAll('tr[data-row]');
-        for (const tr of allRows) {
-            const rowVal = (tr.getAttribute('data-row') || '').trim().toLowerCase();
-            // Exact match on child part
-            if (rowVal === childPart) {
-                console.log(`[VMD-FIND] Found exact match for "${childPart}"`);
-                return tr;
-            }
-            // Contains match
-            if (rowVal.includes(childPart) || childPart.includes(rowVal)) {
-                console.log(`[VMD-FIND] Found contains match for "${childPart}" in "${rowVal}"`);
-                return tr;
-            }
-            // Similar match (for slight variations)
-            if (_isSimilar(rowVal, childPart)) {
-                console.log(`[VMD-FIND] Found similar match for "${childPart}" with "${rowVal}"`);
-                return tr;
-            }
+    // Try child rows specifically if flat rows didn't match perfectly
+    const childRows = root.querySelectorAll('tr[id*="-vmd-child-"]');
+    for (const tr of childRows) {
+        const childVal = (tr.getAttribute('data-row') || '').trim().toLowerCase();
+        if (childVal === needle || _isSimilar(childVal, needle)) {
+            return tr;
         }
-
-        // Try child rows specifically
-        const childRows = root.querySelectorAll('tr[id*="-vmd-child-"]');
-        for (const tr of childRows) {
-            const childVal = (tr.getAttribute('data-row') || '').trim().toLowerCase();
-            if (childVal === childPart || _isSimilar(childVal, childPart)) {
-                console.log(`[VMD-FIND] Found in vmd-child rows: "${childVal}"`);
-                return tr;
-            }
-        }
-    } else if (needle.includes('.')) {
-        // Legacy: try splitting on . as fallback (but be careful with periods in names)
-        const lastDotIndex = needle.lastIndexOf('.');
-        const childPart = needle.substring(lastDotIndex + 1).toLowerCase();
-
-        // Try to find child row under a category
-        const childRows = root.querySelectorAll('tr[id*="-vmd-child-"]');
-        for (const tr of childRows) {
-            const childVal = (tr.getAttribute('data-row') || '').trim().toLowerCase();
-            if (childVal === childPart || _isSimilar(childVal, childPart)) {
-                return tr;
-            }
-        }
-    } else {
-        // Try to find child rows that match just the child name
-        const childRows = root.querySelectorAll('tr[id*="-vmd-child-"]');
-        for (const tr of childRows) {
-            const childVal = (tr.getAttribute('data-row') || '').trim().toLowerCase();
-            if (childVal === needle || _isSimilar(childVal, needle)) {
-                return tr;
-            }
-        }
-        // Try to find category rows that match
-        const categoryRows = root.querySelectorAll('tr[id*="-vmd-category-"]');
-        for (const tr of categoryRows) {
-            const catVal = (tr.getAttribute('data-row') || '').trim().toLowerCase();
-            if (catVal === needle || _isSimilar(catVal, needle)) {
-                return tr;
-            }
+    }
+    // Try to find category rows that match if nothing else did
+    const categoryRows = root.querySelectorAll('tr[id*="-vmd-category-"]');
+    for (const tr of categoryRows) {
+        const catVal = (tr.getAttribute('data-row') || '').trim().toLowerCase();
+        if (catVal === needle || _isSimilar(catVal, needle)) {
+            return tr;
         }
     }
     return null;
@@ -3019,6 +3029,9 @@ function count_columns_from_hmd_fixed(hmd_data) {
     for (const item of hmd_data) {
         if (typeof item === 'object' && item && item.is_childless) {
             count += item.colspan || 1;
+        } else if (typeof item === 'object' && item && item.children && Array.isArray(item.children) && item.children.length > 0) {
+            // Parent with children: count each child as a separate column
+            count += item.children.length;
         } else {
             count += 1;
         }
@@ -3132,11 +3145,12 @@ function analyzeHeaderStructureForMerged(hmdData, tableType) {
                     break;
                 }
             }
-            if (attributeValue) {
+            if (attributeValue !== null) {
                 if (item.children && Array.isArray(item.children) && item.children.length > 0) {
                     item.children.forEach(function (child) {
-                        if (child && child['child_level1.attribute1']) {
-                            stringHeaders.push(attributeValue + '.' + child['child_level1.attribute1']);
+                        var cVal = (function (c) { if (!c) return ''; if (typeof c === 'string') return c; for (var k in c) { if ((k.indexOf('attribute') !== -1 || k.indexOf('child_level') !== -1) && typeof c[k] === 'string') return c[k]; } return ''; })(child);
+                        if (cVal) {
+                            stringHeaders.push(attributeValue + '.' + cVal);
                         }
                     });
                 } else if (attributeValue.indexOf('.') !== -1) {
@@ -3574,8 +3588,9 @@ function renderVmdRowsWithHierarchyJS(vmdData, type, matchData, columnCount, tab
                     // Handle LLM hierarchy format with children array
                     if (item.children && Array.isArray(item.children) && item.children.length > 0) {
                         item.children.forEach(function (child) {
-                            if (child && child['child_level1.attribute1']) {
-                                headers.push(attributeValue + '.' + child['child_level1.attribute1']);
+                            var cVal = (function (c) { if (!c) return ''; if (typeof c === 'string') return c; for (var k in c) { if ((k.indexOf('attribute') !== -1 || k.indexOf('child_level') !== -1) && typeof c[k] === 'string') return c[k]; } return ''; })(child);
+                            if (cVal) {
+                                headers.push(attributeValue + '.' + cVal);
                             }
                         });
                     } else {
@@ -4188,7 +4203,7 @@ function createMergedTableData(mergedData, processedHmd, processedVmd) {
             // Process each HMD column using the correct order from processedHmd
             for (var hmdIdx = 0; hmdIdx < processedHmd.length; hmdIdx++) {
                 var hmdItem = processedHmd[hmdIdx];
-                var hmdKey = '';
+                var hmdKey = null;
                 // Extract HMD key - handle both flat and hierarchical structures
                 if (typeof hmdItem === 'string') {
                     hmdKey = hmdItem;
@@ -4205,7 +4220,7 @@ function createMergedTableData(mergedData, processedHmd, processedVmd) {
                         // Process children for hierarchical HMD
                         for (var childIdx = 0; childIdx < hmdItem.children.length; childIdx++) {
                             var child = hmdItem.children[childIdx];
-                            var childKey = child['child_level1.attribute1'] || '';
+                            var childKey = (function (c) { if (!c) return ''; if (typeof c === 'string') return c; for (var k in c) { if ((k.indexOf('attribute') !== -1 || k.indexOf('child_level') !== -1) && typeof c[k] === 'string') return c[k]; } return ''; })(child);
                             if (childKey) {
                                 var fullHmdKey = hmdKey + '.' + childKey;
                                 var lookupKey = fullHmdKey + '|||' + fullVmdKey;
@@ -4226,28 +4241,25 @@ function createMergedTableData(mergedData, processedHmd, processedVmd) {
                                         }
                                     }
                                 }
-                                console.log('📂  Schema-ordered data lookup (child):', { lookupKey, cellData, vmdText, fullVmdKey, hmdKey: fullHmdKey, hmdIdx, childIdx });
+                                console.log('📂  Schema-ordered data lookup (child):', { lookupKey, cellData, vmdText, fullVmdKey, hmdKey: fullHmdKey, hmdIdx, childIdx, tableData_vmdText: tableData[vmdText] });
+
                                 if (cellData) {
                                     var cellContent;
                                     // Check if aggregated value exists (from merge value strategy)
                                     if (cellData.aggregated) {
                                         // Display single aggregated value
-                                        var aggregatedFormatted = '<span style="color: #2E7D32; font-weight: bold;">' + cellData.aggregated + '</span>';
-                                        cellContent = '<div style="display: table; width: 100%; min-height: 20px; table-layout: fixed;"><div style="display: table-cell; width: 100%; text-align: center; vertical-align: middle; padding: 2px; box-sizing: border-box; word-wrap: break-word; overflow: hidden;">' + aggregatedFormatted + '</div></div>';
+                                        cellContent = cellData.aggregated;
                                     } else {
                                         // Display t1/t2 split
-                                        var t1Value = (cellData.t1 || cellData.source1) ? (cellData.t1 || cellData.source1).toString() : '';
-                                        var t2Value = (cellData.t2 || cellData.source2) ? (cellData.t2 || cellData.source2).toString() : '';
-                                        // Format cell content with FIXED 50/50 split for perfect dashed line alignment at 50%
-                                        var t1Formatted = t1Value ? '<span style="color: #8B4513; font-weight: bold;">' + t1Value + '</span>' : '<span style="color: #999;">-</span>';
-                                        var t2Formatted = t2Value ? '<span style="color: #800080; font-weight: bold;">' + t2Value + '</span>' : '<span style="color: #999;">-</span>';
-                                        cellContent = '<div style="display: table; width: 100%; min-height: 20px; table-layout: fixed;"><div style="display: table-cell; width: 50%; text-align: center; vertical-align: middle; padding: 2px; box-sizing: border-box; word-wrap: break-word; overflow: hidden;">' + t1Formatted + '</div><div style="display: table-cell; width: 50%; text-align: center; vertical-align: middle; padding: 2px; box-sizing: border-box; word-wrap: break-word; overflow: hidden;">' + t2Formatted + '</div></div>';
+                                        var t1Value = (cellData.t1 || cellData.source1) ? (cellData.t1 || cellData.source1).toString() : '-';
+                                        var t2Value = (cellData.t2 || cellData.source2) ? (cellData.t2 || cellData.source2).toString() : '-';
+                                        cellContent = t1Value + ' | ' + t2Value;
                                     }
                                     tableData[vmdText][fullHmdKey] = cellContent;
                                     console.log('[OK] Populated schema-ordered cell (child):', { vmd: vmdText, hmd: fullHmdKey, content: cellContent, position: hmdIdx + '.' + childIdx });
                                 } else {
-                                    // Set empty content for missing data with FIXED 50/50 split
-                                    tableData[vmdText][fullHmdKey] = '<div style="display: flex; width: 100%; min-height: 20px; align-items: center;"><div style="width: 50%; text-align: center; padding: 2px; box-sizing: border-box;"><span style="color: #999;">-</span></div><div style="width: 50%; text-align: center; padding: 2px; box-sizing: border-box;"><span style="color: #999;">-</span></div></div>';
+                                    // Set empty content for missing data with simple format
+                                    tableData[vmdText][fullHmdKey] = '- | -';
                                     console.log('❌ No data found for lookup key (child):', lookupKey);
                                 }
                             }
@@ -4255,7 +4267,7 @@ function createMergedTableData(mergedData, processedHmd, processedVmd) {
                         continue; // Skip flat processing for hierarchical items
                     }
                 }
-                if (hmdKey) {
+                if (hmdKey !== null && hmdKey !== undefined) {
                     var lookupKey = hmdKey + '|||' + fullVmdKey;
                     var cellData = dataLookup[lookupKey];
                     // If not found, try alternate key matching approaches
@@ -4369,7 +4381,7 @@ function createMergedSchemaTable(mergeResultData) {
             attributeValue = item.trim();
         }
         console.log('📂 Extracted attribute value:', attributeValue, 'from item:', item);
-        if (attributeValue) {
+        if (attributeValue !== null && attributeValue !== undefined) {
             if (attributeValue.indexOf('.') !== -1) {
                 var parts = attributeValue.split('.', 2);
                 var parent = parts[0].trim();
@@ -4381,6 +4393,10 @@ function createMergedSchemaTable(mergeResultData) {
                 }
                 hierarchicalGroups[parent].push(child);
             } else {
+                if (attributeValue === '') {
+                    console.log('⏭️ Skipping empty-string HMD attribute');
+                    continue;
+                }
                 console.log('📂¸ Simple item found:', attributeValue);
                 simpleItems.push({
                     text: attributeValue,
@@ -4405,19 +4421,31 @@ function createMergedSchemaTable(mergeResultData) {
                     break;
                 }
             }
-            if (attributeValue) { // Only process if valid attribute found
+            if (attributeValue !== null && attributeValue !== undefined && attributeValue !== '') { // Only process if valid attribute found (skip empty strings)
                 // Check if this is a dot-notation item (like "Bleeding.(n=35)")
                 if (attributeValue.indexOf('.') !== -1) {
                     console.log('📂 Processing dot-notation format in order:', attributeValue);
                     var parts = attributeValue.split('.', 2);
                     var parent = parts[0].trim();
                     var child = parts[1].trim();
-                    // Create hierarchical structure for this item
-                    processedHmd.push({
-                        'attribute1': parent,
-                        'children': [{ 'child_level1.attribute1': child }]
-                    });
-                    console.log('[OK] Added dot-notation item in order:', { parent: parent, child: child, position: i });
+                    // Create hierarchical structure for this item or append to previous if same parent
+                    var addedToExisting = false;
+                    if (processedHmd.length > 0) {
+                        var lastItem = processedHmd[processedHmd.length - 1];
+                        if (typeof lastItem === 'object' && lastItem.attribute1 === parent && lastItem.children) {
+                            lastItem.children.push({ 'child_level1.attribute1': child });
+                            addedToExisting = true;
+                            console.log('[OK] Appended object child to existing parent:', { parent: parent, child: child });
+                        }
+                    }
+
+                    if (!addedToExisting) {
+                        processedHmd.push({
+                            'attribute1': parent,
+                            'children': [{ 'child_level1.attribute1': child }]
+                        });
+                        console.log('[OK] Added new dot-notation object in order:', { parent: parent, child: child });
+                    }
                 } else {
                     // Check if this item has children array
                     if (item.children && Array.isArray(item.children) && item.children.length > 0) {
@@ -4425,7 +4453,7 @@ function createMergedSchemaTable(mergeResultData) {
                         // Expand each child as a separate column entry: "Parent.Child"
                         for (var ci = 0; ci < item.children.length; ci++) {
                             var child = item.children[ci];
-                            var childValue = child['child_level1.attribute1'] || child.attribute1 || '';
+                            var childValue = (function (c) { if (!c) return ''; if (typeof c === 'string') return c; for (var k in c) { if ((k.indexOf('attribute') !== -1 || k.indexOf('child_level') !== -1) && typeof c[k] === 'string') return c[k]; } return ''; })(child);
                             if (childValue) {
                                 var fullKey = attributeValue + '.' + childValue;
                                 console.log('📂 Adding child column:', fullKey);
@@ -4445,7 +4473,36 @@ function createMergedSchemaTable(mergeResultData) {
                 }
             } // End of attributeValue check
         } else if (typeof item === 'string') {
-            processedHmd.push(item.trim());
+            var attributeValue = item.trim();
+            if (!attributeValue) continue; // skip empty strings
+            if (attributeValue !== null && attributeValue !== undefined && attributeValue.indexOf('.') !== -1) {
+                console.log('📂  Processing dot-notation string in order:', attributeValue);
+                var parts = attributeValue.split('.', 2);
+                var parent = parts[0].trim();
+                var child = parts[1].trim();
+
+                // Check if the PREVIOUS item in processedHmd is the SAME parent.
+                // If so, append to its children instead of creating a new parent object.
+                var addedToExisting = false;
+                if (processedHmd.length > 0) {
+                    var lastItem = processedHmd[processedHmd.length - 1];
+                    if (typeof lastItem === 'object' && lastItem.attribute1 === parent && lastItem.children) {
+                        lastItem.children.push({ 'child_level1.attribute1': child });
+                        addedToExisting = true;
+                        console.log('[OK] Appended child to existing parent:', { parent: parent, child: child });
+                    }
+                }
+
+                if (!addedToExisting) {
+                    processedHmd.push({
+                        'attribute1': parent,
+                        'children': [{ 'child_level1.attribute1': child }]
+                    });
+                    console.log('[OK] Added new dot-notation item in order:', { parent: parent, child: child });
+                }
+            } else {
+                processedHmd.push(attributeValue);
+            }
         }
     }
     // Process VMD - handle multiple object formats and string format
@@ -4475,7 +4532,7 @@ function createMergedSchemaTable(mergeResultData) {
             attributeValue = item.trim();
         }
 
-        if (attributeValue) {
+        if (attributeValue !== null && attributeValue !== undefined) {
             flatVmdItems.push(attributeValue);
             // Check if this has a period separator for hierarchy
             if (attributeValue.indexOf('.') !== -1) {
@@ -4557,114 +4614,54 @@ function addVerticalDashedLines(containerId) {
     if (!table) return;
     // Remove any existing overlays
     var existingOverlays = container.querySelectorAll('.column-separators-overlay');
-    existingOverlays.forEach(function (overlay) {
-        overlay.remove();
-    });
-    // Get table bounds
+    existingOverlays.forEach(function (overlay) { overlay.remove(); });
     var tableRect = table.getBoundingClientRect();
-    var containerRect = container.getBoundingClientRect();
-    // Find the table header (thead) which contains all header rows
     var thead = table.querySelector('thead');
-    var headerHeightToT1T2 = 0;
-    if (thead) {
-        // Find the HMD main header row (first row)
-        var hmdMainRow = thead.querySelector('tr:first-child');
-        // Check if t1/t2 sub-header row exists
-        var t1t2Row = thead.querySelector('tr.t1-t2-subheader');
-        if (t1t2Row) {
-            // Start dashed lines FROM the t1/t2 row (so lines pass through t1/t2 row)
-            var hmdMainRect = hmdMainRow.getBoundingClientRect();
-            var t1t2Rect = t1t2Row.getBoundingClientRect();
-            headerHeightToT1T2 = t1t2Rect.top - hmdMainRect.top;
-            console.log('[OK] Found t1/t2 row - dashed lines will pass THROUGH t1/t2 row');
-        } else {
-            // No t1/t2 row, start from end of header
-            var theadRect = thead.getBoundingClientRect();
-            headerHeightToT1T2 = theadRect.bottom - theadRect.top;
-            console.log('ℹ️ No t1/t2 row found - dashed lines start from data rows');
-        }
-    } else {
-        console.log('No thead found, cannot position dashed lines');
+    if (!thead) return;
+    var hmdMainRow = thead.querySelector('tr:first-child');
+    var t1t2Row = thead.querySelector('tr.t1-t2-subheader');
+    if (!t1t2Row) {
+        console.log('No t1/t2 row - skipping dashed lines');
         return;
     }
-    // Find HMD row to get column structure (for positioning lines)
-    var hmdRow = table.querySelector('thead tr:first-child') || table.querySelector('tbody tr:first-child');
-    if (!hmdRow) return;
-    var hmdCells = hmdRow.querySelectorAll('td, th');
-    console.log('📂 HMD cells found:', hmdCells.length, 'cells');
-    if (hmdCells.length < 2) {
-        console.log('âŒ Not enough columns for separators');
-        return; // Need at least 2 columns for separators
-    }
-    // Create overlay div for continuous dashed lines
+    var hmdMainRect = hmdMainRow.getBoundingClientRect();
+    var t1t2Rect = t1t2Row.getBoundingClientRect();
+    var headerHeightToT1T2 = t1t2Rect.top - hmdMainRect.top;
+    var t1t2Cells = t1t2Row.querySelectorAll('td, th');
     var overlay = document.createElement('div');
     overlay.className = 'column-separators-overlay';
     overlay.style.position = 'absolute';
     overlay.style.top = '0px';
     overlay.style.left = '0px';
-    // Match table dimensions precisely so lines span full scroll area
     overlay.style.width = table.offsetWidth + 'px';
     overlay.style.height = table.offsetHeight + 'px';
     overlay.style.pointerEvents = 'none';
     overlay.style.zIndex = '10';
-
-    // Add dashed lines BETWEEN t1 and t2 data in each HMD column
-    // Start from column 1 (skip the first VMD column at index 0)
-    for (var i = 1; i < hmdCells.length; i++) {
-        var hmdCell = hmdCells[i];
-        // Skip if this isn't an HMD data column
-        if (!hmdCell) {
-            console.log('❌ Skipping null cell at index', i);
-            continue;
-        }
-        // Get cell bounds for positioning
-        var hmdCellRect = hmdCell.getBoundingClientRect();
-        var cellWidth = hmdCellRect.width;
-
-        // Only add line if cell is wide enough to show meaningful data separation
-        if (cellWidth < 60) {
-            console.log('❌ Skipping narrow cell at index', i, 'width:', cellWidth);
-            continue;
-        }
-
-        // With fixed 50/50 cell layout, position dashed line at exactly 50% (center) of each cell
-        var separatorPosition = 0.5; // Exactly 50% - perfect for our 50/50 split layout
-
-        // Create vertical line positioned at the exact center (50%) to separate the two halves
-        var line = document.createElement('div');
-        line.style.position = 'absolute';
-        line.style.width = '2px'; // 2px thickness for better visibility
-
-        // Start from t1/t2 row (or data rows if no t1/t2) and continue to bottom of table
-        var lineHeight = 'calc(100% - ' + headerHeightToT1T2 + 'px)';
-        line.style.height = lineHeight;
-        line.style.background = 'repeating-linear-gradient(to bottom, #666, #666 4px, transparent 4px, transparent 8px)';
-        line.style.zIndex = '5';
-
-        // Position the line at exactly 50% of cell width (perfect alignment with our 50/50 cell split)
-        // Correct position relative to table left edge (which aligns with overlay left edge at 0)
-        var separatorX = (hmdCellRect.left - tableRect.left) + (hmdCellRect.width * separatorPosition);
-
-        line.style.left = separatorX + 'px';
-        line.style.top = headerHeightToT1T2 + 'px'; // Start from t1/t2 row or data rows
-
-        console.log('[OK] Added dashed line for column', i, 'at position', separatorX + 'px', 'cell width:', cellWidth, 'separator at: 50% (fixed split)');
-        overlay.appendChild(line);
+    // Draw a dashed line at the left edge of every t2 cell (between t1 and t2 in each pair)
+    var prevWasT1 = false;
+    for (var i = 1; i < t1t2Cells.length; i++) {
+        var cellText = (t1t2Cells[i].textContent || '').trim().toLowerCase();
+        if (cellText === 't1') { prevWasT1 = true; continue; }
+        if (cellText === 't2' && prevWasT1) {
+            prevWasT1 = false;
+            var cellRect = t1t2Cells[i].getBoundingClientRect();
+            var separatorX = cellRect.left - tableRect.left;
+            if (separatorX < 10) continue;
+            var line = document.createElement('div');
+            line.style.position = 'absolute';
+            line.style.width = '2px';
+            line.style.height = 'calc(100% - ' + headerHeightToT1T2 + 'px)';
+            line.style.background = 'repeating-linear-gradient(to bottom, #666, #666 4px, transparent 4px, transparent 8px)';
+            line.style.zIndex = '5';
+            line.style.left = separatorX + 'px';
+            line.style.top = headerHeightToT1T2 + 'px';
+            overlay.appendChild(line);
+        } else { prevWasT1 = false; }
     }
-
-    // Add overlay to the scrollable table wrapper, not the outer container
-    // This (plus the position:relative on the wrapper) ensures lines scroll with the table
     var scrollWrapper = table.parentElement;
-    if (scrollWrapper) {
-        scrollWrapper.appendChild(overlay);
-        console.log('[OK] Applied continuous dashed lines to scrollable wrapper');
-    } else {
-        // Fallback to container if wrapper unusual
-        container.style.position = 'relative';
-        container.appendChild(overlay);
-        console.log('[OK] Applied continuous dashed lines to container');
-    }
+    (scrollWrapper || container).appendChild(overlay);
 }
+
 // Function to display merged schema mappings
 function displayMergedSchemaMappings(mergeResultData) {
     console.log('🔄 displayMergedSchemaMappings called with:', mergeResultData);
@@ -6358,7 +6355,7 @@ async function fetchPipelineMetrics() {
 
         console.log('[METRICS] Request body:', requestBody);
 
-        const response = await fetch('/fuze/pipeline-metrics', {
+        const response = await fetch('/HemolixFusion/pipeline-metrics', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -7075,7 +7072,7 @@ async function extractPdfData() {
         formData.append('tuples_per_partition', tuplesPerPartition);
 
         try {
-            const response = await fetch('/fuze/extract_pdf', { method: 'POST', body: formData });
+            const response = await fetch('/HemolixFusion/extract_pdf', { method: 'POST', body: formData });
             const data = await response.json();
             if (data.results) {
                 if (!window.pdfExtractionResults) window.pdfExtractionResults = [];
@@ -7231,82 +7228,82 @@ window.addEventListener('load', applyModeSeparation);
 // Fetch Models Function (Missing Implementation)
 // ==========================================
 
-function fetchModels() {
-    console.log('[fetchModels] Fetching available models from backend...');
+// function fetchModels() {
+//     console.log('[fetchModels] Fetching available models from backend...');
 
-    // Read from static text file instead of API
-    fetch('/fuze/static/models.txt')
-        .then(response => response.text())
-        .then(text => {
-            // Parse text file (one model per line)
-            const models = text.trim().split('\n').map(line => line.trim()).filter(line => line.length > 0);
-            console.log('[fetchModels] Loaded models from file:', models);
+//     // Read from static text file instead of API
+//     fetch('/HemolixFusion/static/models.txt')
+//         .then(response => response.text())
+//         .then(text => {
+//             // Parse text file (one model per line)
+//             const models = text.trim().split('\n').map(line => line.trim()).filter(line => line.length > 0);
+//             console.log('[fetchModels] Loaded models from file:', models);
 
-            if (models.length > 0) {
-                // Populate all model dropdowns
-                const modelSelects = [
-                    document.getElementById('pdfModelSelect'),
-                    document.getElementById('matchingLLM'),
-                    document.getElementById('mergeLLM')
-                ];
+//             if (models.length > 0) {
+//                 // Populate all model dropdowns
+//                 const modelSelects = [
+//                     document.getElementById('pdfModelSelect'),
+//                     document.getElementById('matchingLLM'),
+//                     document.getElementById('mergeLLM')
+//                 ];
 
-                modelSelects.forEach(select => {
-                    if (!select) return;
+//                 modelSelects.forEach(select => {
+//                     if (!select) return;
 
-                    // Get existing values and texts for deduplication (case-insensitive)
-                    const existingVals = Array.from(select.options).map(o => o.value.toLowerCase().trim());
-                    const existingTexts = Array.from(select.options).map(o => o.text.toLowerCase().trim());
+//                     // Get existing values and texts for deduplication (case-insensitive)
+//                     const existingVals = Array.from(select.options).map(o => o.value.toLowerCase().trim());
+//                     const existingTexts = Array.from(select.options).map(o => o.text.toLowerCase().trim());
 
-                    // Add models from file that aren't already there
-                    models.forEach(model => {
-                        const mLower = model.toLowerCase().trim();
-                        // Only add if neither the value nor the text matches existing options
-                        if (!existingVals.includes(mLower) && !existingTexts.includes(mLower)) {
-                            const option = document.createElement('option');
-                            option.value = model;
-                            option.textContent = model;
-                            select.appendChild(option);
-                        }
-                    });
+//                     // Add models from file that aren't already there
+//                     models.forEach(model => {
+//                         const mLower = model.toLowerCase().trim();
+//                         // Only add if neither the value nor the text matches existing options
+//                         if (!existingVals.includes(mLower) && !existingTexts.includes(mLower)) {
+//                             const option = document.createElement('option');
+//                             option.value = model;
+//                             option.textContent = model;
+//                             select.appendChild(option);
+//                         }
+//                     });
 
-                    // Add custom option for PDF select if not there
-                    if (select.id === 'pdfModelSelect' && !existingVals.includes('custom')) {
-                        const customOption = document.createElement('option');
-                        customOption.value = 'custom';
-                        customOption.textContent = 'Custom Model...';
-                        select.appendChild(customOption);
-                    }
+//                     // Add custom option for PDF select if not there
+//                     if (select.id === 'pdfModelSelect' && !existingVals.includes('custom')) {
+//                         const customOption = document.createElement('option');
+//                         customOption.value = 'custom';
+//                         customOption.textContent = 'Custom Model...';
+//                         select.appendChild(customOption);
+//                     }
 
-                    // Remove "Loading models..." placeholder if present
-                    for (let i = 0; i < select.options.length; i++) {
-                        if (select.options[i] && select.options[i].text.toLowerCase().includes("loading")) {
-                            select.remove(i);
-                            break;
-                        }
-                    }
+//                     // Remove "Loading models..." placeholder if present
+//                     for (let i = 0; i < select.options.length; i++) {
+//                         if (select.options[i] && select.options[i].text.toLowerCase().includes("loading")) {
+//                             select.remove(i);
+//                             break;
+//                         }
+//                     }
 
-                    console.log(`[fetchModels] Deduped and updated #${select.id}`);
-                });
-            } else {
-                console.error('[fetchModels] No models found in file');
-            }
-        })
-        .catch(error => {
-            console.error('[fetchModels] Error fetching models:', error);
+//                     console.log(`[fetchModels] Deduped and updated #${select.id}`);
+//                 });
+//             } else {
+//                 console.error('[fetchModels] No models found in file');
+//             }
+//         })
+//         .catch(error => {
+//             console.error('[fetchModels] Error fetching models:', error);
 
-            // Fallback: Add a default option
-            const modelSelects = [
-                document.getElementById('pdfModelSelect'),
-                document.getElementById('matchingLLM'),
-                document.getElementById('mergeLLM')
-            ];
+//             // Fallback: Add a default option
+//             const modelSelects = [
+//                 document.getElementById('pdfModelSelect'),
+//                 document.getElementById('matchingLLM'),
+//                 document.getElementById('mergeLLM')
+//             ];
 
-            modelSelects.forEach(select => {
-                if (!select) return;
-                select.innerHTML = '<option value="">Error loading models</option>';
-            });
-        });
-}
+//             modelSelects.forEach(select => {
+//                 if (!select) return;
+//                 select.innerHTML = '<option value="">Error loading models</option>';
+//             });
+//         });
+// }
 
 // Fusion Data Transfer Function
 function fuseExtractedData() {
@@ -7332,13 +7329,14 @@ function fuseExtractedData() {
     sessionStorage.setItem('fusionPrefilledData', JSON.stringify(fusionData));
 
     // Navigate to fusion page
-    window.location.href = '/fuze/tool?mode=fusion&prefilled=true';
+    window.location.href = '/HemolixFusion/tool?mode=fusion&prefilled=true';
 }
 
 // Auto-fetch models on page load
 document.addEventListener('DOMContentLoaded', function () {
     // Small delay to ensure dropdowns are rendered
-    setTimeout(fetchModels, 100);
+
+    // setTimeout(fetchModels, 100);
 
     // Fetch PDF preloads
     setTimeout(fetchPdfPreloads, 150);
