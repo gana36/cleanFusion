@@ -7,3 +7,6 @@ add authentication again
 add seperations like delimeted, average, custom etc. 
 remove all the bl6 and GPT OSS models, horizontal partition.  (main.js)
 uncommented the merge value strategy (controls.html)
+
+
+harcoded instance merge to the ML autoamted pipelines

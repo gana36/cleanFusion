@@ -586,7 +586,7 @@ def process_multi_step_merge_with_responses(source_schema, target_schema, schema
 def process_with_llm_enhanced(source_schema, target_schema, schema_type, processing_type, operation_type, llm_model="llama-3.1-8b-instant",
                             max_tokens=None, temperature=None, top_p=None, frequency_penalty=None, presence_penalty=None, use_merge_multi_step=False,
                             match_operation="baseline", matching_method="json_default", merge_method=None, matching_llm=None, merge_llm=None, user_api_keys=None,
-                            merge_value_strategy="delimited", pre_approved_match_result=None):
+                            merge_value_strategy="delimited", pre_approved_match_result=None, previous_match_metrics=None):
     """Enhanced LLM processing with hierarchical output and metrics and configurable parameters"""
 
 
@@ -992,15 +992,32 @@ Return only the JSON object."""
             prompt_tokens, completion_tokens = extract_token_usage(response, operation_llm_used)
 
             # Calculate separate costs for match and merge operations
-            if match_response and operation_type in ['merge', 'instance_merge']:
-                # Extract match step token usage (even if match_result parsing failed)
-                match_prompt_tokens, match_completion_tokens = extract_token_usage(match_response, matching_llm)
+            # This fires when:
+            #   (a) a live match was done internally (match_response is set), OR
+            #   (b) HITL path used pre_approved_match_result (skipped match LLM, match_response=None)
+            if operation_type in ['merge', 'instance_merge'] and (match_response or pre_approved_match_result):
+                # Extract match step token usage if a live match was performed
+                if match_response:
+                    match_prompt_tokens, match_completion_tokens = extract_token_usage(match_response, matching_llm)
+                else:
+                    # HITL path: match was skipped, use metrics passed from the frontend's saved match run
+                    if previous_match_metrics:
+                        match_prompt_tokens = previous_match_metrics.get('input_prompt_tokens', 0) or previous_match_metrics.get('match_input_tokens', 0)
+                        match_completion_tokens = previous_match_metrics.get('output_tokens', 0) or previous_match_metrics.get('match_output_tokens', 0)
+                        # Also carry over the match LLM name and time if the caller didn't set them
+                        if not matching_llm:
+                            matching_llm = previous_match_metrics.get('llm_model') or previous_match_metrics.get('matching_llm_used', matching_llm)
+                        # Override match_generation_time with the real value from the match run
+                        match_generation_time = previous_match_metrics.get('total_generation_time', 0)
+                        print(f"[HITL-METRICS] Restored match metrics from frontend: input={match_prompt_tokens}, output={match_completion_tokens}, time={match_generation_time}s")
+                    else:
+                        match_prompt_tokens, match_completion_tokens = 0, 0
 
                 # Calculate separate costs
                 match_cost = calculate_api_cost(matching_llm, match_prompt_tokens, match_completion_tokens)
                 merge_cost = calculate_api_cost(merge_llm, prompt_tokens, completion_tokens)
                 total_api_cost = match_cost + merge_cost
-
+                print("There are no previous match results",previous_match_metrics)
                 # Total tokens
                 total_prompt_tokens = prompt_tokens + match_prompt_tokens
                 total_completion_tokens = completion_tokens + match_completion_tokens
@@ -1053,10 +1070,14 @@ Return only the JSON object."""
             })
             
             # Add match counts
+            def count_real_matches(matches):
+                """Count only non-empty matches (exclude where both source and target are empty strings)"""
+                return sum(1 for m in matches if m.get('source', '') or m.get('target', ''))
+
             if operation_type == "match":
                 if actual_schema_type == "complex":
-                    metrics_data["hmd_matches"] = len(result_data.get('HMD_matches', []))
-                    metrics_data["vmd_matches"] = len(result_data.get('VMD_matches', []))
+                    metrics_data["hmd_matches"] = count_real_matches(result_data.get('HMD_matches', []))
+                    metrics_data["vmd_matches"] = count_real_matches(result_data.get('VMD_matches', []))
                     metrics_data["total_matches"] = metrics_data["hmd_matches"] + metrics_data["vmd_matches"]
                 else:
                     metrics_data["total_matches"] = len(result_data.get('column_matches', []))
@@ -1064,8 +1085,8 @@ Return only the JSON object."""
                 # For merge operations, use the match result for counts
                 if match_result:
                     if actual_schema_type == "complex":
-                        metrics_data["hmd_matches"] = len(match_result.get('HMD_matches', []))
-                        metrics_data["vmd_matches"] = len(match_result.get('VMD_matches', []))
+                        metrics_data["hmd_matches"] = count_real_matches(match_result.get('HMD_matches', []))
+                        metrics_data["vmd_matches"] = count_real_matches(match_result.get('VMD_matches', []))
                         metrics_data["total_matches"] = metrics_data["hmd_matches"] + metrics_data["vmd_matches"]
                     else:
                         metrics_data["total_matches"] = len(match_result.get('matches', []))
