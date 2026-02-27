@@ -1,5 +1,5 @@
 // Base URL for API calls
-const API_BASE_URL = '/fuze';
+const API_BASE_URL = '/HemolixFusion';
 var sourceData = null;
 var targetData = null;
 var sourcePreviewHTML = null;  // Store preview HTML from backend
@@ -6315,7 +6315,7 @@ async function fetchPipelineMetrics() {
 
         console.log('[METRICS] Request body:', requestBody);
 
-        const response = await fetch('/fuze/pipeline-metrics', {
+        const response = await fetch('/HemolixFusion/pipeline-metrics', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

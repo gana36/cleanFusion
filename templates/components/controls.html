@@ -1,313 +1,339 @@
-            <div id="schemaTypeInfo"
-                style="background: #e3f2fd; border: 1px solid #bbdefb; border-radius: 6px; padding: 8px; margin: 0 auto 15px auto; color: #1565c0; font-size: 14px; text-align: center; display: none; max-width: 900px;">
-                <strong>Schema Type:</strong> <span id="schemaTypeText">Not detected</span> - Auto-detected
-            </div>
+<div id="schemaTypeInfo"
+    style="background: #e3f2fd; border: 1px solid #bbdefb; border-radius: 6px; padding: 8px; margin: 0 auto 15px auto; color: #1565c0; font-size: 14px; text-align: center; display: none; max-width: 900px;">
+    <strong>Schema Type:</strong> <span id="schemaTypeText">Not detected</span> - Auto-detected
+</div>
 
-            <!-- Modern Pipeline Configuration -->
-            <div class="pipeline-config"
-                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 20px; margin: 0 auto 20px auto; box-shadow: 0 8px 32px rgba(0,0,0,0.1); max-width: 900px;">
-                <div style="display: flex; align-items: center; margin-bottom: 20px;">
-                    <div
-                        style="background: rgba(255,255,255,0.2); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
-                        <span style="font-size: 20px;">⚙️</span>
-                    </div>
-                    <h3 style="margin: 0; color: white; font-weight: 600; font-size: 22px;">Pipeline Configuration
-                    </h3>
+<!-- Modern Pipeline Configuration -->
+<div class="pipeline-config"
+    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 16px; padding: 20px; margin: 0 auto 20px auto; box-shadow: 0 8px 32px rgba(0,0,0,0.1); max-width: 900px;">
+    <div style="display: flex; align-items: center; margin-bottom: 20px;">
+        <div
+            style="background: rgba(255,255,255,0.2); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; margin-right: 12px;">
+            <span style="font-size: 20px;">⚙️</span>
+        </div>
+        <h3 style="margin: 0; color: white; font-weight: 600; font-size: 22px;">Pipeline Configuration
+        </h3>
+    </div>
+    <!-- Schema Matching Step (Always Visible) -->
+    <div class="pipeline-card"
+        style="display: block; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+            <div
+                style="background: #e8f5e8; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                <span style="font-size: 16px;">🧩</span>
+            </div>
+            <div>
+                <h5 style="margin: 0; color: #2d3748; font-weight: 600; font-size: 16px;">Schema
+                    Matching</h5>
+                <p style="margin: 0; font-size: 14px; color: #718096;">Identify semantic relationships
+                    between schemas</p>
+            </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end;">
+            <div>
+                <label
+                    style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">Match
+                    Operation</label>
+                <select id="matchOperation"
+                    onchange="updateMatchingMethodOptions(); updatePipelineVisualization(); updateControls();"
+                    style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; background: white; transition: border-color 0.2s;">
+                    <option value="">Choose operation...</option>
+                    <option value="baseline">📊 Baseline</option>
+                    <option value="operator">⚙️ Operator</option>
+                </select>
+            </div>
+            <div>
+                <label
+                    style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">Matching
+                    Method</label>
+                <select id="schemaMatchingType" onchange="updatePipelineVisualization(); updateControls();"
+                    style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; background: white; transition: border-color 0.2s;">
+                    <option value="">Choose method...</option>
+                </select>
+            </div>
+            <div>
+                <label
+                    style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">LLM
+                    Model</label>
+                <select id="matchingLLM" onchange="updateControls();"
+                    style="padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 15px; background: white; min-width: 200px;">
+                    <option value="">Loading models...</option>
+                    <!-- <option value="">Auto-select best</option> -->
+                    <!-- <optgroup label="Fast Models">
+                        <option value="claude-3-5-haiku-20241022">Claude 3.5 Haiku</option>
+                        <option value="llama-3.1-8b-instant">Llama 3.1 8B</option>
+                        <option value="openai/gpt-oss-20b">GPT OSS 20B</option>
+                        <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                    </optgroup> -->
+                    <!-- <optgroup label="[AUTO] Balanced Models">
+                        <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option>
+                        <option value="qwen/qwen3-32b">Qwen 3 32B</option>
+                        <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                    </optgroup> -->
+                    <optgroup label="[START] Premium Models">
+                        <!-- <option value="claude-3-opus-20240229">Claude 3 Opus</option> -->
+                        <!-- <option value="deepseek-r1-distill-llama-70b">DeepSeek R1 70B</option> -->
+                        <!-- <option value="openai/gpt-oss-120b">GPT OSS 120B</option> -->
+                        <!-- <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option> -->
+                        <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+    </div>
+    <!-- Add Merge Step Toggle -->
+    <div style="text-align: center; margin-bottom: 16px;">
+        <button id="addMergeStep" onclick="toggleMergeStep()"
+            style="background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.3); color: white; padding: 10px 20px; border-radius: 20px; font-size: 16px; cursor: pointer; transition: all 0.2s; backdrop-filter: blur(10px);">
+            + Add Schema Merge Step
+        </button>
+    </div>
+    <!-- Schema Merge Step (Conditional) -->
+    <div id="mergeStepContainer" class="pipeline-card"
+        style="background: rgba(255,255,255,0.95); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); display: none;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center;">
+                <div
+                    style="background: #fff3e0; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                    <span style="font-size: 16px;">🔗</span>
                 </div>
-                <!-- Schema Matching Step (Always Visible) -->
-                <div class="pipeline-card"
-                    style="display: block; background: rgba(255,255,255,0.95); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
-                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                        <div
-                            style="background: #e8f5e8; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-                            <span style="font-size: 16px;">🧩</span>
-                        </div>
-                        <div>
-                            <h5 style="margin: 0; color: #2d3748; font-weight: 600; font-size: 16px;">Schema
-                                Matching</h5>
-                            <p style="margin: 0; font-size: 14px; color: #718096;">Identify semantic relationships
-                                between schemas</p>
-                        </div>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end;">
-                        <div>
-                            <label
-                                style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">Match
-                                Operation</label>
-                            <select id="matchOperation"
-                                onchange="updateMatchingMethodOptions(); updatePipelineVisualization(); updateControls();"
-                                style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; background: white; transition: border-color 0.2s;">
-                                <option value="">Choose operation...</option>
-                                <option value="baseline">📊 Baseline</option>
-                                <option value="operator">⚙️ Operator</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label
-                                style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">Matching
-                                Method</label>
-                            <select id="schemaMatchingType" onchange="updatePipelineVisualization(); updateControls();"
-                                style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; background: white; transition: border-color 0.2s;">
-                                <option value="">Choose method...</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label
-                                style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">LLM
-                                Model</label>
-                            <select id="matchingLLM" onchange="updateControls();"
-                                style="padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 15px; background: white; min-width: 200px;">
-                                <option value="">Loading models...</option>
-                                <option value="">Auto-select best</option>
-                                <optgroup label="Fast Models">
-                                    <!-- <option value="claude-3-5-haiku-20241022">Claude 3.5 Haiku</option> -->
-                                    <!-- <option value="llama-3.1-8b-instant">Llama 3.1 8B</option> -->
-                                    <option value="openai/gpt-oss-20b">GPT OSS 20B</option>
-                                    <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
-                                </optgroup>
-                                <optgroup label="[AUTO] Balanced Models">
-                                    <!-- <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option> -->
-                                    <!-- <option value="qwen/qwen3-32b">Qwen 3 32B</option> -->
-                                    <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash</option>
-                                </optgroup>
-                                <optgroup label="[START] Premium Models">
-                                    <!-- <option value="claude-3-opus-20240229">Claude 3 Opus</option> -->
-                                    <!-- <option value="deepseek-r1-distill-llama-70b">DeepSeek R1 70B</option> -->
-                                    <option value="openai/gpt-oss-120b">GPT OSS 120B</option>
-                                    <!-- <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option> -->
-                                    <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
+                <div>
+                    <h5 style="margin: 0; color: #2d3748; font-weight: 600; font-size: 16px;">Schema
+                        Merge</h5>
+                    <p style="margin: 0; font-size: 14px; color: #718096;">Combine matched schemas into
+                        unified structure</p>
                 </div>
-                <!-- Add Merge Step Toggle -->
-                <div style="text-align: center; margin-bottom: 16px;">
-                    <button id="addMergeStep" onclick="toggleMergeStep()"
-                        style="background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.3); color: white; padding: 10px 20px; border-radius: 20px; font-size: 16px; cursor: pointer; transition: all 0.2s; backdrop-filter: blur(10px);">
-                        + Add Schema Merge Step
-                    </button>
+            </div>
+            <button onclick="toggleMergeStep()"
+                style="background: #fed7d7; border: none; color: #c53030; padding: 4px 8px; border-radius: 6px; font-size: 12px; cursor: pointer;">Remove</button>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end;">
+            <div>
+                <label
+                    style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">Merge
+                    Operation</label>
+                <select id="mergeOperation"
+                    onchange="updateMergeMethodOptions(); updatePipelineVisualization(); updateControls();"
+                    style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; background: white; transition: border-color 0.2s;">
+                    <option value="">Choose operation...</option>
+                    <option value="merge">🔗 Schema Merge</option>
+                    <option value="instance_merge">📊 Instance Merge</option>
+                    <option value="baseline">📊 Baseline Merge</option>
+                </select>
+            </div>
+            <div>
+                <label
+                    style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">Merge
+                    Method</label>
+                <select id="mergeMethod"
+                    onchange="updatePipelineVisualization(); updateControls(); updatePartitionStatsPreview();"
+                    style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; background: white; transition: border-color 0.2s;">
+                    <option value="">Choose method...</option>
+                </select>
+            </div>
+            <div>
+                <label
+                    style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">LLM
+                    Model</label>
+                <select id="mergeLLM" onchange="updateControls();"
+                    style="padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 15px; background: white; min-width: 200px;">
+                    <option value="">Loading models...</option>
+                    <!-- <option value="">Auto-select best</option> -->
+                    <!-- <optgroup label="Fast Models">
+                        <option value="claude-3-5-haiku-20241022">Claude 3.5 Haiku</option>
+                        <option value="llama-3.1-8b-instant">Llama 3.1 8B</option>
+                        <option value="openai/gpt-oss-20b">GPT OSS 20B</option>
+                        <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
+                    </optgroup> -->
+                    <!-- <optgroup label="[AUTO] Balanced Models"> -->
+                    <!-- <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option> -->
+                    <!-- <option value="gemini-2.0-flash">Gemini 2.0 Flash</option> -->
+                    <!-- </optgroup> -->
+                    <optgroup label="[START] Premium Models">
+                        <!-- <option value="claude-3-opus-20240229">Claude 3 Opus</option> -->
+                        <!-- <option value="openai/gpt-oss-120b">GPT OSS 120B</option> -->
+                        <!-- <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option> -->
+                        <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+        <!-- Merge Value Strategy -->
+        <!-- <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+            <label style="display: block; font-weight: 500; margin-bottom: 8px; color: #4a5568; font-size: 15px;">
+                Value Merge Strategy
+                <span style="font-weight: normal; color: #718096; font-size: 13px;">(for numeric columns only)</span>
+            </label>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <label
+                    style="display: flex; align-items: center; cursor: pointer; padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.borderColor='#667eea'"
+                    onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='#e2e8f0'">
+                    <input type="radio" name="mergeValueStrategy" value="delimited" checked style="margin-right: 8px;"
+                        onchange="updateMergeStrategyStyles(); toggleCustomFormulaInput()">
+                    <span style="font-size: 14px; color: #2d3748;">
+                        <strong>📝 Delimited</strong>
+                        <span style="display: block; font-size: 12px; color: #718096;">Keep both values (t1 | t2)</span>
+                    </span>
+                </label>
+                <label
+                    style="display: flex; align-items: center; cursor: pointer; padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.borderColor='#667eea'"
+                    onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='#e2e8f0'">
+                    <input type="radio" name="mergeValueStrategy" value="average" style="margin-right: 8px;"
+                        onchange="updateMergeStrategyStyles(); toggleCustomFormulaInput()">
+                    <span style="font-size: 14px; color: #2d3748;">
+                        <strong>📊 Average</strong>
+                        <span style="display: block; font-size: 12px; color: #718096;">Calculate mean of values</span>
+                    </span>
+                </label>
+                <label
+                    style="display: flex; align-items: center; cursor: pointer; padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.borderColor='#667eea'"
+                    onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='#e2e8f0'">
+                    <input type="radio" name="mergeValueStrategy" value="range" style="margin-right: 8px;"
+                        onchange="updateMergeStrategyStyles(); toggleCustomFormulaInput()">
+                    <span style="font-size: 14px; color: #2d3748;">
+                        <strong>📏 Range</strong>
+                        <span style="display: block; font-size: 12px; color: #718096;">Show min-max range</span>
+                    </span>
+                </label>
+                <label
+                    style="display: flex; align-items: center; cursor: pointer; padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; transition: all 0.2s;"
+                    onmouseover="this.style.borderColor='#667eea'"
+                    onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='#e2e8f0'">
+                    <input type="radio" name="mergeValueStrategy" value="custom" style="margin-right: 8px;"
+                        onchange="updateMergeStrategyStyles(); toggleCustomFormulaInput()">
+                    <span style="font-size: 14px; color: #2d3748;">
+                        <strong>🔧 Custom Formula</strong>
+                        <span style="display: block; font-size: 12px; color: #718096;">User-defined
+                            transformation</span>
+                    </span>
+                </label>
+            </div>
+            
+            <div id="customFormulaContainer" style="margin-top: 12px; display: none;">
+                <label style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 14px;">
+                    Enter Custom Formula
+                    <span style="font-weight: normal; color: #718096; font-size: 12px;">(e.g., t1 + t2, max(t1, t2), (t1
+                        * 0.6) + (t2 * 0.4))</span>
+                </label>
+                <textarea id="customFormulaInput"
+                    placeholder="Enter your transformation formula here...&#10;Example: (t1 + t2) / 2&#10;Example: max(t1, t2)&#10;Example: t1 if t1 > t2 else t2"
+                    style="width: 100%; min-height: 80px; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-family: 'Courier New', monospace; resize: vertical; background: #f8f9fa;"
+                    oninput="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
+                <div style="margin-top: 6px; font-size: 12px; color: #718096;">
+                    💡 Use <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px;">t1</code> for first
+                    table value and <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px;">t2</code>
+                    for second table value
                 </div>
-                <!-- Schema Merge Step (Conditional) -->
-                <div id="mergeStepContainer" class="pipeline-card"
-                    style="background: rgba(255,255,255,0.95); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); display: none;">
-                    <div
-                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                        <div style="display: flex; align-items: center;">
-                            <div
-                                style="background: #fff3e0; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-                                <span style="font-size: 16px;">🔗</span>
-                            </div>
-                            <div>
-                                <h5 style="margin: 0; color: #2d3748; font-weight: 600; font-size: 16px;">Schema
-                                    Merge</h5>
-                                <p style="margin: 0; font-size: 14px; color: #718096;">Combine matched schemas into
-                                    unified structure</p>
-                            </div>
-                        </div>
-                        <button onclick="toggleMergeStep()"
-                            style="background: #fed7d7; border: none; color: #c53030; padding: 4px 8px; border-radius: 6px; font-size: 12px; cursor: pointer;">Remove</button>
-                    </div>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end;">
-                        <div>
-                            <label
-                                style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">Merge
-                                Operation</label>
-                            <select id="mergeOperation"
-                                onchange="updateMergeMethodOptions(); updatePipelineVisualization(); updateControls();"
-                                style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; background: white; transition: border-color 0.2s;">
-                                <option value="">Choose operation...</option>
-                                <option value="merge">🔗 Schema Merge</option>
-                                <option value="instance_merge">📊 Instance Merge</option>
-                                <option value="baseline">📊 Baseline Merge</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label
-                                style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">Merge
-                                Method</label>
-                            <select id="mergeMethod" onchange="updatePipelineVisualization(); updateControls(); updatePartitionStatsPreview();"
-                                style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; background: white; transition: border-color 0.2s;">
-                                <option value="">Choose method...</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label
-                                style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 15px;">LLM
-                                Model</label>
-                            <select id="mergeLLM" onchange="updateControls();"
-                                style="padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 15px; background: white; min-width: 200px;">
-                                <option value="">Loading models...</option>
-                                <option value="">Auto-select best</option>
-                                <optgroup label="Fast Models">
-                                    <!-- <option value="claude-3-5-haiku-20241022">Claude 3.5 Haiku</option> -->
-                                    <!-- <option value="llama-3.1-8b-instant">Llama 3.1 8B</option> -->
-                                    <option value="openai/gpt-oss-20b">GPT OSS 20B</option>
-                                    <option value="gemini-1.5-flash">Gemini 1.5 Flash</option>
-                                </optgroup>
-                                <optgroup label="[AUTO] Balanced Models">
-                                    <!-- <option value="claude-3-5-sonnet-20241022">Claude 3.5 Sonnet</option> -->
-                                    <option value="gemini-2.0-flash-exp">Gemini 2.0 Flash</option>
-                                </optgroup>
-                                <optgroup label="[START] Premium Models">
-                                    <!-- <option value="claude-3-opus-20240229">Claude 3 Opus</option> -->
-                                    <option value="openai/gpt-oss-120b">GPT OSS 120B</option>
-                                    <!-- <option value="claude-sonnet-4-20250514">Claude Sonnet 4</option> -->
-                                    <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                    </div>
-                    <!-- Merge Value Strategy -->
-                    <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
-                        <label
-                            style="display: block; font-weight: 500; margin-bottom: 8px; color: #4a5568; font-size: 15px;">
-                            Value Merge Strategy
-                            <span style="font-weight: normal; color: #718096; font-size: 13px;">(for numeric columns only)</span>
-                        </label>
-                        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                            <label style="display: flex; align-items: center; cursor: pointer; padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; transition: all 0.2s;"
-                                   onmouseover="this.style.borderColor='#667eea'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='#e2e8f0'">
-                                <input type="radio" name="mergeValueStrategy" value="delimited" checked
-                                       style="margin-right: 8px;" onchange="updateMergeStrategyStyles(); toggleCustomFormulaInput()">
-                                <span style="font-size: 14px; color: #2d3748;">
-                                    <strong>📝 Delimited</strong>
-                                    <span style="display: block; font-size: 12px; color: #718096;">Keep both values (t1 | t2)</span>
-                                </span>
-                            </label>
-                            <label style="display: flex; align-items: center; cursor: pointer; padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; transition: all 0.2s;"
-                                   onmouseover="this.style.borderColor='#667eea'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='#e2e8f0'">
-                                <input type="radio" name="mergeValueStrategy" value="average"
-                                       style="margin-right: 8px;" onchange="updateMergeStrategyStyles(); toggleCustomFormulaInput()">
-                                <span style="font-size: 14px; color: #2d3748;">
-                                    <strong>📊 Average</strong>
-                                    <span style="display: block; font-size: 12px; color: #718096;">Calculate mean of values</span>
-                                </span>
-                            </label>
-                            <label style="display: flex; align-items: center; cursor: pointer; padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; transition: all 0.2s;"
-                                   onmouseover="this.style.borderColor='#667eea'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='#e2e8f0'">
-                                <input type="radio" name="mergeValueStrategy" value="range"
-                                       style="margin-right: 8px;" onchange="updateMergeStrategyStyles(); toggleCustomFormulaInput()">
-                                <span style="font-size: 14px; color: #2d3748;">
-                                    <strong>📏 Range</strong>
-                                    <span style="display: block; font-size: 12px; color: #718096;">Show min-max range</span>
-                                </span>
-                            </label>
-                            <label style="display: flex; align-items: center; cursor: pointer; padding: 8px 12px; border: 2px solid #e2e8f0; border-radius: 8px; transition: all 0.2s;"
-                                   onmouseover="this.style.borderColor='#667eea'" onmouseout="if(!this.querySelector('input').checked) this.style.borderColor='#e2e8f0'">
-                                <input type="radio" name="mergeValueStrategy" value="custom"
-                                       style="margin-right: 8px;" onchange="updateMergeStrategyStyles(); toggleCustomFormulaInput()">
-                                <span style="font-size: 14px; color: #2d3748;">
-                                    <strong>🔧 Custom Formula</strong>
-                                    <span style="display: block; font-size: 12px; color: #718096;">User-defined transformation</span>
-                                </span>
-                            </label>
-                        </div>
-                        <!-- Custom Formula Input Field -->
-                        <div id="customFormulaContainer" style="margin-top: 12px; display: none;">
-                            <label style="display: block; font-weight: 500; margin-bottom: 6px; color: #4a5568; font-size: 14px;">
-                                Enter Custom Formula
-                                <span style="font-weight: normal; color: #718096; font-size: 12px;">(e.g., t1 + t2, max(t1, t2), (t1 * 0.6) + (t2 * 0.4))</span>
-                            </label>
-                            <textarea id="customFormulaInput" placeholder="Enter your transformation formula here...&#10;Example: (t1 + t2) / 2&#10;Example: max(t1, t2)&#10;Example: t1 if t1 > t2 else t2"
-                                style="width: 100%; min-height: 80px; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; font-family: 'Courier New', monospace; resize: vertical; background: #f8f9fa;"
-                                oninput="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
-                            <div style="margin-top: 6px; font-size: 12px; color: #718096;">
-                                💡 Use <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px;">t1</code> for first table value and <code style="background: #e2e8f0; padding: 2px 6px; border-radius: 4px;">t2</code> for second table value
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div> -->
+    </div>
+    <!-- Pipeline Visualization -->
+    <div
+        style="background: rgba(255,255,255,0.95); border-radius: 12px; padding: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+        <div style="display: flex; align-items: center; margin-bottom: 12px;">
+            <div
+                style="background: #eef2ff; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                <span style="font-size: 16px;">📋</span>
+            </div>
+            <h5 style="margin: 0; color: #2d3748; font-weight: 600; font-size: 16px;">Plan</h5>
+        </div>
+        <div id="pipelineVisualization" style="min-height: 80px;">
+            <div style="text-align: center; color: #718096; font-style: italic; padding: 20px;">
+                <span style="font-size: 24px; display: block; margin-bottom: 8px;">🔮</span>
+                Choose a matching method to see your pipeline
+            </div>
+        </div>
+        <!-- Partition Statistics Section (Below Plan) -->
+        <div id="partitionStatsSection"
+            style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e2e8f0; display: none;">
+            <div style="margin-bottom: 8px;">
+                <strong style="color: #4a5568; font-size: 14px;">📊 Partition Statistics:</strong>
+            </div>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 13px;">
+                <div
+                    style="background: #f7fafc; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #667eea;">
+                    <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Number of Partitions</div>
+                    <div style="color: #2d3748; font-weight: 600;" id="partitionCount">-</div>
                 </div>
-                <!-- Pipeline Visualization -->
-                <div style="background: rgba(255,255,255,0.95); border-radius: 12px; padding: 16px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
-                    <div style="display: flex; align-items: center; margin-bottom: 12px;">
-                        <div
-                            style="background: #eef2ff; border-radius: 8px; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
-                            <span style="font-size: 16px;">📋</span>
-                        </div>
-                        <h5 style="margin: 0; color: #2d3748; font-weight: 600; font-size: 16px;">Plan</h5>
-                    </div>
-                    <div id="pipelineVisualization" style="min-height: 80px;">
-                        <div style="text-align: center; color: #718096; font-style: italic; padding: 20px;">
-                            <span style="font-size: 24px; display: block; margin-bottom: 8px;">🔮</span>
-                            Choose a matching method to see your pipeline
-                        </div>
-                    </div>
-                    <!-- Partition Statistics Section (Below Plan) -->
-                    <div id="partitionStatsSection" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e2e8f0; display: none;">
-                        <div style="margin-bottom: 8px;">
-                            <strong style="color: #4a5568; font-size: 14px;">📊 Partition Statistics:</strong>
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; font-size: 13px;">
-                            <div style="background: #f7fafc; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #667eea;">
-                                <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Number of Partitions</div>
-                                <div style="color: #2d3748; font-weight: 600;" id="partitionCount">-</div>
-                            </div>
-                            <div style="background: #f0fff4; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #48bb78;">
-                                <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 1 Data Rows</div>
-                                <div style="color: #2d3748; font-weight: 600;" id="table1DataRows">-</div>
-                            </div>
-                            <div style="background: #f0fff4; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #48bb78;">
-                                <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 1 Partition Size</div>
-                                <div style="color: #2d3748; font-weight: 600;" id="table1PartitionSize">-</div>
-                            </div>
-                            <div style="background: #f0fff4; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #48bb78;">
-                                <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 1 Rest</div>
-                                <div style="color: #2d3748; font-weight: 600;" id="table1Rest">-</div>
-                            </div>
-                            <div style="background: #fff5f7; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #ed8936;">
-                                <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 2 Data Rows</div>
-                                <div style="color: #2d3748; font-weight: 600;" id="table2DataRows">-</div>
-                            </div>
-                            <div style="background: #fff5f7; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #ed8936;">
-                                <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 2 Partition Size</div>
-                                <div style="color: #2d3748; font-weight: 600;" id="table2PartitionSize">-</div>
-                            </div>
-                            <div style="background: #fff5f7; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #ed8936;">
-                                <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 2 Rest</div>
-                                <div style="color: #2d3748; font-weight: 600;" id="table2Rest">-</div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Performance Metrics Section (Inside Plan) -->
-                    <div id="metricsSection" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e2e8f0; display: none;">
-                        <div id="metricsLoading" style="text-align: center; padding: 12px; color: #718096;">
-                            <div style="display: inline-block; width: 16px; height: 16px; border: 2px solid #e2e8f0; border-top-color: #667eea; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-                            <span style="margin-left: 8px; font-size: 13px;">Loading metrics...</span>
-                        </div>
-                        <div id="metricsContent" style="display: none; font-size: 14px; color: #4a5568; text-align: center;">
-                            📊 <strong>Expected:</strong>
-                            💰 <strong>Avg Cost:</strong> <span id="metricCost">--</span>
-                            &nbsp;|&nbsp;
-                            ⏱️ <strong>Avg Time:</strong> <span id="metricTime">--</span>
-                            &nbsp;|&nbsp;
-                            🎯 <strong>Avg Accuracy:</strong> <span id="metricAccuracy">--</span>
-                        </div>
-                        <div id="metricsError" style="display: none; text-align: center; padding: 8px; color: #e53e3e; font-size: 13px;">
-                            <span id="metricsErrorText">⚠️ No performance data available</span>
-                        </div>
-                    </div>
+                <div
+                    style="background: #f0fff4; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #48bb78;">
+                    <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 1 Data Rows</div>
+                    <div style="color: #2d3748; font-weight: 600;" id="table1DataRows">-</div>
                 </div>
-                <!-- Run Pipeline Button -->
-                <div style="text-align: center; margin-top: 20px;">
-                    <button id="processBtn" class="process-btn"
-                        style="display: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 14px 28px; border-radius: 25px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); margin: 0 auto;"
-                        onmouseover="this.style.transform='translateY(-2px) scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
-                        onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
-                        Run Schema Matching
-                    </button>
+                <div
+                    style="background: #f0fff4; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #48bb78;">
+                    <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 1 Partition Size</div>
+                    <div style="color: #2d3748; font-weight: 600;" id="table1PartitionSize">-</div>
+                </div>
+                <div
+                    style="background: #f0fff4; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #48bb78;">
+                    <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 1 Rest</div>
+                    <div style="color: #2d3748; font-weight: 600;" id="table1Rest">-</div>
+                </div>
+                <div
+                    style="background: #fff5f7; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #ed8936;">
+                    <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 2 Data Rows</div>
+                    <div style="color: #2d3748; font-weight: 600;" id="table2DataRows">-</div>
+                </div>
+                <div
+                    style="background: #fff5f7; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #ed8936;">
+                    <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 2 Partition Size</div>
+                    <div style="color: #2d3748; font-weight: 600;" id="table2PartitionSize">-</div>
+                </div>
+                <div
+                    style="background: #fff5f7; padding: 8px 12px; border-radius: 6px; border-left: 3px solid #ed8936;">
+                    <div style="color: #718096; font-size: 11px; margin-bottom: 2px;">Table 2 Rest</div>
+                    <div style="color: #2d3748; font-weight: 600;" id="table2Rest">-</div>
                 </div>
             </div>
         </div>
-        <div class="pipeline-selection" id="pipelineSelection" style="display: none;">
-            <h4 style="font-size: 14px;">Fusion Plans/Pipelines</h4>
-            <div class="pipeline-options" id="pipelineOptions">
-                <!-- Pipeline options will be populated dynamically -->
+        <!-- Performance Metrics Section (Inside Plan) -->
+        <div id="metricsSection"
+            style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #e2e8f0; display: none;">
+            <div id="metricsLoading" style="text-align: center; padding: 12px; color: #718096;">
+                <div
+                    style="display: inline-block; width: 16px; height: 16px; border: 2px solid #e2e8f0; border-top-color: #667eea; border-radius: 50%; animation: spin 1s linear infinite;">
+                </div>
+                <span style="margin-left: 8px; font-size: 13px;">Loading metrics...</span>
+            </div>
+            <div id="metricsContent" style="display: none; font-size: 14px; color: #4a5568; text-align: center;">
+                📊 <strong>Expected:</strong>
+                💰 <strong>Avg Cost:</strong> <span id="metricCost">--</span>
+                &nbsp;|&nbsp;
+                ⏱️ <strong>Avg Time:</strong> <span id="metricTime">--</span>
+                &nbsp;|&nbsp;
+                🎯 <strong>Avg Accuracy:</strong> <span id="metricAccuracy">--</span>
+            </div>
+            <div id="metricsError"
+                style="display: none; text-align: center; padding: 8px; color: #e53e3e; font-size: 13px;">
+                <span id="metricsErrorText">⚠️ No performance data available</span>
             </div>
         </div>
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Processing schemas...</p>
-        </div>
-        <div class="error" id="error"></div>
-        <div class="success" id="success"></div>
+    </div>
+    <!-- Run Pipeline Button -->
+    <div style="text-align: center; margin-top: 20px;">
+        <button id="processBtn" class="process-btn"
+            style="display: none; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 14px 28px; border-radius: 25px; font-size: 18px; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); margin: 0 auto;"
+            onmouseover="this.style.transform='translateY(-2px) scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.6)'"
+            onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
+            Run Schema Matching
+        </button>
+    </div>
+</div>
+</div>
+<div class="pipeline-selection" id="pipelineSelection" style="display: none;">
+    <h4 style="font-size: 14px;">Fusion Plans/Pipelines</h4>
+    <div class="pipeline-options" id="pipelineOptions">
+        <!-- Pipeline options will be populated dynamically -->
+    </div>
+</div>
+<div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>Processing schemas...</p>
+</div>
+<div class="error" id="error"></div>
+<div class="success" id="success"></div>

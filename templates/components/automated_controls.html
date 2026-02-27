@@ -1,18 +1,19 @@
-
 <style>
     .automated-controls-container {
         max-width: 900px;
-        margin: -40px auto 30px auto; /* Negative margin to pull it up closer to tables */
+        margin: -40px auto 30px auto;
+        /* Negative margin to pull it up closer to tables */
         padding: 20px;
         background: #fff;
         border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
     }
 
     .top-row {
         display: flex;
         align-items: center;
-        justify-content: center; /* Center everything */
+        justify-content: center;
+        /* Center everything */
         gap: 30px;
         margin-bottom: 20px;
         flex-wrap: wrap;
@@ -113,31 +114,35 @@
     }
 
     .pipeline-card {
-        border: 1px solid #edf2f7;
+        border: 1px solid #e2e8f0;
         border-radius: 12px;
         padding: 20px;
         display: flex;
         align-items: flex-start;
         gap: 15px;
-        background: #F9FAFB;
+        background: #ffffff;
         transition: all 0.2s;
         cursor: pointer;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     }
 
     .pipeline-card:hover {
         border-color: #cbd5e0;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
     }
 
     .pipeline-card.selected {
-        border: 2px solid #E91E63;
-        background: #fff;
-        box-shadow: 0 4px 15px rgba(233, 30, 99, 0.1);
+        border: 2px solid #e91e63;
+        background: #ffffff;
+        box-shadow: 0 4px 15px rgba(233, 30, 99, 0.08);
     }
 
     .radio-input {
-        margin-top: 5px;
+        margin-top: 2px;
         cursor: pointer;
+        width: 16px;
+        height: 16px;
+        accent-color: #1976d2;
     }
 
     .card-content {
@@ -147,66 +152,67 @@
     .card-header {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 6px;
         margin-bottom: 15px;
-        font-weight: 600;
-        font-size: 14px;
+        font-weight: 700;
+        font-size: 13px;
+        color: #111827;
     }
 
     .metric-value {
-        color: #4A5568;
-        font-weight: 500;
+        color: #6b7280;
+        font-weight: 400;
     }
 
     .pipeline-flow {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
         flex-wrap: nowrap;
         overflow-x: auto;
         padding-bottom: 5px;
+        margin-top: 5px;
     }
 
     .step-box {
         background: white;
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 10px;
-        min-width: 140px;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        padding: 12px;
+        min-width: 130px;
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 6px;
     }
 
     .step-header {
         display: flex;
         align-items: center;
-        gap: 6px;
+        gap: 8px;
         font-size: 11px;
         font-weight: 700;
-        text-transform: uppercase;
-        color: #2D3748;
+        color: #1a202c;
     }
 
     .step-icon {
-        width: 18px;
-        height: 18px;
+        width: 22px;
+        height: 22px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 4px;
-        font-size: 10px;
+        border-radius: 50%;
+        font-size: 11px;
     }
 
     .step-detail {
-        font-size: 10px;
-        color: #718096;
-        line-height: 1.2;
+        font-size: 11px;
+        color: #6b7280;
+        line-height: 1.3;
     }
 
     .arrow {
-        color: #cbd5e0;
-        font-size: 16px;
+        color: #d1d5db;
+        font-size: 12px;
     }
 
     .execute-btn-container {
@@ -237,7 +243,8 @@
         background: #00796B;
     }
 
-    .download-icon, .share-icon {
+    .download-icon,
+    .share-icon {
         font-size: 20px;
     }
 </style>
@@ -276,15 +283,15 @@
         <div class="pipeline-cards-container" id="pipelineCards">
             <!-- Cards will be populated dynamically -->
         </div>
-            </div> <!-- end pipelineCards -->
+    </div> <!-- end pipelineCards -->
 
-            <div class="execute-btn-container" id="executeBtnContainer" style="display: none;">
-                <button class="execute-btn" onclick="executeAutomatedPipeline()">
-                    Execute Pipeline Plan
-                </button>
-            </div>
-        </div> <!-- end pipelinePlansSection -->
-    </div> <!-- end automatedControls -->
+    <div class="execute-btn-container" id="executeBtnContainer" style="display: none;">
+        <button class="execute-btn" onclick="executeAutomatedPipeline()">
+            Execute Pipeline Plan
+        </button>
+    </div>
+</div> <!-- end pipelinePlansSection -->
+</div> <!-- end automatedControls -->
 
 <script>
     async function predictPipelines() {
@@ -295,10 +302,10 @@
 
         const backend = document.getElementById('autoModelSelect').value;
         const mode = document.getElementById('autoOperationSelect').value;
-        
+
         showLoading(true);
         try {
-            const response = await fetch('/fuze/predict', {
+            const response = await fetch('/HemolixFusion/predict', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -308,7 +315,7 @@
                     mode: mode
                 })
             });
-            
+
             const result = await response.json();
             if (result.success) {
                 updatePipelineCards(result.prediction);
@@ -327,9 +334,9 @@
 
     function updatePipelineCards(prediction) {
         const cards = [
-            { id: 'cost', data: prediction.best_cost, title: 'Cost (USD)', icon: '', subIcon: '' },
-            { id: 'accuracy', data: prediction.best_accuracy, title: 'Accuracy (%)', icon: '', subIcon: '' },
-            { id: 'latency', data: prediction.best_latency, title: 'Latency (seconds)', icon: '', subIcon: '' }
+            { id: 'cost', data: prediction.best_cost, title: 'Cost (USD)', icon: '🟣', subIcon: '$' },
+            { id: 'accuracy', data: prediction.best_accuracy, title: 'Accuracy (%)', icon: '🎯', subIcon: '' },
+            { id: 'latency', data: prediction.best_latency, title: 'Latency (seconds)', icon: '⏱️', subIcon: '' }
         ];
 
         const container = document.getElementById('pipelineCards');
@@ -340,8 +347,8 @@
 
             const div = document.createElement('div');
             div.className = `pipeline-card ${index === 0 ? 'selected' : ''}`;
-            div.onclick = function() { selectPipeline(this, index); };
-            
+            div.onclick = function () { selectPipeline(this, index); };
+
             // Format metric value
             let metricVal = "";
             if (card.id === 'cost') metricVal = `$${card.data.pred_cost.toFixed(5)}`;
@@ -352,6 +359,7 @@
             let flowHtml = `
                 <div class="step-box">
                     <div class="step-header">
+                        <div class="step-icon" style="background: #F3E5F5;">🔮</div>
                         <span>INPUT</span>
                     </div>
                     <div class="step-detail">Source & Target Tables</div>
@@ -359,6 +367,7 @@
                 <div class="arrow">→</div>
                 <div class="step-box">
                     <div class="step-header">
+                        <div class="step-icon" style="background: #E8F5E9;">🧩</div>
                         <span>MATCH STEP</span>
                     </div>
                     <div class="step-detail">Operator: ${card.data['Match Operator'] || 'Operator'}</div>
@@ -372,6 +381,7 @@
                     <div class="arrow">→</div>
                     <div class="step-box">
                         <div class="step-header">
+                            <div class="step-icon" style="background: #E3F2FD;">🔗</div>
                             <span>MERGE STEP</span>
                         </div>
                         <div class="step-detail">Operator: ${card.data['Merge Operator'] || 'Operator'}</div>
@@ -385,6 +395,7 @@
                 <div class="arrow">→</div>
                 <div class="step-box">
                     <div class="step-header">
+                        <div class="step-icon" style="background: #FFF3E0;">📦</div>
                         <span>OUTPUT</span>
                     </div>
                     <div class="step-detail">Merged JSON output</div>
@@ -405,10 +416,10 @@
                     </div>
                 </div>
             `;
-            
+
             // Store the data on the element for execution
             div.dataset.config = JSON.stringify(card.data);
-            
+
             container.appendChild(div);
         });
     }
@@ -417,12 +428,126 @@
         // Remove selected class from all cards
         const cards = document.querySelectorAll('.pipeline-card');
         cards.forEach(c => c.classList.remove('selected'));
-        
+
         // Add selected class to current card
         card.classList.add('selected');
-        
+
         // Check the radio input
         card.querySelector('input[type="radio"]').checked = true;
+
+        // Extract the config data from the card
+        const config = JSON.parse(card.dataset.config);
+
+        // Ensure manual config section is visible so we can set its values
+        // We temporarily show it to set values, then let the CSS/JS keep it hidden during auto-fusion
+        const matchOp = document.getElementById('matchOperation');
+        const matchType = document.getElementById('schemaMatchingType');
+        const matchLLM = document.getElementById('matchingLLM');
+        const mergeOp = document.getElementById('mergeOperation');
+        const mergeMethod = document.getElementById('mergeMethod');
+        const mergeLLM = document.getElementById('mergeLLM');
+
+        const matchOpMap = {
+            "operator": "operator",
+            "align": "align",
+            "map": "map",
+            "baseline": "baseline"
+        };
+
+        const mergeOpMap = {
+            "operator": "merge",
+            "merge": "merge",
+            "schema merge": "merge",
+            "instance merge": "instance_merge",
+            "instance_merge": "instance_merge",
+            "baseline": "baseline",
+            "baseline merge": "baseline"
+        };
+
+        const methodMap = {
+            "json": "json_default",
+            "json (default)": "json_default",
+            "knowledge graph": "kg_enhanced",
+            "knowledge graph enhanced": "kg_enhanced",
+            "kg": "kg_enhanced",
+            "multi-step": "multi_step",
+            "multi_step": "multi_step",
+            "table partition": "table_partition_horizontal",
+            "table_partition_horizontal": "table_partition_horizontal",
+            "table partition (horizontal)": "table_partition_horizontal"
+        };
+
+        // Helper function for select text setting
+        function setSelectByText(select, text) {
+            if (!select) return;
+            if (!text || text === "0" || text === "0.0" || text === "N/A") return;
+
+            const lowerText = text.toString().toLowerCase().trim();
+            const llmMap = {
+                "gpt oss 20b": ["gpt-oss:20b", "gpt oss 20b", "openai/gpt-oss-20b"],
+                "gpt oss 120b": ["gpt-oss:120b", "gpt oss 120b", "openai/gpt-oss-120b"],
+                "gemini 2.5 flash": ["gemini-2.5-flash", "gemini 2.5 flash"],
+                "gemini 2.0 flash": ["gemini-2.0-flash", "gemini 2.0 flash", "gemini 2.0 flash"],
+                "gemini 1.5 flash": ["gemini-1.5-flash", "gemini 1.5 flash"]
+            };
+
+            const searchTargets = llmMap[lowerText] || [lowerText];
+
+            for (let i = 0; i < select.options.length; i++) {
+                const optText = select.options[i].text.toLowerCase().trim();
+                const optVal = select.options[i].value.toLowerCase().trim();
+                if (searchTargets.includes(optText) || searchTargets.includes(optVal)) {
+                    select.selectedIndex = i;
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                    return;
+                }
+            }
+            // partial match fallback
+            for (let i = 0; i < select.options.length; i++) {
+                const optText = select.options[i].text.toLowerCase().trim();
+                if (searchTargets.some(target => optText.includes(target))) {
+                    select.selectedIndex = i;
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                    return;
+                }
+            }
+        }
+
+        // Apply Match Config
+        if (config['Match Operator'] && matchOp) {
+            matchOp.value = matchOpMap[config['Match Operator'].toLowerCase()] || "operator";
+            matchOp.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        if (typeof updateMatchingMethodOptions === 'function') updateMatchingMethodOptions();
+
+        if (config['Match Method'] && matchType) {
+            matchType.value = methodMap[config['Match Method'].toLowerCase()] || "json_default";
+            matchType.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        if (config['LLM used for matching']) setSelectByText(matchLLM, config['LLM used for matching']);
+
+        // Apply Merge Config
+        const isMergeMode = document.getElementById('autoOperationSelect') && document.getElementById('autoOperationSelect').value === 'merge';
+        if ((isMergeMode || (config['Merge Operator'] && config['Merge Operator'].trim())) && mergeOp) {
+            mergeOp.value = mergeOpMap[config['Merge Operator'].toLowerCase()] || "merge";
+            mergeOp.dispatchEvent(new Event('change', { bubbles: true }));
+
+            if (typeof updateMergeMethodOptions === 'function') updateMergeMethodOptions();
+
+            if (config['Merge Method'] && mergeMethod) {
+                mergeMethod.value = methodMap[config['Merge Method'].toLowerCase()] || "json_default";
+                mergeMethod.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+
+            if (config['LLM used for merging']) setSelectByText(mergeLLM, config['LLM used for merging']);
+        }
+
+        // Trigger visual update for the graph
+        if (typeof updatePipelineVisualization === 'function') {
+            updatePipelineVisualization();
+        }
     }
 
     function executeAutomatedPipeline() {
@@ -434,10 +559,10 @@
 
         const config = JSON.parse(selectedBase.dataset.config);
         console.log("Executing mapped pipeline config:", config);
-        
+
         // Update app mode and turn off the visibility checker to prevent UI flickering
         window.isExecuting = true;
-        window.appMode = 'fusion'; 
+        window.appMode = 'fusion';
 
         // Remove the CSS block that forces controls to be hidden in auto-mode
         const styleEl = document.getElementById('autoFusionStyle');
@@ -449,14 +574,41 @@
         // --- UI TRANSITION ---
         const automatedControlsContainer = document.getElementById('automatedControls');
         const manualConfigs = document.querySelectorAll('.pipeline-config:not(#pdfExtractionSection)');
-        
-        console.log("✅ [EXECUTE] Revealing manual controls...");
-        
+
+        console.log("✅ [EXECUTE] Revealing manual controls (restricted view)...");
+
         // Force show all manual configurations EXCEPT PDF extraction
         manualConfigs.forEach(el => {
             el.style.setProperty('display', 'block', 'important');
+
+            // Specifically hide the top configuration cards inside pipeline-config
+            // This hides the Schema Matching and Schema Merge dropdown panels
+            const pipelineCards = el.querySelectorAll('.pipeline-card');
+            pipelineCards.forEach(card => {
+                // Determine if this is the "Plan" card by checking for the visualization container
+                const hasVisualization = card.querySelector('#pipelineVisualization');
+                if (!hasVisualization && card.id !== 'mergeStepContainer') {
+                    // It's a config card (like Schema Matching), hide it
+                    card.style.setProperty('display', 'none', 'important');
+                } else if (card.id === 'mergeStepContainer') {
+                    // Hide the merge config card too
+                    card.style.setProperty('display', 'none', 'important');
+                }
+            });
+
+            // Additionally, hide the "Add Merge Step" button
+            const addMergeStepBtn = document.getElementById('addMergeStep');
+            if (addMergeStepBtn && addMergeStepBtn.parentElement) {
+                addMergeStepBtn.parentElement.style.setProperty('display', 'none', 'important');
+            }
+
+            // Also hide the title and icon at the top of Pipeline Configuration
+            const headerDiv = el.querySelector('div[style*="align-items: center"]');
+            if (headerDiv && headerDiv.querySelector('h3')) {
+                headerDiv.style.setProperty('display', 'none', 'important');
+            }
         });
-        
+
         // Explicitly hide PDF section if it got shown
         const pdfSection = document.getElementById('pdfExtractionSection');
         if (pdfSection) pdfSection.style.setProperty('display', 'none', 'important');
@@ -486,7 +638,7 @@
             "map": "map",
             "baseline": "baseline"
         };
-        
+
         const mergeOpMap = {
             "operator": "merge",
             "merge": "merge",
@@ -496,7 +648,7 @@
             "baseline": "baseline",
             "baseline merge": "baseline"
         };
-        
+
         const methodMap = {
             "json": "json_default",
             "json (default)": "json_default",
@@ -517,11 +669,11 @@
             matchOp.dispatchEvent(new Event('change', { bubbles: true }));
             console.log(`✅ [EXECUTE] Set Match Operator: ${opVal}`);
         }
-        
+
         // Trigger method options update
         if (typeof updateMatchingMethodOptions === 'function') {
             updateMatchingMethodOptions();
-            
+
             if (config['Match Method']) {
                 const methodVal = methodMap[config['Match Method'].toLowerCase()] || "json_default";
                 matchType.value = methodVal;
@@ -529,38 +681,40 @@
                 console.log(`✅ [EXECUTE] Set Match Method: ${methodVal}`);
             }
         }
-        
+
         if (config['LLM used for matching']) setSelectByText(matchLLM, config['LLM used for matching']);
 
-        // Handle Merge Step if applicable
-        const isMergeMode = document.getElementById('autoOperationSelect').value === 'merge';
-        if (isMergeMode || (config['Merge Operator'] && config['Merge Operator'].trim())) {
-            // Show merge container
+        // Apply Merge Config
+        const isMergeMode = document.getElementById('autoOperationSelect') && document.getElementById('autoOperationSelect').value === 'merge';
+        const hasMergeOp = config['Merge Operator'] && String(config['Merge Operator']).trim() !== 'NaN';
+
+        if ((isMergeMode || hasMergeOp) && mergeOp) {
+            // Keep container hidden visually in automated UI, but populate background values safely
             if (mergeContainer) {
-                mergeContainer.style.setProperty('display', 'block', 'important');
+                mergeContainer.style.setProperty('display', 'none', 'important');
                 const addBtn = document.getElementById('addMergeStep');
-                if (addBtn) addBtn.parentElement.style.display = 'none'; 
-            }
-            
-            if (config['Merge Operator']) {
-                const opVal = mergeOpMap[config['Merge Operator'].toLowerCase()] || "merge";
-                mergeOp.value = opVal;
-                mergeOp.dispatchEvent(new Event('change', { bubbles: true }));
-                console.log(`✅ [EXECUTE] Set Merge Operator: ${opVal}`);
-            }
-            
-            if (typeof updateMergeMethodOptions === 'function') {
-                updateMergeMethodOptions();
-                
-                if (config['Merge Method']) {
-                    const methodVal = methodMap[config['Merge Method'].toLowerCase()] || "json_default";
-                    mergeMethod.value = methodVal;
-                    mergeMethod.dispatchEvent(new Event('change', { bubbles: true }));
-                    console.log(`✅ [EXECUTE] Set Merge Method: ${methodVal} (from ${config['Merge Method']})`);
+                if (addBtn && addBtn.parentElement) {
+                    addBtn.parentElement.style.setProperty('display', 'none', 'important');
                 }
             }
-            
-            if (config['LLM used for merging']) setSelectByText(mergeLLM, config['LLM used for merging']);
+
+            const rawOp = config['Merge Operator'] ? String(config['Merge Operator']).toLowerCase() : 'merge';
+            const opVal = rawOp === 'nan' ? 'merge' : (mergeOpMap[rawOp] || "merge");
+            mergeOp.value = opVal;
+            mergeOp.dispatchEvent(new Event('change', { bubbles: true }));
+
+            if (typeof updateMergeMethodOptions === 'function') {
+                updateMergeMethodOptions();
+
+                const rawMethod = config['Merge Method'] ? String(config['Merge Method']).toLowerCase() : 'json';
+                const methodVal = rawMethod === 'nan' ? 'json_default' : (methodMap[rawMethod] || "json_default");
+                mergeMethod.value = methodVal;
+                mergeMethod.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+
+            if (config['LLM used for merging'] && String(config['LLM used for merging']).toLowerCase() !== 'nan') {
+                setSelectByText(mergeLLM, config['LLM used for merging']);
+            }
         }
 
         function setSelectByText(select, text) {
@@ -569,15 +723,15 @@
                 console.log(`ℹ️ [EXECUTE] Skipping LLM selection for empty/invalid value: "${text}"`);
                 return;
             }
-            
+
             const lowerText = text.toString().toLowerCase().trim();
             console.log(`🔍 [EXECUTE] Trying to find LLM match for: "${lowerText}"`);
-            
+
             const llmMap = {
                 "gpt oss 20b": ["gpt-oss:20b", "gpt oss 20b", "openai/gpt-oss-20b"],
                 "gpt oss 120b": ["gpt-oss:120b", "gpt oss 120b", "openai/gpt-oss-120b"],
                 "gemini 2.5 flash": ["gemini-2.5-flash", "gemini 2.5 flash"],
-                "gemini 2.0 flash exp": ["gemini-2.0-flash-exp", "gemini 2.0 flash", "gemini 2.0 flash exp"],
+                "gemini 2.0 flash": ["gemini-2.0-flash", "gemini 2.0 flash", "gemini 2.0 flash"],
                 "gemini 1.5 flash": ["gemini-1.5-flash", "gemini 1.5 flash"]
             };
 
@@ -587,7 +741,7 @@
             for (let i = 0; i < select.options.length; i++) {
                 const optText = select.options[i].text.toLowerCase().trim();
                 const optVal = select.options[i].value.toLowerCase().trim();
-                
+
                 for (const target of searchTargets) {
                     if (optText === target || optVal === target) {
                         select.selectedIndex = i;
@@ -602,9 +756,9 @@
             for (let i = 0; i < select.options.length; i++) {
                 const optText = select.options[i].text.toLowerCase();
                 const optVal = select.options[i].value.toLowerCase();
-                
+
                 for (const target of searchTargets) {
-                    if (optText.includes(target) || target.includes(optText) || 
+                    if (optText.includes(target) || target.includes(optText) ||
                         optVal.includes(target) || target.includes(optVal)) {
                         select.selectedIndex = i;
                         console.log(`✅ [EXECUTE] Match Found (Partial): "${select.options[i].text}" at index ${i}`);
@@ -613,7 +767,7 @@
                     }
                 }
             }
-            
+
             console.warn(`⚠️ [EXECUTE] No LLM match found for: "${text}" in ${select.id}`);
         }
 
@@ -626,18 +780,8 @@
         if (typeof updatePipelineVisualization === 'function') updatePipelineVisualization();
         if (typeof updateControls === 'function') updateControls();
 
-        // Trigger the original process button with a tiny delay to ensure all change events handled
-        console.log("🚀 [EXECUTE] Triggering final processing in 100ms...");
-        setTimeout(() => {
-            processBtn.style.setProperty('display', 'inline-block', 'important');
-            processBtn.click();
-            
-            // Scroll to results
-            setTimeout(() => {
-                const loadingEl = document.getElementById('loading');
-                if (loadingEl) loadingEl.scrollIntoView({ behavior: 'smooth' });
-            }, 400);
-        }, 100);
+        // Reveal the final process button
+        processBtn.style.setProperty('display', 'inline-block', 'important');
     }
 
     // Logic to show/hide based on table population and mode
@@ -647,33 +791,37 @@
         const isAutoMode = window.appMode === 'auto-fusion';
         const sourceDataExists = document.getElementById('sourcePreview')?.innerHTML.trim() !== "";
         const targetDataExists = document.getElementById('targetPreview')?.innerHTML.trim() !== "";
-        
+
         const automatedControls = document.getElementById('automatedControls');
         const manualConfigs = document.querySelectorAll('.pipeline-config:not(#automatedControls .pipeline-config)');
         const schemaTypeInfo = document.getElementById('schemaTypeInfo');
         const pdfExtractionToggle = document.getElementById('pdfExtractionToggleContainer');
 
-        if (isAutoMode || (sourceDataExists && targetDataExists)) {
+        if (isAutoMode) {
             // Show automated controls
             if (automatedControls) automatedControls.style.display = 'block';
-            
+
             // In auto-fusion mode, hide manual controls initially
-            if (isAutoMode) {
-                manualConfigs.forEach(el => {
-                    el.style.display = 'none';
-                });
-                if (schemaTypeInfo) schemaTypeInfo.style.display = 'none';
-                if (pdfExtractionToggle) pdfExtractionToggle.style.display = 'none';
-            } else if (sourceDataExists && targetDataExists) {
-                // In other modes, if tables exist, hide the secondary PDF toggle to reduce clutter
-                if (pdfExtractionToggle) pdfExtractionToggle.style.display = 'none';
-            }
+            manualConfigs.forEach(el => {
+                el.style.display = 'none';
+            });
+            if (schemaTypeInfo) schemaTypeInfo.style.display = 'none';
+            if (pdfExtractionToggle) pdfExtractionToggle.style.display = 'none';
         } else {
+            // Manual mode or PDF mode
+            if (automatedControls) automatedControls.style.display = 'none';
+
+            // Only hide PDF toggle if tables are already loaded
+            if (sourceDataExists && targetDataExists) {
+                if (pdfExtractionToggle) pdfExtractionToggle.style.display = 'none';
+            } else {
+                if (pdfExtractionToggle) pdfExtractionToggle.style.display = 'block';
+            }
             // Manual mode or PDF mode with no tables yet
             if (automatedControls) automatedControls.style.display = 'none';
             const execBtn = document.getElementById('executeBtnContainer');
             if (execBtn) execBtn.style.display = 'none';
-            
+
             // Show PDF extraction toggle if not in auto-mode
             if (!isAutoMode && pdfExtractionToggle) {
                 pdfExtractionToggle.style.display = 'block';

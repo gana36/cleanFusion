@@ -28,6 +28,6 @@ mistral:latest
 gpt-oss:120b
 GPT Oss 20B
 Gemini 1.5 Flash
-Gemini 2.0 Flash Exp
+Gemini 2.0 Flash
 Gemini 2.5 Flash
 llama3:8b

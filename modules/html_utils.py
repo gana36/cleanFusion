@@ -728,43 +728,111 @@ def create_merged_schema_table(merge_result_data):
 
 
 def build_enhanced_headers(hmd_data, vmd_header_label=""):
-    """Build headers with enhanced styling for extraction tables"""
+    """Build headers with enhanced styling, strictly preserving order"""
     if not hmd_data:
         return []
 
-    hierarchical_items = []
-    childless_parents = []
+    # 1. First pass to calculate max depth and normalize items
+    normalized_items = []
+    max_levels = 1
 
     for item in hmd_data:
-        if isinstance(item, dict) and item.get("is_childless"):
-            childless_parents.append(item)
+        if isinstance(item, dict):
+            if item.get("is_childless") or not item.get("children"):
+                text = item.get("text", "")
+                if not text:
+                    for k, v in item.items():
+                        if k.startswith("attribute") and isinstance(v, str):
+                            text = v.strip()
+                            break
+                normalized_items.append({
+                    "type": "childless",
+                    "text": text,
+                    "colspan": item.get("colspan", 1)
+                })
+            else:
+                text = ""
+                for k, v in item.items():
+                    if k.startswith("attribute") and isinstance(v, str):
+                        text = v.strip()
+                        break
+                
+                children_paths = []
+                for child in item.get("children", []):
+                    for ck, cv in child.items():
+                        if ck.startswith("child_level1") and isinstance(cv, str):
+                            children_paths.append(cv.strip())
+                
+                if children_paths:
+                    max_levels = max(max_levels, 2)
+                    normalized_items.append({
+                        "type": "parent",
+                        "text": text,
+                        "children": children_paths,
+                        "colspan": len(children_paths)
+                    })
+                else:
+                    normalized_items.append({
+                        "type": "childless",
+                        "text": text,
+                        "colspan": 1
+                    })
+                    
         elif isinstance(item, str):
-            hierarchical_items.append(item)
+            parts = item.split('.')
+            max_levels = max(max_levels, len(parts))
+            normalized_items.append({
+                "type": "path",
+                "parts": parts,
+                "full_path": item
+            })
 
-    has_hierarchy = any('.' in item for item in hierarchical_items)
-    
-    if not has_hierarchy:
+    # Structure check: if there's no hierarchy, render flat
+    if max_levels == 1:
         headers = ['<tr>']
         safe_label = (vmd_header_label or "").strip()
-        
         headers.append(f'<th style="background: linear-gradient(135deg, #c62828 0%, #d32f2f 100%); color: white; padding: 10px 16px; text-align: left; font-weight: 600; border: 1px solid #b71c1c;">{safe_label}</th>')
         
-        for item in hierarchical_items:
-            headers.append(f'<th data-header="{item}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{item}</th>')
-        
-        for item in childless_parents:
-            colspan = item.get("colspan", 1)
-            text = item.get("text", "")
-            headers.append(f'<th data-header="{text}" colspan="{colspan}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{text}</th>')
+        for item in normalized_items:
+            if item["type"] == "childless":
+                headers.append(f'<th data-header="{item["text"]}" colspan="{item["colspan"]}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{item["text"]}</th>')
+            elif item["type"] == "path":
+                headers.append(f'<th data-header="{item["full_path"]}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{item["full_path"]}</th>')
         
         headers.append('</tr>')
         return headers
 
-    # Multi-level headers
-    structure = parse_hmd_structure_correctly(hierarchical_items)
-    max_levels = structure['levels']
-    
+    # Multi-level headers preserving order
     headers = []
+    
+    # Pre-process "path" types (e.g. flat array of dot notation "Parent.Child") into parent blocks
+    processed_paths = []
+    i = 0
+    while i < len(normalized_items):
+        item = normalized_items[i]
+        if item["type"] == "path":
+            current_parent = item["parts"][0]
+            group = [item]
+            j = i + 1
+            while j < len(normalized_items):
+                next_item = normalized_items[j]
+                if next_item["type"] == "path" and next_item["parts"][0] == current_parent:
+                    group.append(next_item)
+                    j += 1
+                else:
+                    break
+            
+            processed_paths.append({
+                "type": "path_group",
+                "parent": current_parent,
+                "items": group,
+                "colspan": len(group)
+            })
+            i = j
+        else:
+            processed_paths.append(item)
+            i += 1
+
     for level in range(max_levels):
         headers.append('<tr>')
         
@@ -772,38 +840,31 @@ def build_enhanced_headers(hmd_data, vmd_header_label=""):
             safe_label = (vmd_header_label or "").strip()
             headers.append(f'<th rowspan="{max_levels}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 10px 16px; text-align: left; font-weight: 600; border: 1px solid #1b5e20;">{safe_label}</th>')
             
-            processed = set()
-            for item in hierarchical_items:
-                if item in processed:
-                    continue
-                    
-                parts = item.split('.')
-                current_part = parts[0]
-                
-                colspan = 1
-                j = hierarchical_items.index(item) + 1
-                while j < len(hierarchical_items):
-                    next_item = hierarchical_items[j]
-                    if next_item.split('.')[0] == current_part:
-                        processed.add(next_item)
-                        colspan += 1
-                        j += 1
-                    else:
-                        break
-                
-                processed.add(item)
-                headers.append(f'<th data-header="{current_part}" colspan="{colspan}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{current_part}</th>')
-            
-            for item in childless_parents:
-                text = item.get("text", "")
-                headers.append(f'<th data-header="{text}" rowspan="{max_levels}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{text}</th>')
+            for item in processed_paths:
+                if item["type"] == "childless":
+                    headers.append(f'<th data-header="{item["text"]}" rowspan="{max_levels}" colspan="{item["colspan"]}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{item["text"]}</th>')
+                elif item["type"] == "parent":
+                    headers.append(f'<th data-header="{item["text"]}" colspan="{item["colspan"]}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{item["text"]}</th>')
+                elif item["type"] == "path_group":
+                    headers.append(f'<th data-header="{item["parent"]}" colspan="{item["colspan"]}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{item["parent"]}</th>')
         else:
-            for item in hierarchical_items:
-                parts = item.split('.')
-                if level < len(parts):
-                    part = parts[level]
-                    full_path = '.'.join(parts[:level+1])
-                    headers.append(f'<th data-header="{full_path}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{part}</th>')
+            for item in processed_paths:
+                if item["type"] == "childless":
+                    continue # Rendered with rowspan at level 0
+                elif item["type"] == "parent":
+                    for child in item["children"]:
+                        full_path = f"{item['text']}.{child}"
+                        headers.append(f'<th data-header="{full_path}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{child}</th>')
+                elif item["type"] == "path_group":
+                    for path_item in item["items"]:
+                        parts = path_item["parts"]
+                        if level < len(parts):
+                            part = parts[level]
+                            full_path = '.'.join(parts[:level+1])
+                            headers.append(f'<th data-header="{full_path}" style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); color: white; padding: 12px 16px; text-align: center; font-weight: 600; border: 1px solid #1b5e20; font-size: 14px;">{part}</th>')
+                        else:
+                            # If a path is shorter than max_levels, fill empty space
+                            headers.append(f'<th style="background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%); border: 1px solid #1b5e20;"></th>')
         
         headers.append('</tr>')
     

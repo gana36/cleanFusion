@@ -277,15 +277,17 @@ def apply_merge_value_strategy(result_data: Dict[str, Any], strategy: str) -> Di
     return result_data
 
 def process_multi_step(source_schema, target_schema, schema_type, operation_type, llm_model="llama-3.1-8b-instant", 
-                      max_tokens=None, temperature=None, top_p=None, frequency_penalty=None, presence_penalty=None):
+                      max_tokens=None, temperature=None, top_p=None, frequency_penalty=None, presence_penalty=None, pre_approved_match_result=None,
+                      use_merge_multi_step=False, merge_value_strategy="delimited"):
     """Multi-step processing: For MATCH: 3 independent match calls + ensemble. For MERGE: Should receive match results."""
 
     # If this is a merge operation, we shouldn't be doing multi-step here
-    if operation_type == "merge":
-        print("[WARNING] Multi-step merge should receive match results, falling back to normal merge")
+    if operation_type in ["merge", "instance_merge"]:
+        print(f"[WARNING] Multi-step {operation_type} should receive match results, falling back to normal merge")
         return process_with_llm_enhanced(source_schema, target_schema, schema_type, "operator", operation_type, llm_model,
                                        max_tokens, temperature, top_p, frequency_penalty, presence_penalty,
-                                       use_merge_multi_step=False, match_operation="operator", matching_method="json_default")
+                                       use_merge_multi_step=use_merge_multi_step, match_operation="operator", matching_method="json_default",
+                                       pre_approved_match_result=pre_approved_match_result, merge_value_strategy=merge_value_strategy)
 
     print(f"[MULTI] Starting multi-step {operation_type} processing (3 calls + 1 ensemble)")
     
@@ -685,7 +687,8 @@ def process_with_llm_enhanced(source_schema, target_schema, schema_type, process
     # Handle multi-step processing separately
     if processing_type == "multi_step":
         return process_multi_step(source_schema, target_schema, schema_type, operation_type, llm_model,
-                                max_tokens, temperature, top_p, frequency_penalty, presence_penalty)
+                                max_tokens, temperature, top_p, frequency_penalty, presence_penalty, pre_approved_match_result,
+                                use_merge_multi_step, merge_value_strategy)
     
     if match_operation not in PROMPT_TEMPLATES[actual_schema_type]:
         return {"success": False, "error": f"Unsupported match operation: {match_operation}"}
@@ -835,35 +838,36 @@ Return only the JSON object."""
                 match_raw_response = ""
                 match_cleaned_response = ""
             
-            try:
-                if match_cleaned_response:
-                    match_result = json.loads(match_cleaned_response)
-                    print(f"[OK] Match step completed for {operation_type}. Found matches: HMD={len(match_result.get('HMD_matches', []))}, VMD={len(match_result.get('VMD_matches', []))}")
+            if not match_result:
+                try:
+                    if match_cleaned_response:
+                        match_result = json.loads(match_cleaned_response)
+                        print(f"[OK] Match step completed for {operation_type}. Found matches: HMD={len(match_result.get('HMD_matches', []))}, VMD={len(match_result.get('VMD_matches', []))}")
+                    else:
+                        print(f"[ERROR] Empty match response - cannot proceed with merge")
+                        match_result = None
 
-                    # CRITICAL FIX: If merge step uses multi-step but match step was not multi-step,
-                    # replicate the single match result 3 times for multi-step merge ensemble
-                    if use_merge_multi_step and processing_type != "multi_step":
-                        print(f"[AUTO] Replicating single match result 3 times for multi-step merge ensemble")
-                        # Create 3 copies of the match result for ensemble processing
-                        replicated_responses = [
-                            json.dumps(match_result, indent=2),
-                            json.dumps(match_result, indent=2),
-                            json.dumps(match_result, indent=2)
-                        ]
-                        # Call multi-step merge processing with replicated responses
-                        return process_multi_step_merge_with_responses(
-                            source_schema, target_schema, schema_type, operation_type, llm_model,
-                            replicated_responses, max_tokens, temperature, top_p, frequency_penalty, presence_penalty,
-                            merge_value_strategy
-                        )
-                else:
-                    print(f"[ERROR] Empty match response - cannot proceed with merge")
+                except json.JSONDecodeError as e:
+                    print(f"[ERROR] Failed to parse match result JSON: {str(e)}")
+                    # print(f"[DEBUG] Raw match response: {match_raw_response[:500]}...")
                     match_result = None
-
-            except json.JSONDecodeError as e:
-                print(f"[ERROR] Failed to parse match result JSON: {str(e)}")
-                # print(f"[DEBUG] Raw match response: {match_raw_response[:500]}...")
-                match_result = None
+            
+            # CRITICAL FIX: If merge step uses multi-step but match step was not multi-step,
+            # replicate the single match result 3 times for multi-step merge ensemble
+            if match_result and use_merge_multi_step and processing_type != "multi_step":
+                print(f"[AUTO] Replicating single match result 3 times for multi-step merge ensemble")
+                # Create 3 copies of the match result for ensemble processing
+                replicated_responses = [
+                    json.dumps(match_result, indent=2),
+                    json.dumps(match_result, indent=2),
+                    json.dumps(match_result, indent=2)
+                ]
+                # Call multi-step merge processing with replicated responses
+                return process_multi_step_merge_with_responses(
+                    source_schema, target_schema, schema_type, operation_type, llm_model,
+                    replicated_responses, max_tokens, temperature, top_p, frequency_penalty, presence_penalty,
+                    merge_value_strategy
+                )
 
             # Update the merge prompt to include match results
             # print(f"[DEBUG] match_result exists: {bool(match_result)}")

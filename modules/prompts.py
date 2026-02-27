@@ -152,6 +152,7 @@ For hierarchical matches (parent-child relationships):
 - A parent concept CAN match specialized variations or implementations
 - Consider semantic containment: if one term is a type/variant/specialization of another, they should match
 - Apply domain knowledge to recognize semantic relationships
+- STRICT PARENT-CHILD CONTEXT: Do NOT match identical child attributes (e.g., 'N (%)', 'RR') if their parent attributes represent fundamentally different, unrelated concepts (e.g., 'Chemotherapy' vs 'Patients experiencing RDI'). Parents must be semantically compatible for children to match.
 
 The set of all attribute names is called table schema or metadata. Metadata is a set of attributes of a table. Metadata can be stored in a row or in a column. A table with hierarchical metadata is a complex, non-relational table that, similar to a relational table, has metadata (i.e., attributes), but unlike a relational table it may be found not only in a row, but also in a column. It may also take several rows or columns. Such rows with metadata are called horizontal metadata (HMD).On the other hand, such columns with metadata are called vertical metadata (VMD)
 
@@ -432,11 +433,12 @@ Target Schema:
 
 
 Create a new merged schema (Merged_Schema) from the matched attributes above.
-Add all remaining HDM and VMD attributes and their children from source1 (Schema1/Table1) and source2 (Schema2/Table2) in the new merged schema (Merged_Schema).
+Add all remaining HMD and VMD attributes and their children from source1 (Schema1/Table1) and source2 (Schema2/Table2) in the new merged schema (Merged_Schema).
+CRITICAL RULE: DO NOT DROP OR OMIT ANY COLUMNS OR ROWS. Every single attribute from both origin schemas MUST appear in the Merged_Schema. If an attribute is not part of a match, it must still be added as a standalone attribute.
 Output them in JSON format in the following structure:
 
 {
-  "HMD_Merged_Schema": ["attr_name", "attr_name.child_attr_name"],
+  "HMD_Merged_Schema": ["attr_name.child_attr_name"],
   "VMD_Merged_Schema": ["attr_name", "attr_name.child_attr_name"],
 }
 
@@ -552,11 +554,13 @@ Target Schema:
 
 Create a new merged schema (Merged_Schema) from the matched attributes above.
 Add all remaining HMD and VMD attributes and their children from source1 (Schema1/Table1) and source2 (Schema2/Table2) in the new merged schema (Merged_Schema).
+CRITICAL RULE: DO NOT DROP OR OMIT ANY COLUMNS OR ROWS. Every single attribute from both origin schemas MUST appear in the Merged_Schema. If an attribute is not part of a match, it must still be added as a standalone attribute.
+VERY IMPORTANT: For all unmapped/remaining attributes that have a hierarchical structure, you MUST output their full dot-separated path (e.g., Parent.Child) in the schema, exactly like you do for matches. DO NOT output just the child name.
 Output them in JSON format in the following structure:
-
+And please dont put Predictor in the HMD_Merged_Schema
 {
-  "HMD_Merged_Schema": ["column_name1", "column_name2"],
-  "VMD_Merged_Schema": ["row_name1", "row_name2"],
+  "HMD_Merged_Schema": ["Parent.Child", "Standalone_Column"],
+  "VMD_Merged_Schema": ["Parent.Child", "Standalone_Row"],
 }
 
 CRITICAL - Extracting Actual Data Values:

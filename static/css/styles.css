@@ -241,13 +241,10 @@ body {
 }
 .table-mapping-view {
     background: white;
-    border-radius: 12px;
-    padding: 25px;
-    border: 2px solid #e0e0e0;
+    padding: 10px 0;
     margin-bottom: 20px;
     overflow: visible;
     position: relative;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     /* Ensure full width usage */
 }

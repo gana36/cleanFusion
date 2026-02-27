@@ -279,18 +279,18 @@ MODEL_MAP = {
     
     # Gemini models
     "gemini-1.5-flash": "gemini-1.5-flash",
-    "gemini-2.0-flash-exp": "gemini-2.0-flash",
+    "gemini-2.0-flash": "gemini-2.0-flash",
     "gemini-2.5-flash":"gemini-2.5-flash",
     "default": "Qwen2.5:14B",
-    "Qwen2.5:14B": "Qwen2.5:14B",
-    "qwen2.5:14b": "Qwen2.5:14B",
-    "gemma3:12b": "gemma3:12b",
-    "llama3.3:70b": "llama3.3:70b",
-    "llama3:8b": "llama3:8b",
-    "mistral:7b": "mistral:7b",
-    "deepseek-r1:32b": "deepseek-r1:32b",
-    # Legacy/Fallback mappings
-    "llama-3.1-8b-instant": "llama3:8b", 
+    # "Qwen2.5:14B": "Qwen2.5:14B",
+    # "qwen2.5:14b": "Qwen2.5:14B",
+    # "gemma3:12b": "gemma3:12b",
+    # "llama3.3:70b": "llama3.3:70b",
+    # "llama3:8b": "llama3:8b",
+    # "mistral:7b": "mistral:7b",
+    # "deepseek-r1:32b": "deepseek-r1:32b",
+    # # Legacy/Fallback mappings
+    # "llama-3.1-8b-instant": "llama3:8b", 
 }
 
 # --- Model Detection Helper Functions ---

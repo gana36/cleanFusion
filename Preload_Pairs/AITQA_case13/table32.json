@@ -1,0 +1,163 @@
+{
+    "Table2.HMD": [
+        {
+            "attribute1": "Predictor"
+        },
+        {
+            "attribute2": "Total N (N = 207)"
+        },
+        {
+            "attribute3": "Patients experiencing RDI <85%",
+            "children": [
+                {
+                    "child_level1.attribute1": "N (%)"
+                },
+                {
+                    "child_level1.attribute2": "RR (95% CI)"
+                }
+            ]
+        }
+    ],
+    "Table2.VMD": [
+        {
+            "attribute1": "Age",
+            "children": [
+                {
+                    "child_level1.attribute1": "<65"
+                },
+                {
+                    "child_level1.attribute2": "≥65"
+                }
+            ]
+        },
+        {
+            "attribute2": "Race",
+            "children": [
+                {
+                    "child_level1.attribute1": "White"
+                },
+                {
+                    "child_level1.attribute2": "Black"
+                }
+            ]
+        },
+        {
+            "attribute3": "Stage",
+            "children": [
+                {
+                    "child_level1.attribute1": "1"
+                },
+                {
+                    "child_level1.attribute2": "2"
+                },
+                {
+                    "child_level1.attribute3": "3"
+                }
+            ]
+        },
+        {
+            "attribute4": "Chemotherapy timing",
+            "children": [
+                {
+                    "child_level1.attribute1": "Neoadjuvant"
+                },
+                {
+                    "child_level1.attribute2": "Adjuvant"
+                }
+            ]
+        },
+        {
+            "attribute5": "Anthracycline-based regimen",
+            "children": [
+                {
+                    "child_level1.attribute1": "No"
+                },
+                {
+                    "child_level1.attribute2": "Yes"
+                }
+            ]
+        }
+    ],
+    "Table2.Data": [
+        [
+            "",
+            "",
+            ""
+        ],
+        [
+            "143",
+            "42 (29%)",
+            "1.00"
+        ],
+        [
+            "64",
+            "14 (22%)",
+            "0.74 (0.44-1.26)"
+        ],
+        [
+            "",
+            "",
+            ""
+        ],
+        [
+            "163",
+            "40 (25%)",
+            "1.00"
+        ],
+        [
+            "44",
+            "16 (36%)",
+            "1.48 (0.92-2.38)"
+        ],
+        [
+            "",
+            "",
+            ""
+        ],
+        [
+            "43",
+            "12 (28%)",
+            "1.00"
+        ],
+        [
+            "111",
+            "25 (23%)",
+            "0.81 (0.45-1.46)"
+        ],
+        [
+            "53",
+            "19 (36%)",
+            "1.28 (0.70-2.34)"
+        ],
+        [
+            "",
+            "",
+            ""
+        ],
+        [
+            "80",
+            "24 (30%)",
+            "1.00"
+        ],
+        [
+            "127",
+            "32 (25%)",
+            "0.84 (0.54-1.32)"
+        ],
+        [
+            "",
+            "",
+            ""
+        ],
+        [
+            "114",
+            "26 (23%)",
+            "1.00"
+        ],
+        [
+            "93",
+            "30 (32%)",
+            "1.41 (0.90-2.21)"
+        ]
+    ]
+}

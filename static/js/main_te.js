@@ -1,5 +1,5 @@
 // Base URL for API calls
-const API_BASE_URL = '/fuze';
+const API_BASE_URL = '/HemolixFusion';
 var sourceData = null;
 var targetData = null;
 // File upload handlers
