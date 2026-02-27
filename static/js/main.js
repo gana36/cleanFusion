@@ -1092,12 +1092,20 @@ document.getElementById('processBtn')?.addEventListener('click', async function 
     if (isMergeVisible && mergeOperation) {
         // Save merge config for later (after user approves matches)
         // This applies to: ALL merge operations (JSON and Partition-based)
+        // IMPORTANT: Use the global override if this is an automated run, 
+        // because the DOM might have been clobbered during UI updates
+        const finalMergeOp = window._automatedMergeOp || mergeOperation;
+        if (window._automatedMergeOp) {
+            console.log(`🔒 [HITL-STORE] Using automated override for pending config: "${finalMergeOp}"`);
+            // DO NOT clear window._automatedMergeOp here, buildMergePayload needs it too
+        }
+
         pendingMergeConfig = {
-            mergeOperation: mergeOperation,
+            mergeOperation: finalMergeOp,
             mergeMethod: mergeMethod,
             mergeLLM: mergeLLM,
             mergeValueStrategy: getMergeValueStrategy(),
-            processingType: mergeOperation === 'baseline' ? 'baseline' : processingType,
+            processingType: finalMergeOp === 'baseline' ? 'baseline' : processingType,
             matchOperation: matchOperation,
             schemaMatchingType: schemaMatchingType,
             matchingLLM: matchingLLM,
@@ -1288,8 +1296,8 @@ function showResults(result) {
     });
     if (hmdMerged || vmdMerged) {
         // This is a merge operation - show merge tabs
-        document.querySelector('[data-tab="merged-source"]').style.display = 'block';
-        document.querySelector('[data-tab="merged-target"]').style.display = 'block';
+        // document.querySelector('[data-tab="merged-source"]').style.display = 'block';
+        // document.querySelector('[data-tab="merged-target"]').style.display = 'block';
 
         // HITL: For partition workflows, show approval button after schema merge
         const approvalContainer = document.getElementById('proceedToMergeContainer');
@@ -1365,8 +1373,8 @@ function showResults(result) {
         }
     } else {
         // This is a match operation - hide merge tabs and show match results
-        document.querySelector('[data-tab="merged-source"]').style.display = 'none';
-        document.querySelector('[data-tab="merged-target"]').style.display = 'none';
+        // document.querySelector('[data-tab="merged-source"]').style.display = 'none';
+        // document.querySelector('[data-tab="merged-target"]').style.display = 'none';
         // For match operations, use the main result data
         displayEnhancedMapping(result.data);
 
@@ -1413,6 +1421,52 @@ function showResults(result) {
     // window.lastResult already set at start of showResults
     // window.lastResult = result;
     if (result.metrics) {
+        const prevOpType = window.lastMetrics ? window.lastMetrics.operation_type : null;
+        const currOpType = result.metrics.operation_type;
+        console.log('📊 [METRICS] prev op_type:', prevOpType, '→ curr op_type:', currOpType);
+
+        const prevWasMatch = prevOpType === 'match';
+        const currIsMerge = currOpType === 'merge' || currOpType === 'instance_merge';
+
+        if (window.lastMetrics && prevWasMatch && currIsMerge) {
+            console.log('🔄 [METRICS] Accumulating Match metrics into Merge metrics');
+
+            // Preserve the match-specific values from the previous run
+            result.metrics.match_generation_time = window.lastMetrics.total_generation_time || window.lastMetrics.match_generation_time || 0;
+            result.metrics.match_input_tokens = window.lastMetrics.input_prompt_tokens || window.lastMetrics.match_input_tokens || 0;
+            result.metrics.match_output_tokens = window.lastMetrics.output_tokens || window.lastMetrics.match_output_tokens || 0;
+            result.metrics.match_api_cost = window.lastMetrics.api_call_cost || window.lastMetrics.match_api_cost || 0;
+            result.metrics.matching_llm_used = window.lastMetrics.llm_model || window.lastMetrics.matching_llm_used || result.metrics.matching_llm_used;
+
+            // The incoming merge result's totals represent only the merge step — store them in merge_X fields
+            result.metrics.merge_generation_time = result.metrics.total_generation_time || result.metrics.merge_generation_time || 0;
+            result.metrics.merge_input_tokens = result.metrics.merge_input_tokens || result.metrics.input_prompt_tokens || 0;
+            result.metrics.merge_output_tokens = result.metrics.merge_output_tokens || result.metrics.output_tokens || 0;
+            result.metrics.merge_api_cost = result.metrics.merge_api_cost || result.metrics.api_call_cost || 0;
+            result.metrics.merge_llm_used = result.metrics.merge_llm_used || result.metrics.llm_model || result.metrics.matching_llm_used;
+
+            // Accumulate totals so top-row shows combined pipeline cost
+            result.metrics.total_generation_time = result.metrics.match_generation_time + result.metrics.merge_generation_time;
+            result.metrics.input_prompt_tokens = result.metrics.match_input_tokens + result.metrics.merge_input_tokens;
+            result.metrics.output_tokens = result.metrics.match_output_tokens + result.metrics.merge_output_tokens;
+            result.metrics.api_call_cost = result.metrics.match_api_cost + result.metrics.merge_api_cost;
+            result.metrics.total_tokens = result.metrics.input_prompt_tokens + result.metrics.output_tokens;
+
+            // Recalculate tokens per second over the combined time
+            if (result.metrics.total_generation_time > 0) {
+                result.metrics.tokens_per_second = result.metrics.total_tokens / result.metrics.total_generation_time;
+            }
+
+            console.log('✅ [METRICS] Combined metrics:', {
+                total_time: result.metrics.total_generation_time,
+                total_cost: result.metrics.api_call_cost,
+                match_tokens: result.metrics.match_input_tokens,
+                merge_tokens: result.metrics.merge_input_tokens,
+                matching_llm_used: result.metrics.matching_llm_used,
+                merge_llm_used: result.metrics.merge_llm_used
+            });
+        }
+
         window.lastMetrics = result.metrics;
 
         // For partition workflow: accumulate metrics across phases
@@ -1745,7 +1799,14 @@ function buildMergePayload(approvedMatchResults) {
         targetSchema: JSON.stringify(targetData),
         schemaType: schemaType,
         processingType: pendingMergeConfig.processingType || 'operator',
-        operationType: pendingMergeConfig.mergeOperation || 'merge',
+        operationType: (() => {
+            const op = window._automatedMergeOp || pendingMergeConfig.mergeOperation || 'merge';
+            if (window._automatedMergeOp) {
+                console.log(`🔒 [MERGE-PAYLOAD] Using automated override: "${op}"`);
+                window._automatedMergeOp = null; // consume once
+            }
+            return op;
+        })(),
         llmModel: pendingMergeConfig.mergeLLM || 'gemini-1.5-flash',
         parameters: getParameterValues(),
         useMergeMultiStep: pendingMergeConfig.mergeMethod === 'multi_step',
@@ -1758,7 +1819,9 @@ function buildMergePayload(approvedMatchResults) {
             mergeLLM: pendingMergeConfig.mergeLLM,
             mergeValueStrategy: pendingMergeConfig.mergeValueStrategy || 'delimited'
         },
-        preApprovedMatchResult: approvedMatchResults
+        preApprovedMatchResult: approvedMatchResults,
+        // Pass saved match-phase metrics so backend can build combined match+merge metrics
+        previousMatchMetrics: window.lastMetrics || null
     };
 
     // Add API keys if available
